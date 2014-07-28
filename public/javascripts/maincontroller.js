@@ -5,9 +5,22 @@
 		$scope.checkedTests =[];
 		$scope.specCount =0;
 		$scope.singleTest;
-		$scope.testId = 0;
-		$scope.showSpinner=false;
-	 
+		$scope.testId = 0; 
+		$scope.spinner = true;
+       	$log.info("show spinner: "+ $scope.spinner);
+		$scope.showSpinner= function(){
+					$scope.$parent.spinner = true;
+					$log.info("show spinner: "+ $scope.$parent.spinner);
+            		//$scope.$apply();
+
+
+				};
+		$scope.hideSpinner= function(){
+					$scope.$parent.spinner = false;
+			    	$log.info("show spinner: "+ $scope.$parent.spinner);
+            		//$scope.$apply();
+				};
+				
 		$scope.broadcastSpecChange= function(){
 			$log.info("broadcastSpecChange");
 			$scope.$broadcast("spectrumIdsChanged");

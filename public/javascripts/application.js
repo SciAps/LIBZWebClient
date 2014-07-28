@@ -12,8 +12,8 @@
 	 				templateUrl:"zsingletest.hjs",
 	 				controller: "SingleTestController"
 	 		}).when("/tests",{
-	 				templateUrl:"tests.hjs",
-	 				controller: "MainController"
+	 				templateUrl:"ztests.hjs",
+	 				controller: "TestsController"
 
 	 		}).otherwise({redirectTo:"/tests"});
 

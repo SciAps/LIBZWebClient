@@ -60,7 +60,7 @@
 </head>
 <body  class='default main_wrapper' ng-controller="MainController">
     <div style="overflow: hidden;"  class="wrapper" >
-        <div  style="width: 150px; height:100%;margin:auto;" ng-show="showSpinner">
+        <div  style="width: 150px; height:100%;margin:auto;" ng-show="spinner">
         <img alt="" class="spinner-center" src="images/spinner.gif" />
     </div>
 <!--         <div class="top_wrapper">

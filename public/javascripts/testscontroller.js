@@ -9,6 +9,9 @@
       $log.info("onGetTestsComplete");
       $log.info(response.data);
        $scope.tests = response.data;
+       $scope.hideSpinner();
+
+
       showTests();
     }; 
 
@@ -27,8 +30,8 @@
 
     $(document).ready(function () {
 var url = '/cgi/results?start=0';
-//var testurl = 'http://localhost:9000/getAllTests';
-
+      var testurl = 'http://localhost:9000/getAllTests';
+ 
       $http.get(url)
         .then(onGetTestsComplete, onError);
 
@@ -112,12 +115,8 @@ var url = '/cgi/results?start=0';
             //$scope.broadcastTestSelected(dataRecord.id);
             $log.info("/single/"+tid);
             $location.path("/single/"+tid);
-             $log.info('showSpinner');
-
-                        $scope.$apply();
-
-
-          // window.location = "/ztest?tid="+dataRecord.id +"&"+"tname="+ dataRecord.name;
+            $scope.showSpinner();
+            $scope.$apply();
             }
           }
         ] 
