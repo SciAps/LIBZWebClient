@@ -1,0 +1,36 @@
+// [{
+//  "element": "Titanium",
+//  "short": "Ti",
+//  "value": 23.45,
+//  "min": 10.2,
+//  "max": 30,
+//  "error": 1.3
+//  }, {
+//  "element": "Chrome",
+//  "short": "Cr",
+//  "value": 23.45,
+//  "min": 10.2,
+//  "max": 30,
+//  "error": 1.3
+//  },{
+//  "element": "Aluminium",
+//  "short": "AL",
+//  "value": 23.45,
+//  "min": 10.2,
+//  "max": 30,
+//  "error": 1.3
+//  },{
+//  "element": "Copper",
+//  "short": "Cu",
+//  "value": 23.45,
+//  "min": 10.2,
+//  "max": 30,
+//  "error": 1.3
+//  },{
+//  "element": "Uranium",
+//  "short": "U",
+//  "value": 23.45,
+//  "min": 10.2,
+//  "max": 30,
+//  "error": 1.3
+//  }]

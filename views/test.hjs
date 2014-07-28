@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ tid }}</title>
+
+    <link rel="shortcut icon" href="http://sciaps.com/wp-content/uploads/2013/01/sciaps.png" type="image/png">
+
+<!--     <link rel='stylesheet' href='/stylesheets/style.css' />
+-->    
+    
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" />
+
+
+<link rel='stylesheet' href='/stylesheets/home.css' />
+
+
+<link rel="stylesheet" href="/stylesheets/jqx.base.css" type="text/css" />
+<link rel="stylesheet" href="/stylesheets/Arctic.css" type="text/css" />
+<!--  <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script> -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+<!-- <script type="text/javascript" src="http://code.angularjs.org/angular-1.0.0rc3.min.js"></script>
+ <script type="text/javascript" src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+-->
+<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxdata.js"></script> 
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxscrollbar.js"></script>
+
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxtabs.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxdraw.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxchart.core.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxchart.rangeselector.js"></script>
+
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.selection.js"></script> 
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.columnsresize.js"></script> 
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.filter.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.pager.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.columnsresize.js"></script>
+
+
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxtabs.js"></script>
+<script type="text/javascript" src="/javascripts/z_grid_builder.js"></script>
+
+
+
+<!--tabs-->
+<script type="text/javascript">
+$(document).ready(function () {
+
+
+   var initChart = function () {
+                // prepare the data
+                var source =
+                {
+                    datatype: "csv",
+                    datafields: [
+                    { name: 'wavelength' },
+                    { name: 'intensity' } 
+                    ],
+                    url: '../sampledata/Alloy.csv'
+                };
+                var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+                var toolTipCustomFormatFn = function (value, itemIndex, serie, group, categoryValue, categoryAxis) {
+                    return 'Index: ' + itemIndex + ", Value: " + value;
+                };
+            // prepare jqxChart settings
+            var settings = {
+                title: "Spectrum result for {{ tname }}",
+                description: "In this example the range selector works with (non-date) axis",
+                enableAnimations: true,
+                showLegend: true,
+                animationDuration: 1500,
+                enableCrosshairs: true,
+                padding: { left: 5, top: 5, right: 20, bottom: 5 },
+                colorScheme: 'scheme04',
+                source: dataAdapter,
+
+                xAxis:
+                {
+                    dataField: 'wavelength',
+                    type: 'float',
+                    baseUnit: 'float',
+                    type: 'float',
+                    showTickMarks: true,
+                    tickMarksColor: '#888888',
+                    minValue: 300,
+                    maxValue: 600,
+                    flip: false,
+                    valuesOnTicks: true,
+                    showGridLines: false,
+                    textRotationAngle: 45,
+                    textRotationPoint: 'topright',
+                    textOffset: {x: 5, y: 8},
+                    rangeSelector: {
+                        serieType: 'area',
+                        padding: { /*left: 0, right: 0,*/ top: 30, bottom: 0 },
+                            // Uncomment the line below to render the selector in a separate container
+                            renderTo: $('#selectorContainer'),
+                            backgroundColor: 'white',
+                            size: 180,
+                            showGridLines: false,
+                        }
+                    },
+                    seriesGroups:
+                    [
+                    {
+                        type: 'line',
+                        toolTipFormatFunction: toolTipCustomFormatFn,
+                        valueAxis:
+                        {
+                            flip: false,
+                            description: 'Wavelength',
+                            tickMarksColor: '#888888',
+                            displayValueAxis: true
+
+                        },
+                        series: [
+
+                        { dataField: 'intensity', displayText: '{{tname}}', lineWidth: 1, lineWidthSelected: 1 }
+                        ]
+                    }
+                    ]
+                };
+
+                $('#chartContainer').jqxChart(settings);
+            }
+            // init widgets.
+            var initWidgets = function (tab) {
+                switch (tab) {
+                    case 0:
+                        console.log("getJSON");
+
+                    // data ={{ gradeRanks }};
+                    //  console.log("gradeRanks");
+                    // console.log();
+                    getChemResults();
+                    break;
+                    case 1:
+                    initChart();
+                    break;
+
+                }
+            }
+            $('#jqxTabs').jqxTabs({ width: '100%', height: 600,  initTabContent: initWidgets, theme: 'Arctic'});
+        });
+
+        var getTest = function ( ) { 
+              var url = 'http://localhost:9000/getTestById';
+          $.getJSON( url, {
+            tags: "mount rainier",
+            tagmode: "any",
+            format: "json"
+          })
+            .done(function( data ) {
+                  console.log("getJSON");
+
+                  console.log(data);
+
+                    var json = {};
+                    var firstMatch = {};
+    
+
+                     var firstGradeRank =  test["gradeRanks"][0]["grade"];
+
+                    json["base"]= test["base"];
+
+                    firstMatch["chemResults"] = getChemResult();
+                    firstMatch["comments"] = firstGradeRank["comments"];
+                    firstMatch["uns"] = firstGradeRank["uns"];
+                    firstMatch["name"] = "{{ tname }}";//firstGradeRank["name"];
+                    firstMatch["matchNumber"] = test["gradeRanks"][0]["matchNumber"];
+
+                    json["firstMatch"]=firstMatch;
+
+
+                  init1stMatchGrid( json["firstMatch"]["chemResults"]);
+            });
+        }
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class='default'>
+    <div class="wrapper">
+        <div class="top_wrapper">
+            <nav class="navbar navbar-default navbar-inverse navbar-static-top main" role="navigation">
+                <div class="container">
+                  <!-- Brand and toggle get grouped for better mobile display -->
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <img alt="" id="logo-top" src="images/ic_launcher.png" />
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse navbar-ex1-collapse">
+                  <ul class="nav navbar-nav choose_page">   
+                    <li class="home"><a href="/home">Home</a></li>
+                    <li class="Tests"><a href="/tests">Tests</a></li>
+                    <li class="Test active" ><a href="/ztest">Test</a></li>
+                    <li class="contact"><a href="/tests">Contact</a></li>
+                    <li class="signin"><a href="/sign-in">Sign in</a></li>
+                </ul>
+                <a href="/#plans" class="btn btn-default navbar-btn navbar-right btn-success scroll">Plans and Pricing</a>
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <div class="jumbotron text-center">
+        <div class="container">
+
+            <h1 >{{ name }}</h1>
+        </div>
+    </div>
+</div>
+</div>
+<div class="grid-holder">
+    <div class="container">
+        <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+            <div id='jqxTabs'>
+                <ul>
+                    <li style="margin-left: 30px;">
+                        <div style="height: 20px; margin-top: 5px;">
+                            <div style="float: left;">
+                                <img width="16" height="16" src="../images/ic_graph.png" />
+                            </div>
+                            <div style="margin-left: 4px; vertical-align: middle; text-align: center; float: left;">
+                                1st Match
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div style="height: 20px; margin-top: 5px;">
+                            <div style="float: left;">
+                                <img width="16" height="16" src="../images/ic_graph.png" />
+                            </div>
+                            <div style="margin-left: 4px; vertical-align: middle; text-align: center; float: left;">
+                                Spectrum for {{ name }}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div style="overflow: hidden;">
+                    <div class="wrapper">
+        <div class="top_wrapper">
+                    <div class="jumbotron text-center">
+                        <div class="container">
+
+                            <h1 >Base: , Alloy:  , UNS:  </h1>
+
+                            </div>
+                        </div>
+                          </div>
+                        </div>
+                        <div id="jqxGrid1st">
+                        </div>
+                        <div style="margin-top: 10px; height: 15%;">
+                            Comments: {{ firstMatch.comments}}
+                        </div>
+                    </div>    
+
+                    <div style="overflow: hidden;">
+                        <div id='chartContainer' style="width:100%; height:84%;">
+                        </div>
+                        <div id='selectorContainer' style="width:500px; height:100px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

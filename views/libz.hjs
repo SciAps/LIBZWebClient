@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="libz-app">
+<head>
+  <title>{{ title }}</title>
+
+    <link rel="shortcut icon" href="http://sciaps.com/wp-content/uploads/2013/01/sciaps.png" type="image/png">
+
+<!--     <link rel='stylesheet' href='/stylesheets/style.css' />
+-->    
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" />
+    <link rel='stylesheet' href='/stylesheets/home.css' />
+
+
+
+<link rel="stylesheet" href="/stylesheets/jqx.base.css" type="text/css" />
+<!--  <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script> -->
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/angular.min.js"></script>
+<script type="text/javascript" src="/javascripts/angular-route.js"></script>
+<!-- <script type="text/javascript" src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+ --><script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+
+
+
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxdata.js"></script> 
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="/javascripts/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="/javascripts/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="/javascripts/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="/javascripts/jqwidgets/jqxwindow.js"></script>
+
+<script type="text/javascript" src="/javascripts/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="/javascripts/jqwidgets/jqxcheckbox.js"></script>
+
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxdraw.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxchart.core.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxchart.rangeselector.js"></script>
+
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.selection.js"></script> 
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.columnsresize.js"></script> 
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.filter.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.pager.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.columnsresize.js"></script>
+<!--<script type="text/javascript" src="../javascripts/testsgrid.js"></script>-->
+
+
+
+<script type="text/javascript" src="../javascripts/application.js"></script>
+<script type="text/javascript" src="../javascripts/maincontroller.js"></script>
+<script type="text/javascript" src="../javascripts/testscontroller.js"></script>
+<script type="text/javascript" src="../javascripts/spectrumcontroller.js"></script>
+<script type="text/javascript" src="../javascripts/singletestcontroller.js"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body  class='default main_wrapper' ng-controller="MainController">
+    <div style="overflow: hidden;"  class="wrapper" >
+        <div  style="width: 150px; height:100%;margin:auto;" ng-show="showSpinner">
+        <img alt="" class="spinner-center" src="images/spinner.gif" />
+    </div>
+<!--         <div class="top_wrapper">
+        <img alt="" id="logo-top" src="images/ic_launcher.png" />
+            <div class="jumbotron text-center">
+                <div class="container">
+                <h1 >LIBZ  </h1>
+                </div>
+            </div>
+        </div> -->
+        <div ng-view></div>
+        <!-- <div ng-controller="TestsController" ng-include="'ztestsgrid.hjs'" ng-show="tests" ng-hide ="testId">
+        </div>
+        <div ng-controller="SingleTestController" ng-include="'zsingletest.hjs'" ng-show="testId">
+        </div>
+        <div ng-controller="SpectrumController" ng-include="'zspecchart.hjs'" ng-show="specCount">
+        </div> -->
+    </div>
+</body>
+</html>
