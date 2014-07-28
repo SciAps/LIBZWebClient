@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<div ng-show="tests" ng-hide ="testId">
+	<div class="grid-holder">
+		<div class="singleTestContainer">
+			<div class="panel panel-default">
+				<div class="wrapper">
+					<div class="top_wrapper">
+						<div class="panel-heading"> 
+							<div style="width: 100%;">
+								<img alt="" id="logo-top" src="images/ic_launcher.png" style="float: left;"/>
+								<div class="btn-csv" style="float: right;" ng-show="checkedTests.length">
+									<a    class="btn btn-primary btn-lg" ng-click='downloadCSV(checkedTests)'><span class="glyphicon glyphicon-list-alt"></span> Export CSV  </a>
+								</div>
+							</div>
+							<div class=" jumbotron text-center" >
+								<div class="container">
+								<h1>Tests</h1>
+								</div>      
+							</div>
+
+						</div> 
+						<div id="jqxtestsgrid">
+						</div>
+					</div>
+				</div>
+			</div> 
+		</div>
+	</div>
+ </div>
