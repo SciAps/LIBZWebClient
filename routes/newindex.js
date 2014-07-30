@@ -56,13 +56,30 @@ router.get('/examples', function(req, res) {
 // });
 
 // //example of get
-router.get('/getAllTests', function(req, res) {
+router.get('/getAllTests/:start', function(req, res) {
+    console.log("getAllTests");
+            console.log(req.query.start);
           var builder =new gridBuilder();
-          var testsJson = builder.getSampleTests();
- 
+          var tests1 = builder.getSampleTests(req.query.start);
+          
+          //var start = req.query.start;
 
-          res.send(testsJson["items"],200);
+          res.send(tests1["items"],200);
 });
+
+//router.use(express.bodyParser());
+
+router.post('/getCsvForTests', function(request, response){
+
+   var csv ='185.038, 0.0\n185.07133333333334, 1.8818914201031993';
+
+          console.log("getCsvForTests");
+          console.log(request.body);
+          response.send(csv,200);
+
+
+});
+
 
 router.get('/getTestById', function(req, res) {
          
@@ -94,9 +111,10 @@ router.get('/getChemResults', function(req, res) {
 });
 
 var test = {
+  "mResult":{
    "id": "12342",
-   "title": "sample test",
-   "date": "1/1/2000",
+   // "title": "sample test",
+   // "date": "1/1/2000",
    "base": "Al",
    "chemResults": [
    {
@@ -918,15 +936,16 @@ var test = {
      "matchNumber": 55.11576901467525
    }
    ]
+   }
  };
 
 
 var gridBuilder=function(){
   
-var testsJson = {
+var tests1 = {
  "items": [
  {
-   "id": "36",
+   "id": "1",
    "time": "Jun 30, 2014 4:31:33 PM",
    "title": "Alloy Match",
    "base": "Ti",
@@ -934,7 +953,7 @@ var testsJson = {
    "match_no":"1.75"
  },
  {
-   "id": "35",
+   "id": "2",
    "time": "Jun 30, 2014 4:31:04 PM",
    "title": "Alloy Match",
    "base": "Ti",
@@ -942,7 +961,7 @@ var testsJson = {
    "match_no":"1.75"
  },
  {
-   "id": "34",
+   "id": "3",
    "time": "Jun 30, 2014 4:10:29 PM",
    "title": "Alloy Match",
    "base": "Ti",
@@ -950,7 +969,7 @@ var testsJson = {
    "match_no":"1.75"
  },
  {
-   "id": "33",
+   "id": "4",
    "time": "Jun 30, 2014 3:51:23 PM",
    "title": "Alloy Match",
    "base": "Ti",
@@ -958,7 +977,7 @@ var testsJson = {
    "match_no":"1.75"
  },
  {
-   "id": "32",
+   "id": "5",
    "time": "Jun 30, 2014 3:41:35 PM",
    "title": "Alloy Match",
    "base": "Ti",
@@ -966,7 +985,7 @@ var testsJson = {
    "match_no":"1.75"
  },
  {
-   "id": "31",
+   "id": "6",
    "time": "Jun 30, 2014 3:41:04 PM",
    "title": "Alloy Match",
    "base": "Ti",
@@ -974,7 +993,7 @@ var testsJson = {
    "match_no":"1.75"
  },
  {
-   "id": "30",
+   "id": "7",
    "time": "Jun 30, 2014 3:39:55 PM",
    "title": "Alloy Match",
    "base": "Ti",
@@ -982,7 +1001,7 @@ var testsJson = {
    "match_no":"1.75"
  },
  {
-   "id": "29",
+   "id": "8",
    "time": "Jun 30, 2014 3:39:32 PM",
    "title": "Alloy Match",
    "base": "Ti",
@@ -990,7 +1009,7 @@ var testsJson = {
    "match_no":"1.75"
  },
  {
-   "id": "28",
+   "id": "9",
    "time": "Jun 30, 2014 3:05:46 PM",
    "title": "Alloy Match",
    "base": "Al",
@@ -998,7 +1017,87 @@ var testsJson = {
    "match_no":"1.75"
  },
  {
-   "id": "27",
+   "id": "10",
+   "time": "Jun 30, 2014 2:59:09 PM",
+   "title": "Alloy Match",
+   "base": "Al",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+  {
+   "id": "11",
+   "time": "Jun 30, 2014 4:31:33 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "12",
+   "time": "Jun 30, 2014 4:31:04 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "13",
+   "time": "Jun 30, 2014 4:10:29 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "14",
+   "time": "Jun 30, 2014 3:51:23 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "15",
+   "time": "Jun 30, 2014 3:41:35 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "16",
+   "time": "Jun 30, 2014 3:41:04 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "17",
+   "time": "Jun 30, 2014 3:39:55 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "18",
+   "time": "Jun 30, 2014 3:39:32 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "19",
+   "time": "Jun 30, 2014 3:05:46 PM",
+   "title": "Alloy Match",
+   "base": "Al",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "20",
    "time": "Jun 30, 2014 2:59:09 PM",
    "title": "Alloy Match",
    "base": "Al",
@@ -1007,38 +1106,202 @@ var testsJson = {
  }
  ],
  "start": 0,
- "total": 37
+ "total": 100
+};
+
+var tests2 = {
+ "items": [
+ {
+   "id": "21",
+   "time": "Jun 30, 2014 4:31:33 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "22",
+   "time": "Jun 30, 2014 4:31:04 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "23",
+   "time": "Jun 30, 2014 4:10:29 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "24",
+   "time": "Jun 30, 2014 3:51:23 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "25",
+   "time": "Jun 30, 2014 3:41:35 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "26",
+   "time": "Jun 30, 2014 3:41:04 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "27",
+   "time": "Jun 30, 2014 3:39:55 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "28",
+   "time": "Jun 30, 2014 3:39:32 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "29",
+   "time": "Jun 30, 2014 3:05:46 PM",
+   "title": "Alloy Match",
+   "base": "Al",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "30",
+   "time": "Jun 30, 2014 2:59:09 PM",
+   "title": "Alloy Match",
+   "base": "Al",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+  {
+   "id": "31",
+   "time": "Jun 30, 2014 4:31:33 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "32",
+   "time": "Jun 30, 2014 4:31:04 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "33",
+   "time": "Jun 30, 2014 4:10:29 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "34",
+   "time": "Jun 30, 2014 3:51:23 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "35",
+   "time": "Jun 30, 2014 3:41:35 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "36",
+   "time": "Jun 30, 2014 3:41:04 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "37",
+   "time": "Jun 30, 2014 3:39:55 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "38",
+   "time": "Jun 30, 2014 3:39:32 PM",
+   "title": "Alloy Match",
+   "base": "Ti",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "39",
+   "time": "Jun 30, 2014 3:05:46 PM",
+   "title": "Alloy Match",
+   "base": "Al",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ },
+ {
+   "id": "40",
+   "time": "Jun 30, 2014 2:59:09 PM",
+   "title": "Alloy Match",
+   "base": "Al",
+   "1st_match":"h2o",
+   "match_no":"1.75"
+ }
+ ],
+ "start": 20,
+ "total": 100
 };
 
 var getTest = function(){
  
-    var json = {};
-    var firstMatch = {};
-    // "base": "Al",
-    //  "grade": {
-    //    "comments": "",
-    //    "uns": "A03550",
-    //    "name": "Al_355",
-    //    "matchNumber": 64.56099488159458
-    //    "spec": {
 
-     var firstGradeRank =  test["gradeRanks"][0]["grade"];
+ //moved to test controller==================
+    // var json = {};
+    // var firstMatch = {};
+ 
 
-    json["title"]= test["title"];
-    json["id"]= test["id"];
-    json["date"]= test["date"];
-    json["base"]= test["base"];
+    //  var firstGradeRank =  test["gradeRanks"][0]["grade"];
 
-    firstMatch["chemResults"] = getChemResult();
-    firstMatch["comments"] = firstGradeRank["comments"];
-    firstMatch["uns"] = firstGradeRank["uns"];
-    firstMatch["name"] = firstGradeRank["name"];
-    firstMatch["matchNumber"] = test["gradeRanks"][0]["matchNumber"];
+    // json["title"]= test["title"];
+    // json["id"]= test["id"];
+    // json["date"]= test["date"];
+    // json["base"]= test["base"];
 
-    json["firstMatch"]=firstMatch;
-    console.log(json);
-    return json;
+    // firstMatch["chemResults"] = getChemResult();
+    // firstMatch["comments"] = firstGradeRank["comments"];
+    // firstMatch["uns"] = firstGradeRank["uns"];
+    // firstMatch["name"] = firstGradeRank["name"];
+    // firstMatch["matchNumber"] = test["gradeRanks"][0]["matchNumber"];
 
+    // json["firstMatch"]=firstMatch;
+    // console.log(json);
+    // return json;
+    //============================================
+ return test;
   };
   var getChemResult = function(){
 
@@ -1067,8 +1330,14 @@ var getTest = function(){
     return json;
 
   };
-  var getTests = function(){
-    return testsJson;
+  var getTests = function(start){
+    if (start==0) {
+      return tests1;
+    }else{
+
+      return tests2;
+    }
+
 
   };
   return{

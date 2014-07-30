@@ -8,7 +8,7 @@
 
 	 app.config(function($routeProvider){
 		$routeProvider
-	 		.when("/single/:tid",{
+	 		.when("/single/:tid/:ttitle/:tdate",{
 	 				templateUrl:"zsingletest.hjs",
 	 				controller: "SingleTestController"
 	 		}).when("/tests",{

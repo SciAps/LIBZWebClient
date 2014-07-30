@@ -5,7 +5,10 @@
 
 		var onGetSingleTestComplete = function(response) {
 			$log.info("onGetSingleTestComplete");
-			$scope.singleTest= $scope.formatTest(response.data.mResult);
+	
+			$scope.singleTest= $scope.formatTest(response.data.mResult,$routeParams.ttitle,$routeParams.tdate);
+
+
 			$log.info($scope.singleTest);
 			$scope.hideSpinner();
 
@@ -51,15 +54,15 @@
 		     });
 		};
 
-		$scope.formatTest = function(test){
+		$scope.formatTest = function(test,title,date){
 
 		 	var json = {};
 		 	var firstMatch = {};
 	    	var firstGradeRank =  test["gradeRanks"][0]["grade"];
 
-	    	json["title"]= test["title"];
+	    	json["title"]=title;
 	    	json["id"]= test["id"];
-	    	json["date"]= test["date"];
+	    	json["date"]= date;
 	    	json["base"]= test["base"];
 
 	    	firstMatch["chemResults"] = getChemResult(test);
@@ -91,12 +94,14 @@
 		};
 		
 		 var testId = $routeParams.tid;
+
+
 		 $log.info("testSelected");
-		 $log.info(testId);
+		 $log.info($routeParams);
 		 var url ="/cgi/result/"+testId;
 		 var testUrl = "http://localhost:9000/getTestById/"
 
-		 $http.get(url).then(onGetSingleTestComplete, onError);
+		 $http.get(testUrl).then(onGetSingleTestComplete, onError);
 	};
 	app.controller("SingleTestController", SingleTestController);
 })();

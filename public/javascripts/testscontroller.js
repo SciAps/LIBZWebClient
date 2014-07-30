@@ -30,25 +30,25 @@
 
     $(document).ready(function () {
 var url = '/cgi/results?start=0';
-      var testurl = 'http://localhost:9000/getAllTests';
+      var testurl = 'http://localhost:9000/getAllTests/20';
  
-      $http.get(url)
+      $http.get(testurl)
         .then(onGetTestsComplete, onError);
 
     });
 
-    $scope.downloadCSV = function (checkedTests) {
-            $log.info("downloadCSV");
-            $log.info(checkedTests);
+    // $scope.downloadCSV = function (checkedTests) {
+    //         $log.info("downloadCSV");
+    //         $log.info(checkedTests);
 
 
-        //       $http.get("http://localhost:9000/getCompareCSV")
-        // .then(onGetCSVComplete, onError);
+    //     //       $http.get("http://localhost:9000/getCompareCSV")
+    //     // .then(onGetCSVComplete, onError);
 
-     // var querystring = buildQueryString( criteria )
-          window.location = '/sampledata/Alloy.csv' ;
+    //  // var querystring = buildQueryString( criteria )
+    //    //   window.location = '/sampledata/Alloy.csv' ;
 
-    };
+    // };
 
 
     function showTests(tsts) {
@@ -68,7 +68,9 @@ var url = '/cgi/results?start=0';
         ],
         id: 'id',
         pager: function (pagenum, pagesize, oldpagenum) {
-        // callback called when a page or page size is changed.
+              $log.info("pagenum"+pagenum)
+                $log.info("pagesize"+pagesize)
+                $log.info("oldpagenum"+oldpagenum)
         }
       };
       var dataAdapter = new $.jqx.dataAdapter(source);
@@ -96,6 +98,8 @@ var url = '/cgi/results?start=0';
         sortable: true,
         altrows: true,
         editable: false,
+        pagesize: 50,
+
         selectionmode: 'checkbox',
         columns: [
           { text: 'ID', datafield: 'id' },
@@ -111,10 +115,13 @@ var url = '/cgi/results?start=0';
             // open the popup window when the user clicks a button.
             editrow = row;
             //  var offset = $("#jqxgrid").offset();
-            var tid = $("#jqxtestsgrid").jqxGrid('getrowdata', editrow).id;
-            //$scope.broadcastTestSelected(dataRecord.id);
+        var tid = $("#jqxtestsgrid").jqxGrid('getrowdata', editrow).id;
+            var tdate= $("#jqxtestsgrid").jqxGrid('getrowdata', editrow).time;
+            var ttitle= $("#jqxtestsgrid").jqxGrid('getrowdata', editrow).title;
+
+                        //$scope.broadcastTestSelected(dataRecord.id);
             $log.info("/single/"+tid);
-            $location.path("/single/"+tid);
+            $location.path("/single/"+tid+"/"+ttitle+"/"+tdate);
             $scope.showSpinner();
             $scope.$apply();
             }
@@ -148,16 +155,16 @@ var url = '/cgi/results?start=0';
 
               $scope.tests.forEach(function(item) {
 
-                $scope.checkedTests.push({"id":item["id"],"title":item["title"]});
+                $scope.checkedTests.push(item["id"]);
               });
             };
             $scope.$digest();
             $scope.broadcastSpecChange();
             return;
           };
-        var id =row["id"];
-        var title =row["title"];
-        $scope.checkedTests.push({"id":id,"title":title});
+        // var id =row["id"];
+        // var title =row["title"];
+        $scope.checkedTests.push(row["id"]);
         $log.info($scope.checkedTests);
         $scope.$digest();
         $scope.broadcastSpecChange();
@@ -170,7 +177,7 @@ var url = '/cgi/results?start=0';
         var title =row["title"];
 
         for (var i = $scope.checkedTests.length - 1; i >= 0; i--) {
-          if ( $scope.checkedTests[i]["id"]==id) {
+          if ( $scope.checkedTests[i]==id) {
             $scope.checkedTests.splice(i, 1);
             break;
           };

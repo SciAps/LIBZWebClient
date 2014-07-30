@@ -17,6 +17,8 @@ app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+//app.use(express.bodyParser());
+
 app.use(cookieParser());
 //app.use(require('less-middleware')(path.join(__dirname, 'public')));
 
@@ -24,24 +26,9 @@ var lessMiddleware = require('less-middleware');
 
 app.use(lessMiddleware({ src: __dirname + '/less', dest: __dirname + '/public/stylesheets' ,force:true, prefix: "/stylesheets"}));
 app.use(express.static(__dirname + '/public'));
+//app.use(express.bodyParser());
 
 // var lessMiddleware = require('less-middleware');
-
-// var app = express();
-// app.use(lessMiddleware(__dirname + '/public'));
-// app.use(express.static(__dirname + '/public'));
-// app.use(lessMiddleware({
-//     src: __dirname + "./less",
-//     dest: __dirname + "./public/css",
-//     // if you're using a different src/dest directory, you
-//     // MUST include the prefex, which matches the dest
-//     // public directory
-//     prefix: "/css",
-//     // force true recompiles on every request... not the
-//     // best for production, but fine in debug while working
-//     // through changes
-//     force: true
-// }));
 
 
 app.use('/', routes);
