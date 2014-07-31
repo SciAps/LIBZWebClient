@@ -101,7 +101,7 @@
 		 var url ="/cgi/result/"+testId;
 		 var testUrl = "http://localhost:9000/getTestById/"
 
-		 $http.get(testUrl).then(onGetSingleTestComplete, onError);
+		 $http.get(url).then(onGetSingleTestComplete, onError);
 	};
 	app.controller("SingleTestController", SingleTestController);
 })();

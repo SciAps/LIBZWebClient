@@ -28,14 +28,14 @@
       $scope.error = "Unable to fetch test";
     };
 
-    $(document).ready(function () {
-var url = '/cgi/results?start=0';
-      var testurl = 'http://localhost:9000/getAllTests/20';
+//     $(document).ready(function () {
+// var url = '/cgi/results?start=0';
+//       var testurl = 'http://localhost:9000/getAllTests/20';
  
-      $http.get(testurl)
-        .then(onGetTestsComplete, onError);
+//       $http.get(url)
+//         .then(onGetTestsComplete, onError);
 
-    });
+//     });
 
     // $scope.downloadCSV = function (checkedTests) {
     //         $log.info("downloadCSV");
@@ -53,11 +53,20 @@ var url = '/cgi/results?start=0';
 
     function showTests(tsts) {
 
+        var data = {};
 
       var source =
       {
-        localdata:  $scope.tests,
+        //localdata:  $scope.tests,
+                url: "/cgi/results",
+
+//        uri: "/cgi/results",
+        root:"items",
         datatype: "json",
+        beforeprocessing: function (data) {
+          $log.info("Total rows: "+data.total);
+          source.totalrecords = data.total;
+        },
         datafields: [
           { name: 'id', type: 'string' },
           { name: 'title', type: 'string' },
@@ -66,12 +75,14 @@ var url = '/cgi/results?start=0';
           { name: '1st_match', type: 'string' } ,
           { name: 'match_no', type: 'string' } 
         ],
-        id: 'id',
-        pager: function (pagenum, pagesize, oldpagenum) {
-              $log.info("pagenum"+pagenum)
-                $log.info("pagesize"+pagesize)
-                $log.info("oldpagenum"+oldpagenum)
-        }
+
+        id: 'id'
+        // ,
+        // pager: function (pagenum, pagesize, oldpagenum) {
+        //       $log.info("pagenum"+pagenum)
+        //         $log.info("pagesize"+pagesize)
+        //         $log.info("oldpagenum"+oldpagenum)
+        // }
       };
       var dataAdapter = new $.jqx.dataAdapter(source);
       
@@ -83,22 +94,27 @@ var url = '/cgi/results?start=0';
         return '<span style="margin: 4px; float: ' + columnproperties.cellsalign + '; color: #008000;">' + value + '</span>';
         }
       };
-      var dataAdapter = new $.jqx.dataAdapter(source, {
-        downloadComplete: function (data, status, xhr) { },
-        loadComplete: function (data) { },
-        loadError: function (xhr, status, error) { }
-      });
+      // var dataAdapter = new $.jqx.dataAdapter(source, {
+      //   downloadComplete: function (data, status, xhr) { },
+      //   loadComplete: function (data) { },
+      //   loadError: function (xhr, status, error) { }
+      // });
     // initialize jqxGrid
       $("#jqxtestsgrid").jqxGrid({
         width: "100%",
         source: dataAdapter,
         theme: 'Arctic',
         pageable: true,
+        virtualmode: true,
         autoheight: true,
         sortable: true,
         altrows: true,
         editable: false,
-        pagesize: 50,
+        rendergridrows: function () {
+//          $log.info("rendergridrows: "+dataadapter.records);
+
+          return dataAdapter.records;
+        },
 
         selectionmode: 'checkbox',
         columns: [
@@ -114,6 +130,7 @@ var url = '/cgi/results?start=0';
             buttonclick: function (row) {
             // open the popup window when the user clicks a button.
             editrow = row;
+            $scope.checkedTests.length=0;
             //  var offset = $("#jqxgrid").offset();
         var tid = $("#jqxtestsgrid").jqxGrid('getrowdata', editrow).id;
             var tdate= $("#jqxtestsgrid").jqxGrid('getrowdata', editrow).time;
@@ -190,6 +207,7 @@ var url = '/cgi/results?start=0';
 
       });
     };
+       showTests();
   };
   app.controller("TestsController", TestsController);
 

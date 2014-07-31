@@ -56,9 +56,9 @@
 	    $scope.downloadCSV = function () {
 	            $log.info("downloadCSV");
 	            $log.info($scope.checkedTests);
- 		var url ="/cgi/export/csv/";
-		 var testUrl = "http://localhost:9000/getCsvForTests/"
-		 $http.post(testUrl,$scope.checkedTests).then(onPostDownloadCSV, onError);
+ 		var url ="/cgi/export/csv";
+		// var testUrl = "http://localhost:9000/getCsvForTests/"
+		 $http.post(url,$scope.checkedTests).then(onPostDownloadCSV, onError);
 
 
 	      // var querystring = buildQueryString( criteria )
