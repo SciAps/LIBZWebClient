@@ -65,7 +65,7 @@
 		<div id="jqxsingletestgrid">
 		</div>
  	</div>
- 	<div ng-include ="'zspecchart.hjs'">
+ 	<div ng-include ="'zspecchart.hjs'" >
  	</div>
  	
  	<div>

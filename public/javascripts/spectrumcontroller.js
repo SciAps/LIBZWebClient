@@ -1,7 +1,7 @@
 (function() {
   var app = angular.module("libz-app");
 
-  var SpectrumController = function($scope, $http,$log) {
+  var SpectrumController = function($scope, $http,$log, $routeParams) {
   // console.log("SpectrumController");
   // console.log($scope.spectrumIds);
          
@@ -26,13 +26,9 @@
                     function( newValue, oldValue ) {
                       
                         if ($scope.singleTest) {
-                          $log.info("singleTest");
+                          $log.info("singleTest change for spectrum");
 
-                          $log.info($scope.singleTest );
                           $scope.showChart();
-                    // $http.get("http://localhost:9000/sampledata/Alloy.csv")
-                    //       .then(onGetSpecsComplete, onError);
-                     
                         };
   
                     }
@@ -40,6 +36,13 @@
 
 
  $scope.showChart =function() {
+     // var testId = $routeParams.tid;
+
+
+     // $log.info("testSelected");
+     // $log.info($routeParams);
+     // var url ="/cgi/spectrum/"+testId;
+
 
   var source =
   {
@@ -48,7 +51,7 @@
     { name: 'wavelength' },
     { name: 'intensity' } 
     ],
-    url: '../sampledata/Alloy.csv'
+    url: "/cgi/spectrum/"+$routeParams.tid
   };
   var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
   var toolTipCustomFormatFn = function (value, itemIndex, serie, group, categoryValue, categoryAxis) {
