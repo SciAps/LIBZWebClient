@@ -20,8 +20,8 @@ a {
 .btn-back{
   margin-left: 40px;
   margin-right: 40px;
-  margin-bottom: 40px; 
-  width: 90%;
+  margin-bottom: 40px;  
+  float: left;
  }
  #logo-top{
  	width: 50px;
@@ -1422,6 +1422,28 @@ a.video_link {
 
 }
 .spinner-center{
-   width: 150px;
-  height: 150px;
+   width: 100px;
+  height: 100px;
+  margin-top: 200px;
 }
+.logo-z-top{
+   width: 70px;
+  height: 70px;
+  margin-right: 49px
+
+}
+.logo-sciaps-top{
+   width: 119px;
+  height: 40px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+}
+.logo_powered_bottom{
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 40px; 
+  width: 84;
+  height: 46;
+  float: right;
+ }

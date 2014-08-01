@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <div class="grid-holder" >
-		
+	<div style="overflow: hidden;"  class="wrapper" ;>
+        <div  style="width: 100px; height:100%;margin:auto;" ng-hide="singleTest">
+         <img alt="" class="spinner-center" src="images/spinner.gif" />
+    </div>
 	<div ng-show="singleTest">
 	<div class="singleTestContainer" >
 		<div class="panel panel-default">
@@ -8,10 +11,10 @@
 				<div class="top_wrapper">
 					<div class="panel-heading"> 
 							<div style="width: 100%;">
-								<img alt="" id="logo-top" src="images/ic_launcher.png" style="float: left;"/>
-								<div class="btn-csv" style="float: right;" ng-show="checkedTests.length">
-									<a href="#/tests"  class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-list-alt"></span> Export CSV  </a>
-								</div>
+								<img alt="" class="logo-z-top" src="images/ic_launcher.png" style="float: left;"/>
+								<a href="http://sciaps.com/"  style="float: right;">
+								<img alt="" class="logo-sciaps-top"  src="images/Sciaps-Logo.png"/>
+								</a>
 							</div>
 							<div class=" jumbotron text-center" >
 								<div class="container">
@@ -64,9 +67,14 @@
  	</div>
  	<div ng-include ="'zspecchart.hjs'">
  	</div>
-	<div class="btn-back">
-		<a href="#/tests"  class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-arrow-left"></span> Back  </a>
-	</div>
+ 	
+ 	<div>
+		<div class="btn-back">
+			<a href="#/tests"  class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-arrow-left"></span> Back  </a>
+		</div>
+
+		<img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/>
+			</div>
 	</div>
 
 <!-- ng-hide="singleTest"

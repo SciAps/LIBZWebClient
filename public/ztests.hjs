@@ -7,17 +7,22 @@
 					<div class="top_wrapper">
 						<div class="panel-heading"> 
 							<div style="width: 100%;">
-								<img alt="" id="logo-top" src="images/ic_launcher.png" style="float: left;"/>
-								<div class="btn-csv" style="float: right;" ng-show="checkedTests.length">
-									<a    class="btn btn-primary btn-lg" ng-click='downloadCSV(checkedTests)'><span class="glyphicon glyphicon-list-alt"></span> Export CSV  </a>
-								</div>
+								<img alt="" class="logo-z-top" src="images/ic_launcher.png" style="float: left;"/>
+
+								<a href="http://sciaps.com/"  style="float: right;">
+									<img alt="" class="logo-sciaps-top"  src="images/Sciaps-Logo.png"/>
+								</a>
 							</div>
+
+					
 							<div class=" jumbotron text-center" >
 								<div class="container">
 								<h1>Tests</h1>
 								</div>      
 							</div>
-
+<div class="btn-csv"  ng-show="checkedTests.length">
+									<a    class="btn btn-primary btn-lg" ng-click='downloadCSV(checkedTests)'><span class="glyphicon glyphicon-list-alt"></span> Export CSV  </a>
+								</div>
 						</div> 
 						<div id="jqxtestsgrid">
 						</div>
@@ -25,5 +30,8 @@
 				</div>
 			</div> 
 		</div>
+		<img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/>
+			</div>
 	</div>
+	
  </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="libz-app">
 <head>
-  <title>{{ title }}</title>
+  <title>Z-500</title>
 
     <link rel="shortcut icon" href="http://sciaps.com/wp-content/uploads/2013/01/sciaps.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" />
@@ -14,7 +14,7 @@
 <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
 <script type="text/javascript" src="/javascripts/angular.min.js"></script>
 <script type="text/javascript" src="/javascripts/angular-route.js"></script>
- --><script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
 
 
 

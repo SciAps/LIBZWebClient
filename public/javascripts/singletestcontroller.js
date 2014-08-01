@@ -6,7 +6,7 @@
 		var onGetSingleTestComplete = function(response) {
 			$log.info("onGetSingleTestComplete");
 	
-			$scope.singleTest= $scope.formatTest(response.data.mResult,$routeParams.ttitle,$routeParams.tdate);
+			$scope.singleTest= $scope.formatTest(response.data.mResult,$routeParams.tid, $routeParams.ttitle,$routeParams.tdate);
 
 
 			$log.info($scope.singleTest);
@@ -54,14 +54,14 @@
 		     });
 		};
 
-		$scope.formatTest = function(test,title,date){
+		$scope.formatTest = function(test,id,title,date){
 
 		 	var json = {};
 		 	var firstMatch = {};
 	    	var firstGradeRank =  test["gradeRanks"][0]["grade"];
 
 	    	json["title"]=title;
-	    	json["id"]= test["id"];
+	    	json["id"]= id;
 	    	json["date"]= date;
 	    	json["base"]= test["base"];
 

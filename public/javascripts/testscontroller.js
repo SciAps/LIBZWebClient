@@ -76,7 +76,8 @@
           { name: 'match_no', type: 'string' } 
         ],
 
-        id: 'id'
+        id: 'id',
+        pagesize: 50
         // ,
         // pager: function (pagenum, pagesize, oldpagenum) {
         //       $log.info("pagenum"+pagenum)
@@ -86,14 +87,14 @@
       };
       var dataAdapter = new $.jqx.dataAdapter(source);
       
-      var cellsrenderer = function (row, columnfield, value, defaulthtml, columnproperties) {
-        if (value < 20) {
-          return '<span style="margin: 4px; float: ' + columnproperties.cellsalign + '; color: #ff0000;">' + value + '</span>';
-        }
-        else {
-        return '<span style="margin: 4px; float: ' + columnproperties.cellsalign + '; color: #008000;">' + value + '</span>';
-        }
-      };
+      // var cellsrenderer = function (row, columnfield, value, defaulthtml, columnproperties) {
+      //   if (value < 20) {
+      //     return '<span style="margin: 4px; float: ' + columnproperties.cellsalign + '; color: #ff0000;">' + value + '</span>';
+      //   }
+      //   else {
+      //   return '<span style="margin: 4px; float: ' + columnproperties.cellsalign + '; color: #008000;">' + value + '</span>';
+      //   }
+      // };
       // var dataAdapter = new $.jqx.dataAdapter(source, {
       //   downloadComplete: function (data, status, xhr) { },
       //   loadComplete: function (data) { },
@@ -101,6 +102,7 @@
       // });
     // initialize jqxGrid
       $("#jqxtestsgrid").jqxGrid({
+        pagesizeoptions:['5','10','20','50','100'],
         width: "100%",
         source: dataAdapter,
         theme: 'Arctic',
