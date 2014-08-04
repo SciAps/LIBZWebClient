@@ -118,7 +118,7 @@
                         ]
                       };
 
-                      $('#chartContainer').jqxChart(settings);
+                      myChart = $('#chartContainer').jqxChart(settings);
                     };
 
                   };

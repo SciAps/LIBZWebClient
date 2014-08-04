@@ -35,6 +35,7 @@
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxchart.rangeselector.js"></script>
 
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.edit.js"></script>
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.selection.js"></script> 
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.columnsresize.js"></script> 
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.sort.js"></script>
