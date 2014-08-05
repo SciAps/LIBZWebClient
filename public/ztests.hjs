@@ -20,7 +20,7 @@
 								<h1>Tests</h1>
 								</div>      
 							</div>
-<div class="btn-csv"  ng-show="checkedTests.length">
+								<div class="btn-csv"  ng-show="checkedTests.length">
 									<a    class="btn btn-primary btn-lg" ng-click='downloadCSV(checkedTests)'><span class="glyphicon glyphicon-list-alt"></span> Export CSV  </a>
 								</div>
 						</div> 

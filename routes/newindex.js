@@ -2,59 +2,25 @@ var express = require('express');
 var router = express.Router();
 
 // /* GET home page. */
-router.get('/libz', function(req, res) {
-  res.render('libz', { title: 'Z Reporter' ,
+router.get('/index', function(req, res) {
+  res.render('index', { title: 'Z Reporter' ,
     'age':32
 
   });
 });
 router.get('/', function(req, res) {
-  res.render('libz', { title: 'Z Reporter'  
+  res.render('index', { title: 'Z Reporter'  
 
   });
 });
-router.get('/home', function(req, res) {
-  res.render('home', { title: 'Z Reporter' ,
-    'age':32
+ 
+router.get('/float', function(req, res) {
+  res.render('float', { title: 'float plotting'  
 
   });
 });
-router.get('/ztest', function(req, res) {
-  console.log("Params");
-  console.log(req.query);
-
-    // var builder =new gridBuilder();
-    // var test = builder.getSampleTest();
-    // test["name"] = req.query.tname;
-    // test["id"] = req.query.tid;
-    //     console.log(test);
-
-  res.render('test',req.query);
-});
-
-router.get('/tests', function(req, res) {
-  res.render('testsgrid', { title: 'Tests' ,
-    'age':32
-
-  });
-}); 
-router.get('/examples', function(req, res) {
-  res.render('flexgrid', { title: 'Tests' ,
-    'age':32
-
-  });
-}); 
-
-// //example of get
-// router.get('/', function(req, res) {
-
-// 	console.log(req.query);
-//   //res.render('index',{});
-//   // res.send({
-//   // 	users: ['sean','weiss']
-//   // });
-// });
-
+ 
+  
 // //example of get
 router.get('/getAllTests/:start', function(req, res) {
     console.log("getAllTests");

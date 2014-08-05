@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <div class="grid-holder" >
-	<div style="overflow: hidden;"  class="wrapper" ;>
-        <div  style="width: 100px; height:100%;margin:auto;" ng-hide="singleTest">
-         <img alt="" class="spinner-center" src="images/spinner.gif" />
-    </div>
 	<div ng-show="singleTest">
 	<div class="singleTestContainer" >
 		<div class="panel panel-default">

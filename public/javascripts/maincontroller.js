@@ -14,6 +14,7 @@
 
 
 		var onPostDownloadCSV = function(response) {
+ 		$('#myModal').modal('toggle');
 
 			$log.info("onPostDownloadCSV");
 			$log.info(response);
@@ -25,14 +26,16 @@
 
 			var encodedUri = encodeURI(csvContent);
 			//window.open(encodedUri);
-
  		 	window.location = encodedUri;
+ 		
 		}; 
 
 		var onError = function(reason) {
 			$log.error("error");
 			$log.error(reason);
 			$scope.error = "Unable to fetch csv";
+	 		$('#myModal').modal('toggle');
+
 		};
 
 		$scope.showSpinner= function(){
@@ -56,6 +59,10 @@
 	    $scope.downloadCSV = function () {
 	            $log.info("downloadCSV");
 	            $log.info($scope.checkedTests);
+	            $('#myModal').modal({
+				  show: true,
+				  backdrop:'static'
+				});
  		var url ="/cgi/export/csv";
 		// var testUrl = "http://localhost:9000/getCsvForTests/"
 		 $http.post(url,$scope.checkedTests).then(onPostDownloadCSV, onError);

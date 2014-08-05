@@ -13,6 +13,8 @@
 			$scope.hideSpinner();
 
  		 	$scope.showGrid($scope.singleTest);
+ 		 	$('#myModal').modal('toggle');
+
 		}; 
 
 		var onError = function(reason) {
@@ -92,8 +94,13 @@
 	        });
 	   		return json;
 		};
-		
-		 var testId = $routeParams.tid;
+
+        $('#myModal').modal({
+		  show: true,
+		  backdrop:'static'
+		});
+
+		var testId = $routeParams.tid;
 
 
 		 $log.info("testSelected");

@@ -1421,11 +1421,11 @@ a.video_link {
   margin: 40px 40px 40px 40px;
 
 }
-.spinner-center{
+/*.spinner-center{
    width: 100px;
   height: 100px;
   margin-top: 200px;
-}
+}*/
 .logo-z-top{
    width: 70px;
   height: 70px;
@@ -1446,4 +1446,9 @@ a.video_link {
   width: 84;
   height: 46;
   float: right;
+ }
+ .spinner-modal{
+   width: 50px;
+  height: 50px; 
+  margin: auto;
  }
