@@ -14,12 +14,7 @@ router.get('/', function(req, res) {
   });
 });
  
-router.get('/float', function(req, res) {
-  res.render('float', { title: 'float plotting'  
 
-  });
-});
- 
   
 // //example of get
 router.get('/getAllTests/:start', function(req, res) {

@@ -51,7 +51,7 @@
 				<tbody>
 					<tr>
 						<td>{{singleTest.firstMatch.name}}</td>
-						<td>{{singleTest.firstMatch.matchNumber}}</td>
+						<td>{{singleTest.firstMatch.matchNumber.toFixed(4)}}</td>
 						<td>{{singleTest.firstMatch.uns}}</td>
 						<td>{{singleTest.firstMatch.comments}}</td>
 					</tr>

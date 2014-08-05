@@ -5,12 +5,17 @@
         // console.log("SpectrumController");
         // console.log($scope.spectrumIds);
 
-
+        $scope.zoomOut =function(){
+            $log.info("zoomOut");
+                        event.preventDefault();
+                        plot.zoomOut();
+        };
 
         var onGetSpecsComplete = function(response) {
             $log.info("onGetTestsComplete");
             $scope.csv = response.data;
-            $log.info($scope.csv);
+           // $log.info($scope.csv);
+            $scope.showChart($scope.csv);
 
 
         };
@@ -21,122 +26,131 @@
             $scope.error = "Unable to fetch specs";
         };
 
-        $scope.$watch(
-            "singleTest",
-            function(newValue, oldValue) {
+        $scope.showChart = function(csv) {
 
-                if ($scope.singleTest) {
-                    $log.info("singleTest change for spectrum");
+            $log.info('showChart');
+            var container = $("#placeholder");
 
-                    $scope.showChart();
-                };
+            var pixles = $.csv.toArrays(csv);
+            
+            function getData(x1, x2) {
 
-            }
-        );
+            return [
+                { label: $routeParams.ttitle, data: pixles }
+            ];
+        }
 
-
-        $scope.showChart = function() {
-            // var testId = $routeParams.tid;
-
-
-            // $log.info("testSelected");
-            // $log.info($routeParams);
-            // var url ="/cgi/spectrum/"+testId;
-
-
-            var source = {
-                datatype: "csv",
-                datafields: [{
-                    name: 'wavelength'
-                }, {
-                    name: 'intensity'
-                }],
-                url: "/cgi/spectrum/" + $routeParams.tid
-            };
-            var dataAdapter = new $.jqx.dataAdapter(source, {
-                async: false,
-                autoBind: true,
-                loadError: function(xhr, status, error) {
-                    alert('Error loading "' + source.url + '" : ' + error);
-                }
-            });
-            var toolTipCustomFormatFn = function(value, itemIndex, serie, group, categoryValue, categoryAxis) {
-                return 'Index: ' + itemIndex + ", Value: " + value;
-            };
-            // prepare jqxChart settings
-            var settings = {
-                title: "Spectrum result for " + $scope.singleTest["title"],
-                description: "",
-                enableAnimations: true,
-                showLegend: true,
-                animationDuration: 1500,
-                enableCrosshairs: true,
-                padding: {
-                    left: 5,
-                    top: 5,
-                    right: 20,
-                    bottom: 5
+        var options = {
+            legend: {
+                show: true
+            },
+            series: {
+                lines: {
+                    show: true,
+                    lineWidth: 0.3
                 },
-                colorScheme: 'scheme04',
-                source: dataAdapter,
-
-                xAxis: {
-                    dataField: 'wavelength',
-                    description: 'wavelength',
-
-                    type: 'float',
-                    baseUnit: 'float',
-                    type: 'float',
-                    showTickMarks: true,
-                    tickMarksColor: '#888888',
-                    minValue: 300,
-                    maxValue: 600,
-                    flip: false,
-                    valuesOnTicks: true,
-                    showGridLines: false,
-                    textRotationAngle: 45,
-                    textRotationPoint: 'topright',
-                    textOffset: {
-                        x: 5,
-                        y: 8
-                    },
-                    rangeSelector: {
-                        serieType: 'area',
-                        padding: { /*left: 0, right: 0,*/
-                            top: 30,
-                            bottom: 0
-                        },
-                        // Uncomment the line below to render the selector in a separate container
-                        renderTo: $('#selectorContainer'),
-                        backgroundColor: 'white',
-                        size: 180,
-                        showGridLines: false,
+                points: {
+                    show: false
+                },
+                color: '#670089'
+            },
+            yaxis: {
+                ticks: 10
+            },
+            selection: {
+                mode: "xy"
+            }, 
+            grid: {
+                color: "#999",
+                margin: {
+                            top: 20,
+                            left: 30,
+                            bottom:20
                     }
-                },
-                seriesGroups: [{
-                    type: 'line',
-                    toolTipFormatFunction: toolTipCustomFormatFn,
-                    valueAxis: {
-                        flip: false,
-                        description: 'intensity',
-                        tickMarksColor: '#888888',
-                        displayValueAxis: true
-
-                    },
-                    series: [
-
-                        {
-                            dataField: 'intensity',
-                            displayText: $scope.singleTest["title"],
-                            lineWidth: 1,
-                            lineWidthSelected: 1
-                        }
-                    ]
-                }]
-            };
-           
-            myChart = $('#chartContainer').jqxChart(settings);
+            }
         };
+
+        var startData = getData(0, 3 * Math.PI);
+
+        plot = $.plot(container, startData, options);
+
+        // Create the overview plot
+
+        var overview = $.plot("#overview", startData, {
+            legend: {
+                show: false
+            },
+            series: {
+                lines: {
+                    show: true,
+                    lineWidth: 0.3
+                },
+                color: '#670089',
+                shadowSize: 0
+            },
+            xaxis: {
+                ticks: 4
+            },
+            yaxis: {
+                ticks: 3
+            },
+            grid: {
+                color: "#999",
+        
+            },
+            selection: {
+                mode: "xy"
+            }
+        });
+
+
+        var yaxisLabel = $("<div class='axisLabel yaxisLabel'></div>")
+            .text("intensity")
+            .appendTo(container);
+
+        // Since CSS transforms use the top-left corner of the label as the transform origin,
+        // we need to center the y-axis label by shifting it down by half its width.
+        // Subtract 20 to factor the chart's bottom margin into the centering.
+
+        yaxisLabel.css("margin-top", yaxisLabel.width() / 2 - 20);
+        // now connect the two
+
+        container.bind("plotselected", function (event, ranges) {
+
+            // clamp the zooming to prevent eternal zoom
+
+            if (ranges.xaxis.to - ranges.xaxis.from < 0.00001) {
+                ranges.xaxis.to = ranges.xaxis.from + 0.00001;
+            }
+
+            if (ranges.yaxis.to - ranges.yaxis.from < 0.00001) {
+                ranges.yaxis.to = ranges.yaxis.from + 0.00001;
+            }
+
+            // do the zooming
+
+            plot = $.plot(container, getData(ranges.xaxis.from, ranges.xaxis.to),
+                $.extend(true, {}, options, {
+                    xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
+                    yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
+                })
+            );
+
+            // don't fire event on the overview to prevent eternal loop
+
+            overview.setSelection(ranges, true);
+        });
+
+
+     
+
+            $("#overview").bind("plotselected", function (event, ranges) {
+                plot.setSelection(ranges);
+            });
+        };
+        
+        var url= "/cgi/spectrum/" + $routeParams.tid;
+        $http.get(url).then(onGetSpecsComplete, onError);
 
     };
     app.controller("SpectrumController", SpectrumController);

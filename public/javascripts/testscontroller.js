@@ -35,7 +35,8 @@
                     type: 'string'
                 }, {
                     name: 'match_no',
-                    type: 'string'
+                    type: 'string',
+                    cellsformat: 'f4'
                 }, {
                     name: 'selected',
                     type: 'bool'

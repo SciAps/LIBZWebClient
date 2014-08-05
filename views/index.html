@@ -5,16 +5,18 @@
 
     <link rel="shortcut icon" href="http://sciaps.com/wp-content/uploads/2013/01/sciaps.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" />
-    <link rel='stylesheet' href='/stylesheets/home.css' />
+    <link rel='stylesheet' href='../stylesheets/home.css' />
+	<link href="../stylesheets/chart.css" rel="stylesheet" type="text/css">
 
 
 
-<link rel="stylesheet" href="/stylesheets/jqx.base.css" type="text/css" />
+<link rel="stylesheet" href="../stylesheets/jqx.base.css" type="text/css" />
 <!--  <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script> -->
-<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
-<script type="text/javascript" src="https://code.angularjs.org/1.3.0-beta.5/angular.js"></script>
-<script type="text/javascript" src="/javascripts/angular-route.js"></script>
-<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="../javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="../javascripts/jquery.csv.min.js"></script>
+<script type="text/javascript" src="../javascripts/angular.min.js"></script>
+<script type="text/javascript" src="../javascripts/angular-route.js"></script>
+<script type="text/javascript" src="../javascripts/bootstrap.min.js"></script>
 
 
 
@@ -22,13 +24,13 @@
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxdata.js"></script> 
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxbuttons.js"></script>
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxscrollbar.js"></script>
-<script type="text/javascript" src="/javascripts/jqwidgets/jqxlistbox.js"></script>
-<script type="text/javascript" src="/javascripts/jqwidgets/jqxdropdownlist.js"></script>
-<script type="text/javascript" src="/javascripts/jqwidgets/jqxpanel.js"></script>
-<script type="text/javascript" src="/javascripts/jqwidgets/jqxwindow.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxwindow.js"></script>
 
-<script type="text/javascript" src="/javascripts/jqwidgets/jqxmenu.js"></script>
-<script type="text/javascript" src="/javascripts/jqwidgets/jqxcheckbox.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxcheckbox.js"></script>
 
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxdraw.js"></script>
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxchart.core.js"></script>
@@ -44,6 +46,10 @@
 <script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.columnsresize.js"></script>
 
 
+	<script language="javascript" type="text/javascript" src="../javascripts/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="../javascripts/jquery.flot.selection.js"></script>
+	<script language="javascript" type="text/javascript" src="../javascripts/jquery.flot.resize.min.js"></script>
+<script language="javascript" type="text/javascript" src="../javascripts/jquery.flot.navigate.min.js"></script>
 
 <script type="text/javascript" src="../javascripts/application.js"></script>
 <script type="text/javascript" src="../javascripts/maincontroller.js"></script>
@@ -56,7 +62,7 @@
 </head>
 <body  class='default main_wrapper' ng-controller="MainController">
 	<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-sm" style="width:150px;">
+		  <div class="modal-dialog modal-sm" style="width:150px; margin-top:150px;">
 
 		    <div class="modal-content" >
 		        	<!--  <div class="modal-header">
@@ -73,5 +79,8 @@
         <div ng-view></div>
 
     </div>
+    	<div id="footer">
+		Copyright &copy; 2014 - Sciaps
+	</div>
 </body>
 </html>

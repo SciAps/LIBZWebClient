@@ -1,11 +1,22 @@
 
 <!DOCTYPE html>
-<div style="overflow: hidden;" ng-controller="SpectrumController" >
+<div style="overflow: hidden;" ng-controller="SpectrumController" class="singleTestContainer"  >
  
-	<div  class="chartAndSelectorContainer">
-    <div id='chartContainer' style="width:100%; height:500px;">
-    </div>
-    <div id='selectorContainer' style="width:500px; height:140px;">
-    </div>
-	</div>    
+ 
+
+	<div id="content">
+
+		<div class="demo-container">
+			<div class="btn-zoom" >
+				<a    class="btn btn-primary btn-sm" ng-click='zoomOut()'><span class="glyphicon glyphicon-zoom-out"></span>ZOOM OUT</a>
+			</div>
+			<div id="placeholder" class="demo-placeholder" style="width:100%;"></div>
+			<div id="overview" class="demo-placeholder" style="width:30%; height:160px;"></div>
+		
+		</div>
+
+		
+	</div>
+
+
 </div>
