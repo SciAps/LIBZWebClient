@@ -7,9 +7,16 @@
 	<div id="content">
 
 		<div class="demo-container">
-			<div class="btn-zoom" >
+
+			<div class="btns-zoom-holder">
+				<div class="btns-zoom">
+				<a    class="btn btn-primary btn-sm" ng-click='zoomIn()'><span class="glyphicon glyphicon-zoom-in"></span>ZOOM IN</a>
 				<a    class="btn btn-primary btn-sm" ng-click='zoomOut()'><span class="glyphicon glyphicon-zoom-out"></span>ZOOM OUT</a>
+				</div>
 			</div>
+
+			
+			
 			<div id="placeholder" class="demo-placeholder" style="width:100%;"></div>
 			<div id="overview" class="demo-placeholder" style="width:30%; height:160px;"></div>
 		

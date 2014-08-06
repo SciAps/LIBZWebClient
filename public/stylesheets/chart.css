@@ -154,6 +154,11 @@ input[type=checkbox] {
 	background-color: #eee;
 	padding: 2px;
 }
-.btn-zoom-out{
-/*	z-index: 10;*/
+.btns-zoom-holder{
+	display: inline-block;
+	width: inherit;
+ }
+.btns-zoom-holder .btns-zoom{
+	 float: right;
 }
+

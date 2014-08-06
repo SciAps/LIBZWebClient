@@ -5,17 +5,56 @@
         // console.log("SpectrumController");
         // console.log($scope.spectrumIds);
 
+             var getMinMaxVals = function(vals){
+                var minXVal = Number.MAX_VALUE;
+                var maxXVal = 0;
+                var minYVal =Number.MAX_VALUE;
+                var maxYVal = 0;
+                $(vals).each(function(index, val) {
+
+                    minXVal = parseFloat(val[0]) < minXVal ? parseFloat(val[0]) : minXVal;
+                    minYVal = parseFloat(val[1]) < minYVal ? parseFloat(val[1]) : minYVal;
+                    maxXVal = parseFloat(val[0]) > maxXVal ? parseFloat(val[0]) : maxXVal;
+                    maxYVal = parseFloat(val[1]) > maxYVal ? parseFloat(val[1]) : maxYVal;
+                });
+                minYVal -= 50;
+                maxYVal +=300;
+                
+                $log.info(minXVal);
+                $log.info(maxXVal);
+                $log.info(minYVal);
+                $log.info(maxYVal);
+
+                return [minXVal,maxXVal,minYVal,maxYVal];
+            };
+
+
+
+        
         $scope.zoomOut =function(){
             $log.info("zoomOut");
                         event.preventDefault();
                         plot.zoomOut();
         };
+        $scope.zoomIn =function(){
+            $log.info("zoomIn");
+                        event.preventDefault();
+                        plot.zoom();
+        };
 
         var onGetSpecsComplete = function(response) {
-            $log.info("onGetTestsComplete");
-            $scope.csv = response.data;
-           // $log.info($scope.csv);
-            $scope.showChart($scope.csv);
+            $log.info("onGetTestsComplete"); 
+
+            var pixles = $.csv.toArrays(response.data);
+
+ 
+            $scope.minMax = getMinMaxVals(pixles);
+
+            $log.info($scope.minMax); 
+
+
+
+            $scope.showChart(pixles);
 
 
         };
@@ -26,12 +65,13 @@
             $scope.error = "Unable to fetch specs";
         };
 
-        $scope.showChart = function(csv) {
+        $scope.showChart = function(pixles) {
 
             $log.info('showChart');
             var container = $("#placeholder");
 
-            var pixles = $.csv.toArrays(csv);
+
+
             
             function getData(x1, x2) {
 
@@ -54,12 +94,24 @@
                 },
                 color: '#670089'
             },
-            yaxis: {
-                ticks: 10
+            xaxis: {
+                 panRange: [$scope.minMax[0], $scope.minMax[1]],
+                zoomRange: [10, $scope.minMax[1]]
+
+
             },
-            selection: {
-                mode: "xy"
-            }, 
+            yaxis: {
+                ticks: 10,
+                panRange: [$scope.minMax[2], $scope.minMax[3]],
+                zoomRange: [10, $scope.minMax[3]]
+
+            },
+            zoom: {
+                interactive: true
+            },
+            pan: {
+                interactive: true
+            },
             grid: {
                 color: "#999",
                 margin: {
@@ -89,7 +141,9 @@
                 shadowSize: 0
             },
             xaxis: {
-                ticks: 4
+                ticks: 4,
+                min: $scope.minMax[0],
+                max: $scope.minMax[1],
             },
             yaxis: {
                 ticks: 3
@@ -103,9 +157,20 @@
             }
         });
 
+        container.bind("plotzoom", function (event, plot) {
+                var axes =plot.getAxes();
+            var ranges = { xaxis: { from: axes.xaxis.min, to: axes.xaxis.max }, yaxis: { from: axes.yaxis.min, to: axes.yaxis.max } };
+            overview.setSelection(ranges, true);
+        });
+
+        container.bind("plotpan", function (event, plot) {
+            var axes =plot.getAxes();
+            var ranges = { xaxis: { from: axes.xaxis.min, to: axes.xaxis.max }, yaxis: { from: axes.yaxis.min, to: axes.yaxis.max } };
+            overview.setSelection(ranges, true);
+        });
 
         var yaxisLabel = $("<div class='axisLabel yaxisLabel'></div>")
-            .text("intensity")
+            .text("Intensity")
             .appendTo(container);
 
         // Since CSS transforms use the top-left corner of the label as the transform origin,
@@ -146,7 +211,10 @@
 
             $("#overview").bind("plotselected", function (event, ranges) {
                 plot.setSelection(ranges);
-            });
+                var yaxisLabel = $("<div class='axisLabel yaxisLabel'></div>")
+                .text("Intensity")
+                .appendTo(container);
+                });
         };
         
         var url= "/cgi/spectrum/" + $routeParams.tid;
