@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app="libz-app">
+<head>
+  <title> 500</title>
+
+
+    <link rel="shortcut icon" href="../images/ic_launcher.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" />
+    <link rel='stylesheet' href='../stylesheets/home.css' />
+	<link href="../stylesheets/chart.css" rel="stylesheet" type="text/css">
+
+
+
+<link rel="stylesheet" href="../stylesheets/jqx.base.css" type="text/css" />
+<!--  <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script> -->
+<script type="text/javascript" src="../javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="../javascripts/jquery.csv.min.js"></script>
+<script type="text/javascript" src="../javascripts/angular.min.js"></script>
+<script type="text/javascript" src="../javascripts/angular-route.js"></script>
+<script type="text/javascript" src="../javascripts/bootstrap.min.js"></script>
+
+
+
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxdata.js"></script> 
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxcombobox.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxwindow.js"></script>
+
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxcheckbox.js"></script>
+
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.edit.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.selection.js"></script> 
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.columnsresize.js"></script> 
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.filter.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.pager.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="../javascripts/jqwidgets/jqxnumberinput.js"></script>
+
+
+
+
+	<script language="javascript" type="text/javascript" src="../javascripts/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="../javascripts/jquery.flot.selection.js"></script>
+	<script language="javascript" type="text/javascript" src="../javascripts/jquery.flot.resize.min.js"></script>
+<script language="javascript" type="text/javascript" src="../javascripts/jquery.flot.navigate.min.js"></script>
+
+<script type="text/javascript" src="../javascripts/application.js"></script>
+<script type="text/javascript" src="../javascripts/maincontroller.js"></script>
+<script type="text/javascript" src="../javascripts/homecontroller.js"></script>
+<script type="text/javascript" src="../javascripts/testscontroller.js"></script>
+<script type="text/javascript" src="../javascripts/spectrumcontroller.js"></script>
+<script type="text/javascript" src="../javascripts/singletestcontroller.js"></script>
+<script type="text/javascript" src="../javascripts/assayscontroller.js"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body  class='default main_wrapper' ng-controller="MainController">
+	<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-sm" style="width:150px; margin-top:150px;">
+
+		    <div class="modal-content" >
+		        	<!--  <div class="modal-header">
+		        <h4 class="modal-title" id="myModalLabel">Loading</h4>
+		      </div> -->
+		        <div class="modal-body" style="text-align:center; padding:10px">
+		           <img alt="" class="spinner-modal" src="images/spinner.gif"/>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+ <div>
+  <div class="home-header" >
+    <div class="head-container">
+      <h1>
+        Welcome To Your Z-500
+      </h1>
+      <div>
+      	  <img alt="" class="img-libz" src="../images/LIBZ.png"/>
+      <p>
+       	The Z is based on a well-established technology called laser induced breakdown spectroscopy (LIBS) or LIBZ as we like to call it. With LIBS, a laser is fired at a sample, heating it almost instantaneously and creating an electron plasma.  As the plasma cools after about 1 us, the electrons return to the atoms that constitute the sample, emitting light at various discrete wavelengths.  The spectrometer resolves the wavelengths and the processor determines elements present and concentrations.
+      </p>
+
+		         
+</div>
+      
+    </div>
+  </div>
+        <div ng-view></div>
+
+    </div>
+    	<div id="footer">
+		Copyright &copy; 2014 - Sciaps
+	</div>
+			<img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/>
+
+</body>
+</html>

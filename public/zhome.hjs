@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+  <div style="margin:10px 100px;">
+    <table class="nav-btns-holder">
+      <tr>
+        <td>
+          <div class ="btn-huge-holder">
+            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("tests")'>
+            	      <h1>
+                REPORTING
+              </h1>
+                <img alt="" src="../images/ic_report.png" width="150px"/>
+
+        
+            </button>
+          </div>
+          
+        </td>
+        <td>
+          <div class ="btn-huge-holder">
+            
+            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("assays")'>
+            	     <h1>
+                ASSAYS
+              </h1>
+                         <img alt="" src="../images/ic_laser.png" width="150px"/>
+
+             
+            </button>
+          </div>
+        </td>
+         <td>
+          <div class ="btn-huge-holder">
+            
+            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" >
+            	     <h1>
+                MANUAL
+              </h1>
+                         <img alt="" src="../images/ic_manual.png" width="150px"/>
+
+             
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
