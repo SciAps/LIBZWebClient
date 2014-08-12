@@ -1,77 +1,132 @@
 <!DOCTYPE html>
-<div class="grid-holder" >
-	<div ng-show="singleTest">
-	<div class="singleTestContainer" >
-		<div class="panel panel-default">
-			<div class="wrapper">
-				<div class="top_wrapper">
-					<div class="panel-heading"> 
-							<div style="width: 100%;">
-								<img alt="" class="logo-z-top" src="images/ic_launcher.png" style="float: left;"/>
-								<a href="http://sciaps.com/"  style="float: right;">
-								<img alt="" class="logo-sciaps-top"  src="images/Sciaps-Logo.png"/>
-								</a>
-							</div>
-							<div class=" jumbotron text-center" >
-								<div class="container">
-								<h1>Test: {{singleTest.title}}</h1>
-								</div>      
-							</div>
+<div>
+  
+  <div class="grid-holder">
+	<div class="page-header">
+      <h1>
+        Test -  {{singleTest.title}} 			
+        <!-- 		
+<div class="btn-csv" ng-show="checkedTests.length" >
+<a class="btn btn-primary btn-lg" ng-click='downloadCSV(checkedTests)'>
+<span class="glyphicon glyphicon-list-alt">
+</span>
+Export CSV  
+</a>
+</div>
+-->
+      </h1>
+  </div>
+  <!-- 						
+<div class="panel-heading">
 
-						</div> 
-				</div>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Date</th>
-							<th>Base</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>{{singleTest.id}}</td>
-							<td>{{singleTest.date}}</td>
-							<td>{{singleTest.base}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>			
-		<div class="panel panel-default">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>First Match</th>
-						<th>Match Number</th>
-						<th>UNS</th>
-						<th>Comments</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>{{singleTest.firstMatch.name}}</td>
-						<td>{{singleTest.firstMatch.matchNumber.toFixed(4)}}</td>
-						<td>{{singleTest.firstMatch.uns}}</td>
-						<td>{{singleTest.firstMatch.comments}}</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div id="jqxsingletestgrid">
-		</div>
- 	</div>
- 	<div ng-include ="'zspecchart.hjs'" >
- 	</div>
- 	
- 	<div>
-		<div class="btn-back">
-			<a href="#/tests"  class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-arrow-left"></span> Back  </a>
-		</div>
+<div style="width: 100%;">
+<img alt="" class="logo-z-top" src="images/ic_launcher.png" style="float: left;"/>
 
-		<img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/>
-			</div>
-	</div>
+<a href="http://sciaps.com/"  style="float: right;">
+<img alt="" class="logo-sciaps-top"  src="images/Sciaps-Logo.png"/>
+</a>
+</div>
 
-<!-- ng-hide="singleTest"
- --></div>
+
+<div class=" jumbotron text-center" >
+<div class="container">
+<h1>
+Tests
+</h1>
+</div>
+
+</div>
+<div class="btn-csv"  ng-show="checkedTests.length">
+<a    class="btn btn-primary btn-lg" ng-click='downloadCSV(checkedTests)'>
+<span class="glyphicon glyphicon-list-alt">
+</span>
+Export CSV  
+</a>
+</div>
+</div>
+-->
+  <div ng-show="singleTest">
+      <div class="panel panel-default">
+        <div class="wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  ID
+                </th>
+                <th>
+                  Date
+                </th>
+                <th>
+                  Base
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {{singleTest.id}}
+                </td>
+                <td>
+                  {{singleTest.date}}
+                </td>
+                <td>
+                  {{singleTest.base}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="panel panel-default">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                First Match
+              </th>
+              <th>
+                Match Number
+              </th>
+              <th>
+                UNS
+              </th>
+              <th>
+                Comments
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                {{singleTest.firstMatch.name}}
+              </td>
+              <td>
+                {{singleTest.firstMatch.matchNumber.toFixed(4)}}
+              </td>
+              <td>
+                {{singleTest.firstMatch.uns}}
+              </td>
+              <td>
+                {{singleTest.firstMatch.comments}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="jqxsingletestgrid">
+      </div>
+      <div ng-include ="'zspecchart.hjs'" >
+      </div>
+  </div>
+  
+  <div class="btn-back">
+    <a href="#/tests"  class="btn btn-danger btn-lg">
+      <span class="glyphicon glyphicon-arrow-left">
+      </span>
+      Back  
+    </a>
+  </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<div style="overflow: hidden;" ng-controller="SpectrumController" class="singleTestContainer"  >
+<div style="overflow: hidden;" ng-controller="SpectrumController"  >
  
  
 
