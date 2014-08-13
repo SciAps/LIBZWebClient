@@ -9,12 +9,9 @@
 		$scope.specCount =0;
 		$scope.singleTest;
 		$scope.testId = 0; 
-		$scope.spinner = true;
-       	$log.info("show spinner: "+ $scope.spinner);
-
 
 		var onPostDownloadCSV = function(response) {
- 		$('#myModal').modal('toggle');
+                    $('#myModal').modal('hide');
 
 			$log.info("onPostDownloadCSV");
 			$log.info(response);
@@ -34,7 +31,7 @@
 			$log.error("error");
 			$log.error(reason);
 			$scope.error = "Unable to fetch csv";
-	 		$('#myModal').modal('toggle');
+                    $('#myModal').modal('hide');
 
 		};
 
