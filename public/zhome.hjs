@@ -32,7 +32,7 @@
          <td>
           <div class ="btn-huge-holder">
             
-            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" >
+            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("manual")'>
             	     <h1>
                 MANUAL
               </h1>

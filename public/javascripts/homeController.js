@@ -2,7 +2,11 @@
     var app = angular.module("libz-app");
     var HomeController = function($scope, $http, $log,  $location, $routeParams) {
         $scope.goTo= function(path){
-			$location.path("/" + path);
+        	if (path =="manual") {
+				window.open('z_manual.pdf', '_blank', 'fullscreen=yes');
+        	}else{
+				$location.path("/" + path);
+        	};
         }
 
                 

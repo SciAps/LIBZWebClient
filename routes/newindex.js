@@ -14,13 +14,7 @@ router.get('/', function(req, res) {
         title: 'Z Reporter'
 
     });
-});
-router.get('/report', function(req, res) {
-    res.render('report', {
-        title: 'Z Reporter'
-
-    });
-});
+}); 
 
 router.post('/cgi/saveassays/json', function(req, res) {
     console.log("save");
@@ -30,6 +24,12 @@ router.post('/cgi/saveassays/json', function(req, res) {
 
 
 
+router.post('/cgi/export/csv', function(req, res) {
+    console.log("export");
+    console.log(req.body);
+    var csv = '185.038, 0.0\n185.07133333333334, 1.8818914201031993\n186.07133333333334, 1.6818914201031993';
+    res.send(csv, 200);
+});
 
 router.get('/cgi/results', function(req, res) {
     console.log("getAllTests");
@@ -41,7 +41,6 @@ router.get('/cgi/results', function(req, res) {
 
     res.send(tests1["items"], 200);
 });
-
 
 router.get('/cgi/spectrum/:tid', function(request, response) {
 
@@ -72,28 +71,6 @@ router.get('/cgi/assays', function(req, res) {
 
     res.send(assays, 200);
 
-
-});
-
-
-// router.get('/getChemResults', function(req, res) {
-
-//   //console.log("getSingleTest");
-//     //console.log(req.query);
-//        // var data = getChemResults();
-
-//           var builder =new gridBuilder();
-//           var chemResults = builder.getSampleChemResult();
-//           console.log(chemResults);
-
-//            res.send(chemResults,200);
-// });
-
-router.get('/getCompareCSV', function(req, res) {
-
-
-
-    res.send(testsJson["items"], 200);
 });
 
 var test = {

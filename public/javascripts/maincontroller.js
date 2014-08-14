@@ -22,7 +22,7 @@
 			$log.info(csvContent);
 
 			var encodedUri = encodeURI(csvContent);
-			//window.open(encodedUri);
+			window.open(encodedUri,'_self');
  		 	window.location = encodedUri;
  		
 		}; 
