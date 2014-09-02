@@ -276,6 +276,11 @@
                                 result: false,
                                 message: value+" is not a valid name"
                             };
+                        }else if (value.length==0) {
+                            return {
+                                result: false,
+                                message: "You must enter a name for this assay"
+                            };
                         }
                         return true;
                     }
