@@ -4,12 +4,12 @@
         <div class="page-header">
             <h1>Tests 		
 	            <div class="btn-csv"  >
-					<a class="btn btn-primary btn-lg" ng-click="downloadCSV([])">
+					<a class="btn btn-primary btn-lg" ng-click="downloadCSVAll()">
 						<span class="glyphicon glyphicon-list-alt"/> Export All  
 					</a>
 				</div>	
             	<div class="btn-csv" ng-show="checkedTests.length" >
-					<a class="btn btn-primary btn-lg" ng-click="downloadCSV(checkedTests)">
+					<a class="btn btn-primary btn-lg" ng-click="downloadCSV()">
 						<span class="glyphicon glyphicon-list-alt"/> Export Selected  
 					</a>
 				</div>

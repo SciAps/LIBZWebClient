@@ -69,6 +69,21 @@
 	      // window.location = '/sampledata/Alloy.csv' + querystring;
 	    };
 
+	    $scope.downloadCSVAll = function () {
+	            $log.info("downloadCSVAll");
+ 	            $('#myModal').modal({
+				  show: true,
+				  backdrop:'static'
+				});
+ 				var url ="/cgi/export/csv";
+		// var testUrl = "http://localhost:9000/getCsvForTests/"
+		 		$http.post(url,[]).then(onPostDownloadCSV, onError);
+
+
+	      // var querystring = buildQueryString( criteria )
+	      // window.location = '/sampledata/Alloy.csv' + querystring;
+	    };
+
 	};
 	app.controller("MainController",MainController);
 })();
