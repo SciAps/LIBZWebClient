@@ -43,7 +43,7 @@
                 }],
 
                 id: 'id',
-                pagesize: 50 
+                pagesize: 50
                     // ,
                     // pager: function (pagenum, pagesize, oldpagenum) {
                     //       $log.info("pagenum"+pagenum)
@@ -119,8 +119,9 @@
 
                 selectionmode: 'singlecell',
                 columns: [{
-                    text: '',
+                    text: '',//<div class="header-checkbox-holder"><input type="checkbox" checked/></div>',
                     editable: true,
+                    sortable:false,
                     datafield: 'selected',
                     columntype: 'checkbox',
                     filtertype: 'bool',

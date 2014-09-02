@@ -117,6 +117,7 @@ margin-right: 30px;
 }
 .btn-csv{
   float: right;
+  margin-left: 5px;
 }
 .assays-holder {
   width: 100%;
@@ -132,6 +133,26 @@ margin-right: 30px;
    width: 40%;
    margin: 10px 60px ;
  }
+.header-checkbox{
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin: 0;
+  vertical-align: top;
+  display: block;
+  text-align: left;
+  cursor: auto;
+  zoom: 1;
+  color: #000000;
 
+}
+.header-checkbox-holder{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -14px;
+  margin-left: -14px;
+  cursor: auto;
+}
 
 
