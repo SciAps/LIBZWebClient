@@ -1,0 +1,13 @@
+
+task assembleWeb(type: Sync) {
+    from 'public'
+    from('views') {
+        rename 'index.hjs', 'index.html'
+    }
+    into 'build/web'
+}
+
+task buildZip(dependsOn: assembleWeb, type: Zip) {
+    archiveName 'webservice.zip'
+    from 'build/web'
+}
