@@ -234,11 +234,11 @@
                     datafield: 'base',
 
                 }, {
-                    text: 'Add assays',
+                    text: 'Add/Edit',
                     columntype: 'button',
-                    width: 120,
+                    width: 250,
                     cellsrenderer: function() {
-                        return "Add Assays";
+                        return "Add/Edit Calibration Standards";
                     },
                     buttonclick: function(row) {
                         $log.info("go to assays");

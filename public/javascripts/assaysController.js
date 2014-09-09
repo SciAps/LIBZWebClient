@@ -6,7 +6,7 @@
             $scope.postJson = [];
             $scope.newAssayName = '';
             $scope.unsavedChanges = false;
-
+            $scope.calibrationName =$routeParams.name;
 
 
                 $(window).bind('beforeunload', function(){
@@ -18,13 +18,18 @@
 
                 $scope.$on('$locationChangeStart', function (event, next, current) {
                     if ($scope.unsavedChanges) {
-                        event.preventDefault();
-                        var answer = confirm("It looks like you have unsaved changes, Are you sure you want to leave this page?")
-                        if (answer) {
-                             $location.path("/calibrations/" );
+                                event.preventDefault();
 
-                        }
-                    };
+                         var answer = confirm("It looks like you have unsaved changes, Are you sure you want to leave this page?")
+                        if (answer) {
+                            $scope.unsavedChanges=false;
+                                        blockNavigation = false;
+                                        $location.url($location.url(next).hash());
+                                        $scope.$apply();
+                                 }
+                             }
+
+                    
                 });
 
            
@@ -190,7 +195,7 @@
 
                         $($scope.assays).each(function(index, assay) {
                             if (assay['name']==item["name"]) {
-                                $scope.assayvalidationerror ="Assay already exists!";
+                                $scope.assayvalidationerror ="Calibration Standard already exists!";
                                 //$scope.$digest();
                              };
                         });
@@ -224,19 +229,23 @@
             var setUpAssayToolBar = function(){
                 $("#selectassayrowbutton").on('click', function() {
                     if ($scope.ddVals.length==0) {
-                        $scope.error= "No Assays found for "+$routeParams.base+ " Create a new Assay to add to this calibration";
+                        //$scope.assayvalidationerror= "No Standards found for "+$routeParams.base+ ". Create a new Standard to add to this calibration";
+                        $scope.assayvalidationwarning= "No Standards found for "+$routeParams.base+ ".\n   Create a new Standard to add to this calibration";
                         $log.error($scope.error);
-                                                $scope.$digest();
+                        $scope.$digest();
 
 
                     }else{
+                        $scope.assayvalidationwarning= "";
+
                         $scope.assayvalidationerror ="";
+
+                    }
 
                         $('#selectAssayModal').modal({
                           show: true,
                           backdrop:'static'
                         });
-                    }
                 });
 
        
@@ -283,7 +292,7 @@
             };
             var onError = function(reason) {
                 $log.error("error");
-                $scope.error = "Unable to fetch assays";
+                $scope.error = "Unable to fetch calibration standards";
             };
   
         $scope.showAssaysGrid = function(assays) {
@@ -352,9 +361,9 @@
                     var me = this;
                     var container = $("<div style='margin: 5px;'></div>");
                     toolbar.append(container);
-                    var selectExisting = '<button id="selectassayrowbutton" class="btn btn-primary btn-sm"><span>Add Assay</span>  </button>';
+                    var selectExisting = '<button id="selectassayrowbutton" class="btn btn-primary btn-sm"><span>Add Standard</span>  </button>';
                     //var addButton = '<button id="addassayrowbutton" class="btn btn-primary btn-sm" style="margin-left: 10px;"><span>Create New</span>  </button>';
-                    var deleteButton = '<button id="deleteassayrowbutton" class="btn btn-danger btn-sm" style="margin-left: 10px;"><span>Delete Selected Row</span>  </button>';
+                    var deleteButton = '<button id="deleteassayrowbutton" class="btn btn-danger btn-sm" style="margin-left: 10px;"><span>Delete Selected Standard</span>  </button>';
                     container.append(selectExisting);
                     //container.append(addButton);
                      container.append(deleteButton);
@@ -504,8 +513,8 @@
                     var me = this;
                     var container = $('<div style="margin: 5px;" ></div>');
                     toolbar.append(container);
-                    var addButton = '<button id="addspecrowbutton" " class="btn btn-primary btn-sm"><span>Add New Row</span>  </button>';
-                    var deleteButton = '<button id="deletespecrowbutton" class="btn btn-danger btn-sm" style="margin-left: 10px;"><span>Delete Selected Row</span>  </button>';
+                    var addButton = '<button id="addspecrowbutton" " class="btn btn-primary btn-sm"><span>Add New Element</span>  </button>';
+                    var deleteButton = '<button id="deletespecrowbutton" class="btn btn-danger btn-sm" style="margin-left: 10px;"><span>Delete Selected Element</span>  </button>';
                     container.append(addButton);
                     // container.append('<div width="10px"></div>');
                     container.append(deleteButton);
@@ -646,4 +655,5 @@
     };
 
     app.controller("AssaysController", AssaysController);
+
 })();
