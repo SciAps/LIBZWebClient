@@ -129,7 +129,7 @@
           Welcome To Your Z-500
         </h1>
         <div>
-      	  <img alt="" class="img-libz" src="../images/libz.png"/>
+      	  <img alt="" class="img-libz" src="../images/z-splash.png"/>
         <p>
           The Z is based on a well-established technology called laser induced breakdown spectroscopy (LIBS) or LIBZ as we like to call it. With LIBS, a laser is fired at a sample, heating it almost instantaneously and creating an electron plasma.  As the plasma cools after about 1 us, the electrons return to the atoms that constitute the sample, emitting light at various discrete wavelengths.  The spectrometer resolves the wavelengths and the processor determines elements present and concentrations.
         </p>

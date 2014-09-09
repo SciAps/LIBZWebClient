@@ -97,8 +97,8 @@
  -->      </small>
         <div class="btn-csv" >
           <a class="btn btn-primary btn-lg"  ng-click="saveAll()">
-           <!--  disabled="disabled" -->
-            <span class="glyphicon glyphicon-save"/> Save  
+           <!--  disabled="disabled" -->Save Standards
+            <span class="glyphicon glyphicon-save"/> 
           </a>
         </div>
     </h1>
