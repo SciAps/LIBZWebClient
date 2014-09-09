@@ -4,13 +4,13 @@
 
 
         $scope.postJson = [];
-        $scope.$watch('postJson', function(newVal, oldVal) {
-            $log.info("watch postJson fired");
+        // $scope.$watch('postJson', function(newVal, oldVal) {
+        //     $log.info("watch postJson fired");
 
-            if (newVal.length > 0) {
-                $scope.syncData();
-            };
-        }, true);
+        //     if (newVal.length > 0) {
+        //         $scope.syncData();
+        //     };
+        // }, true);
         var bases = new basesBuilder();
 
 
@@ -99,7 +99,6 @@
                     var answer = confirm("Are you sure you want to delete this calibrationt?")
                     if (answer) {
                         var id = $("#jqxcalibrationsgrid").jqxGrid('getrowid', selectedrowindex);
-                        var commit = $("#jqxcalibrationsgrid").jqxGrid('deleterow', id);
                         $scope.postJson.length = 0;
                         var datarow = $("#jqxcalibrationsgrid").jqxGrid('getrowdata', selectedrowindex);
                         $($scope.rawAssays).each(function(index, item) {
@@ -111,7 +110,9 @@
 
                             };
                         });
-                        $scope.$digest();
+                        var commit = $("#jqxcalibrationsgrid").jqxGrid('deleterow', id);
+ 
+                        $scope.syncData($scope.postJson);
 
 
                     };
@@ -123,7 +124,7 @@
             $log.error("error");
             $scope.error = "Unable to fetch calibrations";
         };
-        $scope.syncData = function() {
+        $scope.syncData = function(data) {
 
 
             var onSaveCalibrationsComplete = function(response) {
@@ -132,7 +133,7 @@
 
                 $log.info(response.data);
                 $('#myModal').modal('hide');
-                $("#jqxcalibrationsgrid").jqxGrid('updatebounddata', 'cells');
+                //$("#jqxcalibrationsgrid").jqxGrid('updatebounddata', 'cells');
 
                 return true;
 
@@ -157,7 +158,7 @@
                     backdrop: 'static'
                 });
                 var url = "/cgi/saveassays/json";
-                $http.post(url, $scope.postJson).then(onSaveCalibrationsComplete, onError);
+                $http.post(url, data).then(onSaveCalibrationsComplete, onError);
 
             }
         };

@@ -21,8 +21,8 @@
                         event.preventDefault();
                         var answer = confirm("It looks like you have unsaved changes, Are you sure you want to leave this page?")
                         if (answer) {
-                            $location.url($location.url(next).hash());
-                            $rootScope.$apply();
+                             $location.path("/calibrations/" );
+
                         }
                     };
                 });
@@ -54,8 +54,7 @@
                     return false;
                 };
 
-                $log.info("syncData");
-                $log.info($scope.postJson);
+                //$log.info($scope.postJson);
 
 
                 if ($scope.rawAssays.length == 0 && $scope.assays.length > 0) {
@@ -77,7 +76,10 @@
 
 
                     var url = "/cgi/saveassays/json";
-                     $log.info($scope.postJson);
+                $log.info("$scope.postJson");
+
+                     $log.info( $scope.postJson.length);
+                     $log.info( $scope.postJson[0]);
 
                     $http.post(url, $scope.postJson).then(onSaveAllComplete, onError);
 
@@ -114,6 +116,7 @@
                     item["shortName"] = name;
                     item["name"] = $routeParams.name+"-"+$routeParams.base+"_"+name;
                     item["base"] = $routeParams.base;
+                    item["spec"] = [];
 
 
 
@@ -128,7 +131,6 @@
                         $scope.rawAssays.unshift(item);
                         $log.info($scope.rawAssays);
 
-                        $scope.$digest();
 
                         $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
                         $("#jqxassaysgrid").jqxGrid('gotopage', 0);
@@ -138,7 +140,7 @@
                         $('#selectAssayModal').modal('hide');
                         $scope.newAssayName="";
                     };
-                                            $("#jqxAssayDd").jqxDropDownList('selectIndex', -1); 
+                    $("#jqxAssayDd").jqxDropDownList('selectIndex', -1); 
 
             };
             
@@ -171,15 +173,51 @@
                 $("#jqxAssayDd").jqxDropDownList({ source: $scope.ddVals, displayMember: "shortName", valueMember: "shortName",selectedIndex: -1, width: '200', height: '25'});
 
                 $('#jqxAssayDd').on('select', function (event) {
+              $log.info("adding assay ");
 
-                    $scope.assayvalidationerror ="";
-                    if (event.args.item!=null) { 
-                        var item = event.args.item.value;
-                        $scope.addAssay(item);
-                        $log.info(item);
+                $scope.assayvalidationerror ="";
+                if (event.args.item==null) {
+                    return;
+                };
+                   var item = event.args.item.originalItem;
+ 
+                    if (item != null) {
 
-                    }
-                  
+                    $log.info(event.args);
+
+
+
+                        $($scope.assays).each(function(index, assay) {
+                            if (assay['name']==item["name"]) {
+                                $scope.assayvalidationerror ="Assay already exists!";
+                                //$scope.$digest();
+                             };
+                        });
+
+
+                        if ($scope.assayvalidationerror.length==0) {
+                        $scope.unsavedChanges = true;
+
+                        item["calibrationName"] = $routeParams.name;
+                        item["name"] = $routeParams.name+"-"+item["name"];
+
+
+
+                          var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, item);
+
+                            $scope.assays.unshift(item);
+                            //$log.info($scope.assays);
+                            $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
+                            $("#jqxassaysgrid").jqxGrid('gotopage', 0);
+                            $("#jqxassaysgrid").jqxGrid('selectrow', 0);
+                            $('#selectAssayModal').modal('hide');
+                            }; 
+                            $("#jqxAssayDd").jqxDropDownList('selectIndex', -1); 
+
+                         };
+                      //  $scope.ddVals = bases.getAssaysByBaseForDropDown($scope.rawAssays,$scope.assays,$routeParams.base);
+                      //  $("#jqxAssayDd").jqxDropDownList('removeItem', event.args.item); 
+                    
                 });
             };
             var setUpAssayToolBar = function(){
@@ -191,6 +229,7 @@
 
 
                     }else{
+                        $scope.assayvalidationerror ="";
 
                         $('#selectAssayModal').modal({
                           show: true,
@@ -420,7 +459,13 @@
 
                         $($scope.rawAssays).each(function(index, item) {
                             if ($scope.assays[rowid]['name'] == item['name']) {
-                                item["spec"]=$scope.assayElems[row];
+                                $scope.rawAssays[index]['spec'] =[];
+
+                                $($scope.assayElems).each(function(index2, item2) {
+                                     $scope.rawAssays[index]['spec'].push({"element": item2["element"],"error": item2["error"],"percent": item2["percent"]})
+                                });
+
+                                //item["spec"]=$scope.assayElems[row];
 
                             };
                         });

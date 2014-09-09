@@ -104,7 +104,7 @@
   </script>
   <script type="text/javascript" src="../javascripts/calibrationscontroller.js">
   </script>
-  <script type="text/javascript" src="../javascripts/gradesController.js">
+  <script type="text/javascript" src="../javascripts/gradescontroller.js">
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
