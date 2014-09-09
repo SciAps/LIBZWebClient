@@ -24,7 +24,7 @@
         $scope.saveNewCalibration = function() {
             $scope.validationerror = "";
 
-            var name = $("#calibrationName").val();
+            var name = $("#calibrationName").val().trim();
             var item = $("#jqxDd").jqxDropDownList('getSelectedItem');
             $log.info(item);
             $log.info(name);
@@ -35,7 +35,13 @@
 
 
                 $scope.validationerror = "Base must be selected";
-            };
+            }
+
+            $($scope.calibrations).each(function(index,cal){
+                if (cal['name'].trim()=== name&&item.value===cal['base']) {
+                     $scope.validationerror = "Calibration with the same name and base already exists!";
+                 }
+            });
 
 
             if ($scope.validationerror.length == 0) {

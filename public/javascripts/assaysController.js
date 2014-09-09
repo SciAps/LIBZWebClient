@@ -90,6 +90,7 @@
             };
 
             $scope.addAssay= function(name){
+                name = name.trim();
                 $log.info("saving new assay "+name);
 
                 $scope.assayvalidationerror ="";
@@ -98,7 +99,7 @@
 
                     $($scope.assays).each(function(index, assay) {
 
-                        if (assay['shortName']==name) {
+                        if (assay['shortName'].trim()==name) {
                             $scope.assayvalidationerror ="Assay already exists!";
                             $scope.$digest();
  
