@@ -575,6 +575,7 @@
                         $log.info(value);
 
                         if (value < 0 || value > 100) {
+
                             return {
                                 result: false,
                                 message: "Value should be in the 0-100% range"
@@ -586,10 +587,10 @@
 
 
                             var sum = 0;
-                            $($scope.assayElems['spec']).each(function(index, item) {
+                            $($scope.assayElems).each(function(index, item) {
                                 //  $log.info(item);
                                 if (cell.row != index) {
-                                    sum += item.percent;
+                                    sum += item['percent'];
                                 };
                                 // sum+=
                             });
@@ -609,17 +610,21 @@
                     createeditor: function(row, cellvalue, editor) {
                         editor.jqxNumberInput({
                             decimalDigits: 3,
-                            symbol: '%'
+                           //symbol: '%',
+                           min: 0, 
+                           max: 100,
+                            inputMode: 'simple'
                         });
                     }
                 }, {
                     text: 'Error',
                     datafield: 'error',
                     columntype: 'numberinput',
+                    inputMode: 'simple',
                     cellsformat: 'f3',
                     validation: function(cell, value) {
                         if (value < 0 || value > 100) {
-                            return {
+                             return {
                                 result: false,
                                 message: "Error should be in the 0-100% range"
                             };
@@ -629,7 +634,10 @@
                     createeditor: function(row, cellvalue, editor) {
                         editor.jqxNumberInput({
                             decimalDigits: 3,
-                            symbol: '%'
+                           min: 0, 
+                           max: 100,
+                            // symbol: '%'
+                            inputMode: 'simple'
                         });
                     }
                 }]
