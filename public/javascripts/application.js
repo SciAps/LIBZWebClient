@@ -8,7 +8,7 @@
 	 				templateUrl:"zhome.hjs",
 	 				controller: "HomeController"
 	 		})
-	 		.when("/assays",{
+	 		.when("/assays/:name/:base",{
 	 				templateUrl:"zassays.hjs",
 	 				controller: "AssaysController"
 	 		})
@@ -18,6 +18,14 @@
 	 		}).when("/tests",{
 	 				templateUrl:"ztests.hjs",
 	 				controller: "TestsController"
+
+	 		}).when("/calibrations",{
+	 				templateUrl:"zCalibrations.hjs",
+	 				controller: "CalibrationsController"
+
+	 		}).when("/grades",{
+	 				templateUrl:"zGrades.hjs",
+	 				controller: "GradesController"
 
 	 		}).otherwise({redirectTo:"/home"});
 

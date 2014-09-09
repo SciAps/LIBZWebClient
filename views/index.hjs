@@ -102,9 +102,17 @@
   </script>
   <script type="text/javascript" src="../javascripts/assaysController.js">
   </script>
+  <script type="text/javascript" src="../javascripts/calibrationscontroller.js">
+  </script>
+  <script type="text/javascript" src="../javascripts/gradesController.js">
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body  class='default main_wrapper' ng-controller="MainController">
+
+
+
+
 	<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm" style="width:150px; margin-top:150px;">
         <div class="modal-content" >

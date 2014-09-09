@@ -4,66 +4,231 @@
 
 
             $scope.postJson = [];
-            $scope.$watch('postJson', function(newVal, oldVal) {
-                $log.info("watch postJson fired");
-
-                if (newVal.length > 0) {
-                    $scope.syncData();
-                };
-            }, true);
-                       var bases = new basesBuilder();
-
-
-            var onGetAssaysComplete = function(response) {
-
-                $log.info("onGetAssaysComplete");
-
-                $log.info(response.data);
-
-
-                //var assays=bases.addShortNameAndBase(response.data);
-                $scope.assays = bases.addShortNameAndBase(response.data)
+            $scope.newAssayName = '';
+            $scope.unsavedChanges = false;
 
 
 
-                $scope.showAssaysGrid($scope.assays);
-
-                setUpAssayToolBar();
-            };
-            var setUpAssayToolBar = function(){
-                $("#addassayrowbutton").on('click', function() {
-                    var datarow = generaterow();
-                    var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, datarow);
-                    $scope.assays.unshift(datarow);
-                    $log.info($scope.assays);
-                    $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
-                    $("#jqxassaysgrid").jqxGrid('gotopage', 0);
-                    $("#jqxassaysgrid").jqxGrid('selectrow', 0);
-
-                    $("#jqxassaysgrid").jqxGrid('beginrowedit', 0);
-
+                $(window).bind('beforeunload', function(){
+                    if( $scope.unsavedChanges ){
+                        return "It looks like you have unsaved changes."
+                    }
                 });
 
-                $("#deleteassayrowbutton").on('click', function() {
-                    var selectedrowindex = $("#jqxassaysgrid").jqxGrid('getselectedrowindex');
-                    var rowscount = $("#jqxassaysgrid").jqxGrid('getdatainformation').rowscount;
-                    $log.info(selectedrowindex);
 
-                    if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
-                        var id = $("#jqxassaysgrid").jqxGrid('getrowid', selectedrowindex);
-                        var commit = $("#jqxassaysgrid").jqxGrid('deleterow', id);
-                        $scope.assays.splice(selectedrowindex, 1);
-                        $log.info($scope.assays);
-                        $scope.postJson.length = 0;
-                        $($scope.assays).each(function(index, item) {
+                $scope.$on('$locationChangeStart', function (event, next, current) {
+                    if ($scope.unsavedChanges) {
+                        event.preventDefault();
+                        var answer = confirm("It looks like you have unsaved changes, Are you sure you want to leave this page?")
+                        if (answer) {
+                            $location.url($location.url(next).hash());
+                            $rootScope.$apply();
+                        }
+                    };
+                });
+
+           
+            $scope.saveAll= function(){
+              
+                var onSaveAllComplete = function(response) {
+
+                    $log.info("onSaveAssaysComplete"); 
+
+
+                    
+
+
+                    $log.info(response.data);
+                    $('#myModal').modal('hide');
+                    $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
+                                $scope.unsavedChanges = false;
+
+                     return true;
+
+                };
+                var onError = function(reason) {
+                    $log.error("error");
+                    $scope.error = "Failed to save assays";
+                    $('#myModal').modal('hide');
+
+                    return false;
+                };
+
+                $log.info("syncData");
+                $log.info($scope.postJson);
+
+
+                if ($scope.rawAssays.length == 0 && $scope.assays.length > 0) {
+                    return;
+                } else {
+                     $('#myModal').modal({
+                      show: true,
+                      backdrop:'static'
+                    });
+
+                    $scope.postJson.length = 0;
+                        $($scope.rawAssays).each(function(index, item) {
                             var postItem = {
                                 "name": item["name"],
                                 "spec": item["spec"]
                             }
                             $scope.postJson.push(postItem);
                         })
+
+
+                    var url = "/cgi/saveassays/json";
+                     $log.info($scope.postJson);
+
+                    $http.post(url, $scope.postJson).then(onSaveAllComplete, onError);
+
+                }
+
+
+
+            };
+
+            $scope.addAssay= function(name){
+                $log.info("saving new assay "+name);
+
+                $scope.assayvalidationerror ="";
+                
+
+
+                    $($scope.assays).each(function(index, assay) {
+
+                        if (assay['shortName']==name) {
+                            $scope.assayvalidationerror ="Assay already exists!";
+                            $scope.$digest();
+ 
+                         };
+                    });
+
+                    $log.info($scope.assayvalidationerror);
+                    if ($scope.assayvalidationerror.length==0) {
+                                                        $scope.unsavedChanges = true;
+
+                    $log.info('$scope.assayvalidationerror');
+
+                    var item ={};
+                    item["calibrationName"] = $routeParams.name;
+                    item["shortName"] = name;
+                    item["name"] = $routeParams.name+"-"+$routeParams.base+"_"+name;
+                    item["base"] = $routeParams.base;
+
+
+
+                    $log.info(item);
+
+                      var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, item);
+
+                        $log.info("$scope.assays");
+                        $scope.assays.unshift(item);
+                        $log.info($scope.assays);
+                        $log.info("$scope.rawAssays");
+                        $scope.rawAssays.unshift(item);
+                        $log.info($scope.rawAssays);
+
                         $scope.$digest();
-                        $log.info($scope.postJson);
+
+                        $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
+                        $("#jqxassaysgrid").jqxGrid('gotopage', 0);
+                        $("#jqxassaysgrid").jqxGrid('selectrow', 0);
+
+                       
+                        $('#selectAssayModal').modal('hide');
+                        $scope.newAssayName="";
+                    };
+                                            $("#jqxAssayDd").jqxDropDownList('selectIndex', -1); 
+
+            };
+            
+            var bases = new basesBuilder();
+
+
+            var onGetAssaysComplete = function(response) {
+
+                $log.info("onGetAssaysComplete");
+
+
+                $scope.rawAssays = response.data;
+
+            
+
+                //var assays=bases.addShortNameAndBase(response.data);
+                $scope.assays = bases.getAssays(response.data,$routeParams.name,$routeParams.base)
+
+
+
+                $scope.showAssaysGrid($scope.assays);
+
+                setUpAssayToolBar();
+
+                //todo: remove previously selected items
+
+                $scope.ddVals = bases.getAssaysByBaseForDropDown($scope.rawAssays,$scope.assays,$routeParams.base);
+ 
+
+                $("#jqxAssayDd").jqxDropDownList({ source: $scope.ddVals, displayMember: "shortName", valueMember: "shortName",selectedIndex: -1, width: '200', height: '25'});
+
+                $('#jqxAssayDd').on('select', function (event) {
+
+                    $scope.assayvalidationerror ="";
+                    if (event.args.item!=null) { 
+                        var item = event.args.item.value;
+                        $scope.addAssay(item);
+                        $log.info(item);
+
+                    }
+                  
+                });
+            };
+            var setUpAssayToolBar = function(){
+                $("#selectassayrowbutton").on('click', function() {
+                    if ($scope.ddVals.length==0) {
+                        $scope.error= "No Assays found for "+$routeParams.base+ " Create a new Assay to add to this calibration";
+                        $log.error($scope.error);
+                                                $scope.$digest();
+
+
+                    }else{
+
+                        $('#selectAssayModal').modal({
+                          show: true,
+                          backdrop:'static'
+                        });
+                    }
+                });
+
+       
+
+                $("#deleteassayrowbutton").on('click', function() {
+                    var selectedrowindex = $("#jqxassaysgrid").jqxGrid('getselectedrowindex');
+                    var rowscount = $("#jqxassaysgrid").jqxGrid('getdatainformation').rowscount;
+                    $log.info(selectedrowindex);
+                    //var deletedItem = $scope.assays[selectedrowindex];
+
+                    if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+                        var id = $("#jqxassaysgrid").jqxGrid('getrowid', selectedrowindex);
+                        var commit = $("#jqxassaysgrid").jqxGrid('deleterow', id);
+ 
+
+                        $($scope.rawAssays).each(function(index, item) {
+                            if ($scope.assays[selectedrowindex]['name'] == item['name']) {
+                                $scope.rawAssays.splice(index, 1);
+
+                            };
+                        });
+
+                        $scope.assays.splice(selectedrowindex, 1);
+                        $log.info("$scope.assays");
+                        $log.info($scope.assays);
+                        $log.info("$scope.rawAssays");
+                        $log.info($scope.rawAssays);
+                        $scope.$digest();
+                        $scope.unsavedChanges = true;
+
+                        $scope.showElementsGrid(-1); 
+
                     }
 
                 });
@@ -80,45 +245,7 @@
                 $log.error("error");
                 $scope.error = "Unable to fetch assays";
             };
-            $scope.syncData = function() {
-
-
-                var onSaveAssaysComplete = function(response) {
-
-                    $log.info("onSaveAssaysComplete");
-
-                    $log.info(response.data);
-                    $('#myModal').modal('hide');
-                    $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
-
-                    return true;
-
-                };
-                var onError = function(reason) {
-                    $log.error("error");
-                    $scope.error = "Failed to save assays";
-                    $('#myModal').modal('hide');
-
-                    return false;
-                };
-
-                $log.info("syncData");
-                $log.info($scope.postJson);
-
-
-                if ($scope.postJson.length == 0 && $scope.assays.length > 0) {
-                    return;
-                } else {
-                     $('#myModal').modal({
-                      show: true,
-                      backdrop:'static'
-                    });
-                    var url = "/cgi/saveassays/json";
-                    $http.post(url, $scope.postJson).then(onSaveAssaysComplete, onError);
-
-                }
-            };
-
+  
         $scope.showAssaysGrid = function(assays) {
             var source = {
                 localdata: assays,
@@ -129,10 +256,7 @@
                     $log.info(rowdata);
 
                     var lName = rowdata["base"].toUpperCase()!="NONE"? (rowdata["base"] + "_" + rowdata["shortName"]):rowdata["shortName"];
-                    //$("#jqxassaysgrid").jqxGrid('setcellvalue', rowid, 'name', rowdata["base"] + "_" + rowdata["shortName"]);
-                    //$("#jqxassaysgrid").jqxGrid('setcellvalue', rowid, 'name', lName);
-
- 
+      
 
 
 
@@ -140,25 +264,11 @@
                     $scope.assays[rowid]["base"] = rowdata["base"];
                     $scope.assays[rowid]["shortName"] = rowdata["shortName"]; 
 
-                           //.push({ index: rowid, data: rowdata });
-                    // synchronize with the server - send update command
-                    // call commit with parameter true if the synchronization with the server is successful 
-                    // and with parameter false if the synchronization failder.
-                    $log.info($scope.assays);
-                    $scope.postJson.length = 0;
-                    $($scope.assays).each(function(index, item) {
-                        var postItem = {
-                            "name": item["name"],
-                            "spec": item["spec"]
-                        }
-                        $scope.postJson.push(postItem);
-                    })
-                    $scope.$digest();
-                    $log.info($scope.postJson);
-                    commit(true);
- 
-                    //$scope.syncData();
 
+                    $log.info($scope.assays);
+                     $scope.unsavedChanges = true;
+
+            
                 },
                 datafields: [{
                         name: 'name'
@@ -191,7 +301,7 @@
                 width: '100%',
                 autorowheight: true,
                 autoheight: true,
-                editable: true,
+                editable: false,
                 pageable: true,
                 showtoolbar: true,
                 editmode: 'selectedrow',
@@ -202,89 +312,26 @@
                     var me = this;
                     var container = $("<div style='margin: 5px;'></div>");
                     toolbar.append(container);
-                    var addButton = '<button id="addassayrowbutton" class="btn btn-primary btn-sm"><span>Add New Row</span>  </button>';
+                    var selectExisting = '<button id="selectassayrowbutton" class="btn btn-primary btn-sm"><span>Add Assay</span>  </button>';
+                    //var addButton = '<button id="addassayrowbutton" class="btn btn-primary btn-sm" style="margin-left: 10px;"><span>Create New</span>  </button>';
                     var deleteButton = '<button id="deleteassayrowbutton" class="btn btn-danger btn-sm" style="margin-left: 10px;"><span>Delete Selected Row</span>  </button>';
-                    container.append(addButton);
-                    // container.append('<div width="10px"></div>');
-                    container.append(deleteButton);
-                    $("#addassayrowbutton").jqxButton();
+                    container.append(selectExisting);
+                    //container.append(addButton);
+                     container.append(deleteButton);
+                    //$("#addassayrowbutton").jqxButton();
+                    $("#selectassayrowbutton").jqxButton();
                     $("#deleteassayrowbutton").jqxButton();
                     // create new row.
 
 
                 },
-                columns: [{
-                    text: 'Long Name',
-                    datafield: 'name',
-                    editable: false
-                }, {
-                    text: 'Base',
-                    datafield: 'base',
-                    columntype: 'combobox',
-                    createeditor: function(row, column, editor) {
-                        // assign a new data source to the combobox.
-                        editor.jqxComboBox({ 
-                            source: bases.bases,
-                            promptText: "Choose Base:",
-                             dropDownHeight: 300, autoDropDownHeight: false
-                        });
-                    },
-                        //      createeditor: function(row, column, editor) {
-                        // // assign a new data source to the combobox.
-                        // editor.jqxDropDownList({ 
-                        //     autoDropDownHeight: true,
-                        //     source: bases.bases,
-                        //     promptText: "Choose Base", dropDownHeight: 400, autoDropDownHeight: false
-                  
-                        // });
-                 //   },
-                    // update the editor's value before saving it.
-                    cellvaluechanging: function(rowid, column, columntype, oldvalue, newvalue) {
-                        var rows = $("#jqxassaysgrid").jqxGrid('getrows');
-                        var rowdata = rows[rowid];
+                columns: [
+                    {
+                    text: 'Name',
+                     datafield: 'shortName' 
 
-                        // return the old value, if the new value is empty.
-                        $log.info("Selected Value: " + newvalue)
- 
-                            return newvalue == ""? "NONE":newvalue;
-                       
-
- 
-                    }
-                }, {
-                    text: 'Short Name',
-                    datafield: 'shortName',
-                    cellvaluechanging: function(rowid, column, columntype, oldvalue, newvalue) {
-                        // return the old value, if the new value is empty.
-                        $log.info("edited Value: " + newvalue)
-
-                        //$log.info($scope.assays[row]); 
-                        var rows = $("#jqxassaysgrid").jqxGrid('getrows');
-                        var rowdata = rows[rowid];
-
-
-                        $log.info("update row called");
-
-                        $log.info(rowdata);
-                        var newName = "";
-                        return newvalue;
-
-                    },
-                    validation: function(cell, value) {
-                        if (value.toLowerCase() =="new") {
-                            return {
-                                result: false,
-                                message: value+" is not a valid name"
-                            };
-                        }else if (value.length==0) {
-                            return {
-                                result: false,
-                                message: "You must enter a name for this assay"
-                            };
-                        }
-                        return true;
-                    }
-                }]
+                }
+                ]
             });
             $("#jqxassaysgrid").on('rowselect', function(event) {
                 $log.info("Row " + event.args.rowindex + " Selected");
@@ -318,18 +365,11 @@
                     var id = $("#jqxassayselementsgrid").jqxGrid('getrowid', selectedrowindex);
                     var commit = $("#jqxassayselementsgrid").jqxGrid('deleterow', id);
                     $scope.assayElems.splice(selectedrowindex, 1);
-                    $log.info($scope.assayElems);
-                    $scope.postJson.length = 0;
-                    $($scope.assays).each(function(index, item) {
-                        var postItem = {
-                            "name": item["name"],
-                            "spec": item["spec"]
-                        }
-                        $scope.postJson.push(postItem);
-                    })
-                    $scope.$digest();
-                    $log.info($scope.postJson);
+                    $scope.unsavedChanges = true;
+
+ 
                 }
+
 
             });
             var generaterow = function(i) {
@@ -344,7 +384,7 @@
             
 
             $scope.assayElems = rowid < 0 ? [] : $scope.assays[rowid]["spec"];
-            $log.info($scope.assayElems);
+            //$log.info($scope.assayElems);
  
             var source = {
                 localdata: $scope.assayElems,
@@ -360,33 +400,40 @@
                     name: 'error',
                     type: 'float'
                 }],
-                updaterow: function(rowid, rowdata, commit) {
+                updaterow: function(row, rowdata, commit) {
                      $log.info("updaterow called");
                     // $log.info(rowdata);
 
 
 
-                     $scope.assayElems[rowid]["element"] = rowdata["element"];
-                     $scope.assayElems[rowid]["error"] = rowdata["error"];
-                     $scope.assayElems[rowid]["percent"] = rowdata["percent"];
+                     $scope.assayElems[row]["element"] = rowdata["element"];
+                     $scope.assayElems[row]["error"] = rowdata["error"];
+                     $scope.assayElems[row]["percent"] = rowdata["percent"];
 
 
                      // // synchronize with the server - send update command
                     // // call commit with parameter true if the synchronization with the server is successful 
                     // // and with parameter false if the synchronization failder.
                     $log.info($scope.assayElems);
-                    $scope.postJson.length = 0;
-                    $($scope.assays).each(function(index, item) {
-                        var postItem = {
-                            "name": item["name"],
-                            "spec": item["spec"]
-                        }
-                        $scope.postJson.push(postItem);
-                    })
-                    $scope.$digest();
-                    $log.info($scope.postJson);
-                     commit(true);
-                    //$scope.syncData();
+
+
+
+                        $($scope.rawAssays).each(function(index, item) {
+                            if ($scope.assays[rowid]['name'] == item['name']) {
+                                item["spec"]=$scope.assayElems[row];
+
+                            };
+                        });
+
+
+
+                        $log.info("$scope.assays");
+                        $log.info($scope.assays);
+                        $log.info("$scope.rawAssays");
+                        $log.info($scope.rawAssays);
+                        
+                        $scope.$digest();
+                       $scope.unsavedChanges = true;
 
                 },
             };
@@ -534,7 +581,7 @@
 
             });
             $('#jqxassayselementsgrid').on('bindingcomplete', function () {
-                $log.info("init init init init init init init init init init");
+                //$log.info("init init init init init init init init init init");
                 setUpSpecToolBar();
             }); 
            // $log.info("$scope.assayElems");
@@ -549,6 +596,7 @@
         var url = "/cgi/assays";
 
         $http.get(url).then(onGetAssaysComplete, onError);
+
     };
 
     app.controller("AssaysController", AssaysController);

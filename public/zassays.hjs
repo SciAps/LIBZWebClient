@@ -1,50 +1,117 @@
 <!DOCTYPE html>
- <div class="alert alert-danger fade in" role="alert" ng-show="error">
-     <button type="button" class="close" data-dismiss="alert">
-       <span aria-hidden="true">
+<div class="modal fade" id="selectAssayModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">SELECT OR CREATE NEW ASSAY</h4>
+            </div>
+            <div class="modal-body">
+                <div style="overflow: hidden;">
+                    <div class="alert alert-danger fade in" role="alert" ng-show="assayvalidationerror" style="width:80%">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">
+                   ×
+                 </span>
+                            <span class="sr-only">
+                   Close
+                 </span>
+                        </button>
+                        <strong>
+                 ERROR!
+               </strong>{{assayvalidationerror}}
+                    </div>
+                    <table>
+
+                        <tr>
+                            <td align="right">SELECT ASSAY:</td>
+                            <td align="left">
+                                <div id='jqxAssayDd'>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td align="left">OR</td>
+                            <td align="left"></td>
+                        </tr>
+
+                        <tr> 
+                            <td align="right">New Assay Name:</td>
+                            <td align="left">
+                                <input id="assayName" ng-model="newAssayName" />
+                            </td>
+                         </tr>
+
+
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="addAssay(newAssayName)">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="alert alert-danger fade in" role="alert" style="width:90%" ng-show="error">
+    <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">
          ×
        </span>
-       <span class="sr-only">
+        <span class="sr-only">
          Close
        </span>
-     </button>
-     <strong>
+    </button>
+    <strong>
        ERROR!
      </strong>{{error}}
-   </div>
+</div>
 <div class="grid-holder">
-  <div class="page-header">
-    <h1>
+    <div class="page-header">
+        <h1>
       Assay Table 
       <small>
         Edit Your Z's Assays 
       </small>
+        <div class="btn-csv" >
+          <a class="btn btn-primary btn-lg"  ng-click="saveAll()">
+           <!--  disabled="disabled" -->
+            <span class="glyphicon glyphicon-save"/> Save  
+          </a>
+        </div>
     </h1>
-  </div> 
+
+    </div>
     <div class="wrapper">
-      <table class = "assays-holder">
-      	<tr>
-      		<td>
-      			<div class = "assays-grid-holder">
-          <div id="jqxassaysgrid">
-          </div>
-        </div>
-  			</td>
-      		<td>
-      			  <div class = "elements-grid-holder">
-          <div id="jqxassayselementsgrid" >
-          </div>
-        </div>
-  			</td>
-      	</tr>
+
+        <table class="assays-holder">
+            <tr>
+                <td>
+                    <div class="assays-grid-holder">
+                        <div id="jqxassaysgrid">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="elements-grid-holder">
+                        <div id="jqxassayselementsgrid">
+                        </div>
+                    </div>
+                </td>
+            </tr>
         </table>
 
-    </div> 
-  <div class="btn-back">
-    <a href="#/home"  class="btn btn-danger btn-lg">
-      <span class="glyphicon glyphicon-arrow-left">
+    </div>
+    <div class="btn-back">
+        <a href="#/calibrations" class="btn btn-danger btn-lg">
+            <span class="glyphicon glyphicon-arrow-left">
       </span>
-      Back  
+            Back
         </a>
-  </div>
+    </div>
 </div>

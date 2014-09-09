@@ -19,9 +19,9 @@
         <td>
           <div class ="btn-huge-holder">
             
-            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("assays")'>
+            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("calibrations")'>
             	     <h1>
-                ASSAYS
+                Calibrations
               </h1>
                          <img alt="" src="../images/ic_laser.png" width="150px"/>
 
@@ -32,15 +32,60 @@
          <td>
           <div class ="btn-huge-holder">
             
+
             <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("manual")'>
-            	     <h1>
+                   <h1>
                 MANUAL
               </h1>
                          <img alt="" src="../images/ic_manual.png" width="150px"/>
 
              
             </button>
+
+           
           </div>
+        </td>
+      </tr>
+       <tr style="visibility: hidden;">
+        <td>
+           <div class ="btn-huge-holder">
+           <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("grades")'>
+                   <h1>
+                Grades
+              </h1>
+                         <img alt="" src="../images/logo_sa.png" width="150px"/>
+
+             
+            </button>
+          </div>
+          
+        </td>
+        <td>
+
+          <!-- <div class ="btn-huge-holder" >
+            
+            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" >
+                   <h1>
+                 
+              </h1>
+                         <img alt="" src="../images/ic_laser.png" width="150px"/>
+ 
+             
+            </button>
+          </div> -->
+        </td>
+         <td>
+         <!--  <div class ="btn-huge-holder">
+            
+            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" >
+                   <h1>
+                 
+              </h1>
+                          <img alt="" src="../images/ic_manual.png" width="150px"/>
+ 
+             
+            </button>
+          </div> -->
         </td>
       </tr>
     </table>
