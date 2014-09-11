@@ -7,10 +7,13 @@
     
     
     <link rel="shortcut icon" href="../images/ic_launcher.png" type="image/png">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css" />
-  <link rel='stylesheet' href='../stylesheets/home.css' />
-  <link href="../stylesheets/chart.css" rel="stylesheet" type="text/css">
-  
+  <link rel="stylesheet" href="/stylesheets/bootstrap.css"  type="text/css"/>
+  <link rel="stylesheet" href="../stylesheets/chart.css" type="text/css">
+  <link rel="stylesheet" href="../stylesheets/skeleton/stylesheets/base.css"  type="text/css">
+  <link rel="stylesheet" href="../stylesheets/skeleton/skeleton.css"  type="text/css">
+  <link rel="stylesheet" href="../stylesheets/skeleton/layout.css"  type="text/css">
+  <link rel='stylesheet' href='../stylesheets/home.css'  type="text/css"/>
+
   
   
   <link rel="stylesheet" href="../stylesheets/jqx.base.css" type="text/css" />
@@ -124,26 +127,58 @@
   </div>
   <div>
     <div class="home-header" >
+                    <img alt="" class="img-logo" src="../images/logo_large.png"/>
+
+             <!--  <img alt="" class="img-libz" src="../images/z-splash.png"/> -->
+
       <div class="head-container">
-        <h1>
+        <div>
+      	
+            <h1>
           Welcome To Your Z-500
         </h1>
-        <div>
-      	  <img alt="" class="img-libz" src="../images/z-splash.png"/>
-        <p>
-          The Z is based on a well-established technology called laser induced breakdown spectroscopy (LIBS) or LIBZ as we like to call it. With LIBS, a laser is fired at a sample, heating it almost instantaneously and creating an electron plasma.  As the plasma cools after about 1 us, the electrons return to the atoms that constitute the sample, emitting light at various discrete wavelengths.  The spectrometer resolves the wavelengths and the processor determines elements present and concentrations.
-        </p>
+        <h2>Introducing LIBS Technology</h2>
       </div>
     </div>
-   </div>
+   </div> 
    <div ng-view>
    </div>
    
   </div>
+
   <div id="footer">
-    Copyright &copy; 2014 - Sciaps
+<div class="container2">
+    <div class="four columns">
+       &nbsp; 
+    </div>
+    <div class="eight columns">
+ <p>
+    Copyright &copy; 2014 - Sciaps</p>
+    </div>
+    <div class="four columns logo">
+      <img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/>
+    </div>
+</div>
+
+
+
+<!-- 
+<div class="left">
+  &nbsp;
+ </div>
+<div class="right">
+     <img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/>
+</div>
+<div class="center"><p>
+    Copyright &copy; 2014 - Sciaps</p>
+</div>
+  -->
+<!-- 
+    <p>
+    Copyright &copy; 2014 - Sciaps</p>
+    <img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/> -->
   </div>
-  <img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/>
+  
   
   </body>
 </html>
