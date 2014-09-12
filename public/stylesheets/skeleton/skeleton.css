@@ -69,14 +69,12 @@
     .container2 .offset-by-fourteen              { padding-left: 840px; }
     .container2 .offset-by-fifteen               { padding-left: 900px; }
 
-/*     #footer .container2 .column .logo{
-            float: right;
-            margin: 0;
-        }*/
-        #footer .logo_powered_bottom{
-          width: 80%;
-           float: right;
-        }
+    #footer .logo_powered_bottom                 { width: 80%; float: right; }
+    #footer .logo_sciaps_bottom{
+        width: 80%;
+        float: left;
+        margin-top: 40px;
+    }
 
 
 /* #Tablet (Portrait)
@@ -191,24 +189,20 @@
         .container2 .offset-by-fourteen,
         .container2 .offset-by-fifteen { padding-left: 0; }
 
-/*        #footer .container2 .column .logo{
-             margin: 0 auto;
-        }*/
-        #footer .logo_powered_bottom{
-          width: 100%;
-         }
-         .home-header .head-container h1{
+ 
+        #footer .container2  .logo{
+             width: 100%;
+        }
+        .home-header .head-container h1{
             font-size: 35px;
-margin-left: 0;
-
-         }
-         .home-header .head-container h2{
+            margin-left: 0;
+        }
+        .home-header .head-container h2{
             font-size: 25px;
-
-         }
-          .container2 .btn-main-nav  h2{
+        }
+        .container2 .btn-main-nav  h2{
             font-size: 40px;
-         }
+        }
     }
 
 
@@ -242,26 +236,25 @@ margin-left: 0;
         .container2 .one-third.column,
         .container2 .two-thirds.column { width: 420px; }
 
-        #footer .container2 .column .logo{
+        #footer .container2 .column {
              margin: 0 auto;
         }
-        #footer .logo_powered_bottom{
-          width: 80%;
-          margin: 0 10%;
-
-         }
-         .home-header .head-container h1{
+        #footer .container2  .logo{
+            width: 80%;
+            margin: 0 10%;
+        }
+ 
+        .home-header .head-container h1{
             font-size: 35px;
-margin-left: 0;
-
-         }
+            margin-left: 0;
+        }
          .home-header .head-container h2{
             font-size: 25px;
 
-         }
-     .container2 .btn-main-nav h2{
+        }
+         .container2 .btn-main-nav h2{
             font-size: 40px;
-         }
+        }
 
     }
 

@@ -9,8 +9,8 @@
     <link rel="shortcut icon" href="../images/ic_launcher.png" type="image/png">
   <link rel="stylesheet" href="/stylesheets/bootstrap.css"  type="text/css"/>
   <link rel="stylesheet" href="../stylesheets/chart.css" type="text/css">
-  <link rel="stylesheet" href="../stylesheets/skeleton/stylesheets/base.css"  type="text/css">
-  <link rel="stylesheet" href="../stylesheets/skeleton/skeleton.css"  type="text/css">
+<!--   <link rel="stylesheet" href="../stylesheets/skeleton/stylesheets/base.css"  type="text/css">
+ -->  <link rel="stylesheet" href="../stylesheets/skeleton/skeleton.css"  type="text/css">
   <link rel="stylesheet" href="../stylesheets/skeleton/layout.css"  type="text/css">
   <link rel='stylesheet' href='../stylesheets/home.css'  type="text/css"/>
 
@@ -125,58 +125,37 @@
 		    </div>
       </div>
   </div>
-  <div>
     <div class="home-header" >
-                    <img alt="" class="img-logo" src="../images/logo_large.png"/>
+      <img alt="" class="img-logo" src="../images/logo_large.png"/>
 
-             <!--  <img alt="" class="img-libz" src="../images/z-splash.png"/> -->
 
       <div class="head-container">
-        <div>
-      	
+       	
             <h1>
           Welcome To Your Z-500
         </h1>
         <h2>Introducing LIBS Technology</h2>
-      </div>
-    </div>
+     </div>
    </div> 
-   <div ng-view>
+   <div ng-view class="main_view">
    </div>
-   
-  </div>
+    
 
   <div id="footer">
 <div class="container2">
-    <div class="four columns">
-       &nbsp; 
+    <div class="four columns "><a href="http://sciaps.com">
+            <img alt="" class="logo_sciaps_bottom logo" src="images/SciAps_Logo.png"/></a>
+
     </div>
     <div class="eight columns">
  <p>
-    Copyright &copy; 2014 - Sciaps</p>
+    Copyright &copy; 2014 - <a href="http://sciaps.com">Sciaps</a></p>
     </div>
     <div class="four columns logo">
-      <img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/>
+      <img alt="" class="logo_powered_bottom logo" src="images/LIBZ_Tech.png"/>
     </div>
 </div>
-
-
-
-<!-- 
-<div class="left">
-  &nbsp;
- </div>
-<div class="right">
-     <img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/>
-</div>
-<div class="center"><p>
-    Copyright &copy; 2014 - Sciaps</p>
-</div>
-  -->
-<!-- 
-    <p>
-    Copyright &copy; 2014 - Sciaps</p>
-    <img alt="" class="logo_powered_bottom" src="images/LIBZ_Tech.png"/> -->
+ 
   </div>
   
   

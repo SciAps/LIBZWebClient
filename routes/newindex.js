@@ -42,6 +42,15 @@ router.get('/cgi/results', function(req, res) {
     res.send(tests1["items"], 200);
 });
 
+router.get('/cgi/gradelibraries', function(req, res) {
+    console.log("get grade Libraries");
+    //console.log(req.query.start);
+    gradeLibs =[{'name':"MASTER"},{'name':"OTHER"},{'name':"OTHER2"}];
+
+
+    res.send(gradeLibs, 200);
+});
+
 router.get('/cgi/spectrum/:tid', function(request, response) {
 
     var csv = '185.038, 0.0\n185.07133333333334, 1.8818914201031993';

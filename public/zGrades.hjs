@@ -12,28 +12,61 @@
        ERROR!
      </strong>{{error}}
    </div>
-<div class="grid-holder">
-  <div class="page-header">
+   <div class="page-header">
     <h1>
-      Grade Library 
+      &nbsp; &nbsp; &nbsp; Grade Library 
       <small>
         Edit Your Z's Grade Library 
       </small>
     </h1>
   </div> 
-    <div class="wrapper">
+   <!--  <div class="wrapper">
       
       			<div class = "grades-grid-holder">
           <div id="jqxgradesgrid">
           </div>
         </div>
   		
-    </div> 
-  <div class="btn-back">
+    </div>  -->
+  <div class="grid-holder">
+    <div class="row">
+      <div class="col-md-4">
+      <div style="background-color: #6f5499;">
+                    <div id="jqxgradelibsgrid">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div style="background-color: #4996f5;">
+           &nbsp;
+        </div>
+      </div>
+    </div>
+
+
+   <!--  <div class="container2 nav-btns-holder">
+    <div class="seven columns alpha">
+        <div style="background-color: #6f5499;">
+          &nbsp;
+        </div>
+    </div>
+    <div class="nine columns omega">
+        <div style="background-color: #4996f5;">
+           &nbsp;
+        </div>
+    </div>
+  -->
+     
+
+
+
+  <div class="btn-back" >
+ 
     <a href="#/home"  class="btn btn-danger btn-lg">
       <span class="glyphicon glyphicon-arrow-left">
       </span>
       Back  
         </a>
   </div>
+
 </div>

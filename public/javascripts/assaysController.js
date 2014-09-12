@@ -204,14 +204,17 @@
                         if ($scope.assayvalidationerror.length==0) {
                         $scope.unsavedChanges = true;
 
-                        item["calibrationName"] = $routeParams.name;
-                        item["name"] = $routeParams.name+"-"+item["name"];
+                        var newItem = { "name":$routeParams.name+"-"+item["name"] , "calibrationName": $routeParams.name , "shortName": item["shortName"] ,"base": item["base"], "spec": item["spec"]};
+
+
+                        // item["calibrationName"] = $routeParams.name;
+                        // item["name"] = $routeParams.name+"-"+item["name"];
 
 
 
                           var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, item);
 
-                            $scope.assays.unshift(item);
+                            $scope.assays.unshift(newItem);
                             //$log.info($scope.assays);
                             $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
                             $("#jqxassaysgrid").jqxGrid('gotopage', 0);
