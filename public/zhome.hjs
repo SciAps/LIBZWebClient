@@ -24,20 +24,20 @@
     
     <div class="four columns">
         <div class="btn-huge-holder">
-            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("manual")'>
-                <h2>Manual</h2>
-                            <div class = "img_holder">
-                <img alt="" class="img" src="../images/ic_manual.png" width="150px" />
-                  </div>
-            </button>
-        </div>
-    </div>
-    <div class="four columns" style="visibility:hidden;">
-        <div class="btn-huge-holder">
             <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("grades")'>
                 <h2>Grades</h2>
                             <div class = "img_holder">
                 <img alt="" class="img" src="../images/logo_sa.png" width="150px" />
+                  </div>
+            </button>
+        </div>
+    </div>
+    <div class="four columns">
+        <div class="btn-huge-holder">
+            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("manual")'>
+                <h2>Manual</h2>
+                            <div class = "img_holder">
+                <img alt="" class="img" src="../images/ic_manual.png" width="150px" />
                   </div>
             </button>
         </div>
