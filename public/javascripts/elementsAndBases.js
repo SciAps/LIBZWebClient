@@ -126,7 +126,7 @@
 
 
 
-    var bases = ["NONE", "Ag", "Al", "Au", "Babbit", "Bi", "ChromeMoly", "Cr", "Co", "Cu", "Fe", "Hf", "LowAlloy", "Mg", "Mn", "Mo", "Ni" , "Pb", "Pd", "Re", "Sb", "Se", "Sn", "Solder", "Stainless",
+    var bases = ["NONE", "Ag", "Al", "Au", "Babbit", "Bi", "ChromeMoly", "Cr", "Co", "Cu", "Fe", "Hf", "li" ,"LowAlloy", "Mg", "Mn", "Mo", "Ni" , "Pb", "Pd", "Re", "Sb", "Se", "Sn", "Solder", "Stainless",
      "Ta", "Ti", "ToolSteel", "V", "W", "Zr", "Nb", "Zn"];
 
  
