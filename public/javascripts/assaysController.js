@@ -397,14 +397,27 @@
             $("#addspecrowbutton").unbind('click');
 
             $("#addspecrowbutton").on('click', function() {
-                var datarow = generaterow();
-                var commit = $("#jqxassayselementsgrid").jqxGrid('addrow', null, datarow);
-                $scope.assayElems.unshift(datarow);
-                $log.info($scope.assayElems);
-                $("#jqxassayselementsgrid").jqxGrid('updatebounddata', 'cells');
-                $("#jqxassayselementsgrid").jqxGrid('gotopage', 0);
-                $("#jqxassayselementsgrid").jqxGrid('begincelledit', 0,"element");
 
+
+                 $("#jqxassayselementsgrid").jqxGrid('endrowedit', 0, false);
+
+                var elemVal =  $('#jqxassayselementsgrid').jqxGrid('getcellvalue', 0, "element");
+                // $log.info("addspecrowbutton");
+                // $log.info(val);
+
+                //update only if elem is valid
+                if (elemVal.length>0) { 
+
+                    var datarow = generaterow();
+                    var commit = $("#jqxassayselementsgrid").jqxGrid('addrow', null, datarow);
+                    $scope.assayElems.unshift(datarow);
+                    $log.info($scope.assayElems);
+                    $("#jqxassayselementsgrid").jqxGrid('updatebounddata', 'cells');
+                    $("#jqxassayselementsgrid").jqxGrid('gotopage', 0);
+                    $("#jqxassayselementsgrid").jqxGrid('begincelledit', 0,"element");
+
+
+                };
             });
             $("#deletespecrowbutton").unbind('click');
 
@@ -534,8 +547,7 @@
                   //  values:  bases.elements,
                     createeditor: function(row, column, editor) {
                         // assign a new data source to the combobox.
-                        editor.jqxDropDownList({ 
-                            autoDropDownHeight: true,
+                        editor.jqxDropDownList({  
                             source: bases.elements,
                             promptText: "Choose Element", dropDownHeight: 400, autoDropDownHeight: false
                   
@@ -552,10 +564,18 @@
 
                     },
                     validation: function(cell, value) {
+                        $log.info("validation");
                         $log.info(cell);
+                        $log.info(value);
                         result =true;
 
-                        if (cell["value"]!=value) {
+
+                        if (value.length==0) {
+                                    result= {
+                                        result: false,
+                                        message: "Please Select Element!"
+                                    };
+                        }else if (cell["value"]!=value) {
                             $( $scope.assayElems).each(function(index,item){
                                 if (item["element"].toLowerCase()==value.toLowerCase()) {
                                     result= {
@@ -565,7 +585,7 @@
                                 };
                             });
                         };
-
+                        $log.info('element valid '+result);
                         return result;
                     }
                 }, {
@@ -573,11 +593,11 @@
                     datafield: 'percent',
                     columntype: 'numberinput',
                     inputMode: 'simple',
-                    cellsformat: 'f3',
+                    cellsformat: 'f3', 
                     validation: function(cell, value) {
                         $log.info(value);
 
-                        if (value < 0 || value > 100) {
+                        if (value < 0 || value >= 100.001) {
 
                             return {
                                 result: false,
@@ -613,10 +633,11 @@
                     createeditor: function(row, cellvalue, editor) {
                         editor.jqxNumberInput({
                             decimalDigits: 3,
-                           //symbol: '%',
+                           symbol: '%',
                            min: 0, 
                            max: 100,
-                            inputMode: 'simple'
+                            inputMode: 'simple',
+                            spinButtons: false 
                         });
                     }
                 }, {
@@ -639,8 +660,9 @@
                             decimalDigits: 3,
                            min: 0, 
                            max: 100,
-                            // symbol: '%'
-                            inputMode: 'simple'
+                             symbol: '%',
+                            inputMode: 'simple',
+                            spinButtons: false 
                         });
                     }
                 }]
@@ -650,13 +672,27 @@
                 //$log.info("init init init init init init init init init init");
                 setUpSpecToolBar();
             }); 
-           // $log.info("$scope.assayElems");
-           // $log.info($scope.assayElems);
+            $("#jqxassayselementsgrid").on('cellbeginedit', function (event) {
+                var column = args.datafield;
+                var row = args.rowindex;
+                $log.info("column "+column);
+
+                var cell = $('#jqxassayselementsgrid').jqxGrid('getcell', row, column);
+
+                $log.info(cell);
+
+                if(args.columntype == "numberinput"){
+                //$('#jqxNumberInput').jqxNumberInput('focus'); 
+                    $log.info("numberinput ");
+
+                }
+                var value = args.value;
+            });
+            
            var show= (typeof rowid!="undefined" && rowid>=0);
             $('#jqxassayselementsgrid').jqxGrid({ showtoolbar: show}); 
         };
 
-       // $scope.showAssaysGrid([]);
         $scope.showElementsGrid(-1);
 
         var url = "/cgi/assays";
@@ -668,3 +704,5 @@
     app.controller("AssaysController", AssaysController);
 
 })();
+
+
