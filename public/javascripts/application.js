@@ -23,11 +23,18 @@
 	 				templateUrl:"zCalibrations.hjs",
 	 				controller: "CalibrationsController"
 
-	 		}).when("/grades",{
+	 		}).when("/grades/:fname",{
 	 				templateUrl:"zGrades.hjs",
 	 				controller: "GradesController"
 
-	 		}).otherwise({redirectTo:"/home"});
+	 		})
+
+
+	 		// .when('/modalGradeFiles', {
+	 		// 		templateUrl: 'modalGradeFileSelect.html', 
+	 		// 		controller: 'ModalGradeFileController'
+ 			// }) 
+	 		.otherwise({redirectTo:"/home"});
 
  	 });
 })();

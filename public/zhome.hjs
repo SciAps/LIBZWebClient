@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<div class="container2 nav-btns-holder">
+ <div class="container2 nav-btns-holder" >
     <div class="four columns">
         <div class="btn-huge-holder">
             <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("tests")'>
@@ -24,7 +24,7 @@
     
     <div class="four columns">
         <div class="btn-huge-holder">
-            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("grades")'>
+            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='showModal()'>
                 <h2>Grades</h2>
                             <div class = "img_holder">
                 <img alt="" class="img" src="../images/logo_sa.png" width="150px" />
@@ -43,3 +43,89 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" ng-controller="ModalGradeFileController" id="fileSelectModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">CHOOSE OR CREATE A NEW GRADE LIBRARY</h4>
+            </div>
+            <div class="modal-body">
+                <div style="overflow: hidden;">
+                    <div class="alert alert-danger fade in" role="alert" ng-show="validationError" style="width:80%">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">
+                   ×
+                 </span>
+                            <span class="sr-only">
+                   Close
+                 </span>
+                        </button>
+                        <strong>
+                 ERROR!
+               </strong>{{validationError}}
+                    </div>
+                    <div class="alert alert-warning fade in" role="alert" ng-show="libraryvalidationwarning" style="width:80%">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">
+                   ×
+                 </span>
+                            <span class="sr-only">
+                   Close
+                 </span>
+                        </button>
+                        <strong>
+                 Warning!
+               </strong>{{libraryvalidationwarning}}
+                    </div>
+                    <table class="modal_form_table">
+                
+                        <tr> 
+                            <td align="left"><h4> Grade Library:</h4>
+                            </td>
+                            <td align="right">
+                                <div id='jqxlibDd'>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                     <table class ="modal_form_table" ng-show="selectedFile==-1" >
+                        <tr>
+                            <td align="left">NAME:</td>
+                            <td align="right">
+                                <input id="libraryName" ng-model="newLibraryName" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left"><h4> IMPORT FROM (OPTIONAL):<h4></td>
+                     
+                        </tr>
+                        <tr>
+                            <td align="left">FROM EXISTING LIBRARY:</td>
+                            <td align="right">
+                                <div id='jqxImportlibDd'>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">FROM CSV FILE:</td>
+                            <td align="right">
+                                <button type="button" class="btn btn-primary" ng-click="openFile()">OPEN</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click='selectFile(selectedFile)'  ng-show="selectedFile!=-1">Select</button>
+                <button type="button" class="btn btn-primary" ng-click="addLibrary(newLibraryName)"  ng-show="selectedFile==-1">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

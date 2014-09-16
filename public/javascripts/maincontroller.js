@@ -84,6 +84,16 @@
 	      // window.location = '/sampledata/Alloy.csv' + querystring;
 	    };
 
+	    
+    		$scope.showModal = function(){
+    			$log.info('show modal');
+    			$log.info($('#fileSelectModal'));
+		        $('#fileSelectModal').modal({
+		            show: true,
+		            backdrop: 'static'
+		        });
+    		};
+
 	};
 	app.controller("MainController",MainController);
 })();

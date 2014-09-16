@@ -108,7 +108,11 @@
   <script type="text/javascript" src="../javascripts/calibrationscontroller.js">
   </script>
   <script type="text/javascript" src="../javascripts/gradescontroller.js">
+  </script>  
+  <script type="text/javascript" src="../javascripts/ModalGradeFileController.js">
   </script>
+
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body  class='default main_wrapper' ng-controller="MainController">
@@ -125,6 +129,7 @@
 		    </div>
       </div>
   </div>
+  
     <div class="home-header" >
       <img alt="" class="img-logo" src="../images/logo_large.png"/>
 
