@@ -3,17 +3,20 @@
         var ModalGradeFileController = function($scope, $http, $log, $location, $routeParams) {
     			$log.info('show modal');
 				$scope.selectedFile="";
+				$scope.newLibraryName="";
 
 					$('#fileSelectModal').on('hidden.bs.modal', function (e) {
 					$log.info("fileSelectModal hidden.bs.modal");
-  	            			             
-		 				var url = "/grades/" + $scope.selectedFile;
-			            $log.info(url);
+  	            		if ($scope.selectedFile!=-1) {
 
-		         		$location.path(url);
-		         		      $scope.$apply();
+			 				var url = "/grades/" + $scope.selectedFile;
+				            $log.info(url);
+
+			         		$location.path(url);
+			         		      $scope.$apply();
+  	            		}        
 		         		      
-					})
+					});
 
 	    	var onError = function(reason) {
 	            $log.error(reason);
@@ -93,7 +96,7 @@
 	        };
 
 	        $scope.selectFile = function(fileName){
-	        			            $log.info("fileName: "+fileName);
+	            $log.info("fileName: "+fileName);
 
 	        	if (fileName.length>0) {
 		            $log.info(fileName);
@@ -102,8 +105,41 @@
 				
 				
 	        	 }else{
-	        	 	$scope.validationError="Please Select A Library";
+	        	 	$scope.validationError="Please Select A Library!";
 	        	 };
+
+	        };
+
+	        $scope.addLibrary = function(fileName){
+	        	$log.info("fileName: "+fileName);
+	        	var exists = false;
+	        	$($scope.files).each(function(i,item){
+	        		$log.info("item['name']: "+item['name'].trim().toLowerCase());
+	        		$log.info("fileName: "+fileName.trim().toLowerCase());
+
+	        		if (item['name'].trim().toLowerCase()===fileName.trim().toLowerCase() ){
+						exists=true;
+	        		};
+	        	});
+
+
+	        	if (fileName.length<=0) {
+	        		$scope.validationError="Please Enter A Name For Your Library!";
+	        	 	return;
+	        	 }else if(exists){
+	        	 	$scope.validationError="A Library By That Name Already Exists!";
+	        	 	return;
+	        	 }else{
+	        	 	$log.info(fileName);
+	        	 	
+  	            			//TODO:Save New File
+  	            			//set: $scope.selectedFile=fileName.trim();
+  	            			//TODO:Close Modal
+  	            			//$('#fileSelectModal').modal('hide');
+
+	        	 };
+
+
 
 	        };
 	        var url = "/cgi/gradelibraries";

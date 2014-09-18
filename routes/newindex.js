@@ -16,21 +16,6 @@ router.get('/', function(req, res) {
     });
 }); 
 
-router.post('/cgi/saveassays/json', function(req, res) {
-    console.log("save");
-    console.log(req.body);
-    res.send("success", 200);
-});
-
-
-
-router.post('/cgi/export/csv', function(req, res) {
-    console.log("export");
-    console.log(req.body);
-    var csv = '185.038, 0.0\n185.07133333333334, 1.8818914201031993\n186.07133333333334, 1.6818914201031993';
-    res.send(csv, 200);
-});
-
 router.get('/cgi/results', function(req, res) {
     console.log("getAllTests");
     console.log(req.query.start);
@@ -106,9 +91,30 @@ router.get('/cgi/assays', function(req, res) {
 
 });
 
+router.post('/cgi/saveassays/json', function(req, res) {
+    console.log("save");
+    console.log(req.body);
+    res.send("success", 200);
+});
+
+router.post('/cgi/savegradelib/json', function(req, res) {
+    console.log("save");
+    console.log(req.body);
+    res.send("success", 200);
+});
+
+
+
+router.post('/cgi/export/csv', function(req, res) {
+    console.log("export");
+    console.log(req.body);
+    var csv = '185.038, 0.0\n185.07133333333334, 1.8818914201031993\n186.07133333333334, 1.6818914201031993';
+    res.send(csv, 200);
+});
+
 var gradeLibJson= [
         {
-        "comments":"comments",
+        "comments":"comments comments",
         "uns":"C 48200",
         "name":"Al_1100",
         "spec": {
@@ -128,7 +134,7 @@ var gradeLibJson= [
         "enabled":true,
      },
     {
-        "comments":"comments",
+        "comments":"comments comments",
         "uns":"C 48500",
         "name":"Al_2011",
         "spec":{
@@ -136,7 +142,7 @@ var gradeLibJson= [
                     "isTramp":false
             },"Silicon":{
                 "min":0.0,"max":0.4,
-                    "isTramp":false
+                    "isTramp":true
             },"Iron":{
                 "min":0.0,
                 "max":0.7,
@@ -145,7 +151,7 @@ var gradeLibJson= [
                     "isTramp":false
         },"Zinc":{"min":0.0,"max":0.3,
                     "isTramp":false},"Lead":{"min":0.2,"max":0.6,
-                    "isTramp":false},"Bismuth":{"min":0.0,"max":1.0,
+                    "isTramp":true},"Bismuth":{"min":0.0,"max":1.0,
                     "isTramp":false}
         },
         "enabled":false 
