@@ -80,6 +80,17 @@
                  Warning!
                </strong>{{libraryvalidationwarning}}
                     </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                             <div align="left"><h4> Grade Library:</h4></div>
+                              </div>
+                              <div class="col-md-6 modalddl"  align="right">
+                                  <div id='jqxlibDd'>
+                              
+                                </div>
+                              </div>
+                            </div>
+
                     <table class="modal_form_table">
                 
                         <tr> 
@@ -99,7 +110,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="left"><h4> IMPORT FROM (OPTIONAL):<h4></td>
+                            <td align="left"><h4> CLONE FROM (OPTIONAL):<h4></td>
                      
                         </tr>
                         <tr>
