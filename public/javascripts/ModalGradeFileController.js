@@ -27,12 +27,15 @@
 	        };
 	        var setUpAddForm = function(response){
 				var ddlFiles=[];
+				ddlFiles.push({name:"\&nbsp;\&nbsp;\&nbsp;---"});
+
     			$log.info(response);
 
 					$(response.data).each(function(index,item){
 						ddlFiles.push({name:item['name']});
 					});
     			$log.info(ddlFiles); 
+
 
 	            $("#jqxImportlibDd").jqxDropDownList({
 	                source: ddlFiles,
@@ -45,16 +48,21 @@
 	               $('#jqxImportlibDd').on('select', function(event) {
 
 
-	              	$scope.assayvalidationerror ="";
+	              	$scope.validationError ="";
 	              	if (event.args.item==null) {
 	                  	return;
 	              	};
 
-	        		var item = event.args.item.originalItem;
+	        		var item = event.args.item.originalItem['name'];
+	        		$log.info(event.args.item);
 
+	        		if(event.args.item['index']!=0){
+	        			importFromLib(item);
+	        		}
 	            });
+				ddlFiles.splice(0, 1);
 
-				ddlFiles.push({name:"NEW LIBRARY"});
+				ddlFiles.unshift({name:"NEW LIBRARY"});
 
 	            $("#jqxlibDd").jqxDropDownList({
 	                source: ddlFiles,
@@ -89,8 +97,7 @@
 
 
 	            $scope.files = response.data;
-	            // $log.info($scope.libraries);
-
+ 
 
 	            setUpAddForm(response);
 	        };
@@ -109,6 +116,12 @@
 	        	 };
 
 	        };
+
+	        var importFromLib = function(item){
+	        	$log.info(item);
+
+
+	        }
 
 	        $scope.addLibrary = function(fileName){
 	        	$log.info("fileName: "+fileName);

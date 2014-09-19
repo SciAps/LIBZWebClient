@@ -109,7 +109,7 @@
   </script>
   <script type="text/javascript" src="../javascripts/gradescontroller.js">
   </script>  
-  <script type="text/javascript" src="../javascripts/ModalGradeFileController.js">
+  <script type="text/javascript" src="../javascripts/modalGradeFileController.js">
   </script>
 
   
