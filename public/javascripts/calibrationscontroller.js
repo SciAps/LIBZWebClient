@@ -111,7 +111,8 @@
                             $log.info(item);
                             $log.info(datarow);
 
-                            if (item["shortName"].substring(0, (datarow["name"] + "-" + datarow["base"]).length) != datarow["name"] + "-" + datarow["base"]) {
+                            var tempname = item["name"].substring(0, (datarow["name"] + "-" + datarow["base"]).length);
+                            if (tempname != datarow["name"] + "-" + datarow["base"]) {
                                 $scope.postJson.push(item);
 
                             }else{
