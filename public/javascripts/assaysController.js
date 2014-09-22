@@ -72,9 +72,18 @@
 
                     $scope.postJson.length = 0;
                         $($scope.rawAssays).each(function(index, item) {
+                            var postspec=[];
+                            $(item["spec"]).each(function(i, specitem) {
+                                if (specitem['percent']>0) {
+                                    postspec.push(specitem);
+                                };
+                            });
+
+
+
                             var postItem = {
                                 "name": item["name"],
-                                "spec": item["spec"]
+                                "spec": postspec
                             }
                             $scope.postJson.push(postItem);
                         })
