@@ -114,7 +114,7 @@
                             $log.info(datarow);
 
                             var tempname = item["name"].substring(0, (datarow["name"] + "-" + datarow["base"]).length);
-                            if (tempnameq != datarow["name"] + "-" + datarow["base"]) {
+                            if (tempname != datarow["name"] + "-" + datarow["base"]) {
                                 $scope.postJson.push(item);
 
                             }else{
@@ -145,7 +145,7 @@
 
                 $log.info(response.data);
 
-                 $('#newCalibrationModal').modal({
+                 $('#myModal').modal({
                     show: true,
                     backdrop: 'static'
                 });
