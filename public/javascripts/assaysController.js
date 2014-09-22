@@ -18,18 +18,15 @@
 
                 $scope.$on('$locationChangeStart', function (event, next, current) {
                     if ($scope.unsavedChanges) {
-                                event.preventDefault();
-
-                         var answer = confirm("It looks like you have unsaved changes, Are you sure you want to leave this page?")
+                        event.preventDefault();
+                        var answer = confirm("It looks like you have unsaved changes, Are you sure you want to leave this page?")
                         if (answer) {
                             $scope.unsavedChanges=false;
-                                        blockNavigation = false;
-                                        $location.url($location.url(next).hash());
-                                        $scope.$apply();
-                                 }
-                             }
-
-                    
+                            blockNavigation = false;
+                            $location.url($location.url(next).hash());
+                            $scope.$apply();
+                        }
+                     }      
                 });
 
            
@@ -38,17 +35,11 @@
                 var onSaveAllComplete = function(response) {
 
                     $log.info("onSaveAssaysComplete"); 
-
-
-                    
-
-
                     $log.info(response.data);
                     $('#myModal').modal('hide');
                     $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
-                                $scope.unsavedChanges = false;
-
-                     return true;
+                    $scope.unsavedChanges = false;
+                    return true;
 
                 };
                 var onError = function(reason) {
@@ -79,7 +70,7 @@
                                 };
                             });
 
-
+   
 
                             var postItem = {
                                 "name": item["name"],
@@ -245,17 +236,27 @@
                         if ($scope.assayvalidationerror.length==0) {
                         $scope.unsavedChanges = true;
     
-                         var newItem = { "name":$routeParams.name+"-"+item["name"] , "calibrationName": $routeParams.name , "shortName": item["shortName"] ,"base": item["base"], "spec": item["spec"]};
+                         var newItem = {
+                          "name":$routeParams.name+"-"+item["name"] ,
+                           "calibrationName": $routeParams.name , 
+                           "shortName": item["shortName"] ,
+                           "base": item["base"], 
+                           "spec": item["spec"]};
 
 
-                        // item["calibrationName"] = $routeParams.name;
-                        // item["name"] = $routeParams.name+"-"+item["name"];
 
+                    $log.info(item);
 
+                      var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, item);
 
-                          var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, item);
+                        $log.info("$scope.assays");
+                        $scope.assays.unshift(item);
+                        $log.info($scope.assays);
+                        $log.info("$scope.rawAssays");
+                        $scope.rawAssays.unshift(item);
+                        $log.info($scope.rawAssays);
 
-                            $scope.assays.unshift(newItem);
+ 
                             //$log.info($scope.assays);
                             $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
                             $("#jqxassaysgrid").jqxGrid('gotopage', 0);
@@ -702,7 +703,7 @@
 
         var url = "/cgi/assays";
 
-        $http.get(url).then(onGetAssaysComplete, onError);
+        $http.get(url).then(s, onError);
 
     };
 

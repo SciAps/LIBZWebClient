@@ -126,8 +126,13 @@
 
 
 
-    var bases = ["NONE", "Ag", "Al", "Au", "Babbit", "Bi", "ChromeMoly", "Cr", "Co", "Cu", "Fe", "Hf", "Li" ,"LowAlloy", "Mg", "Mn", "Mo", "Ni" , "Pb", "Pd", "Re", "Sb", "Se", "Sn", "Solder", "Stainless",
-     "Ta", "Ti", "ToolSteel", "V", "W", "Zr", "Nb", "Zn"];
+    var bases = ["NONE", 
+    "Ag", 
+    "Al", 
+    "Au",
+    "Cr", 
+    "Co", "Cu", "Fe", "Hf", "Li", "Mg", "Mn", "Mo", "Ni" , "Pb", "Pd", "Re", "Sb", "Se", "Sn", "Stainless",
+    "Ta", "Ti", "ToolSteel", "V", "W", "Zr", "Nb", "Zn"];
 
  
 
