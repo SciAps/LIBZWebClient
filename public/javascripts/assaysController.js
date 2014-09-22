@@ -85,6 +85,7 @@
 
                      $log.info( $scope.postJson.length);
                      $log.info( $scope.postJson[0]);
+                    $log.info($scope.postJson);
 
                     $http.post(url, $scope.postJson).then(onSaveAllComplete, onError);
 
@@ -158,7 +159,6 @@
 
 
 
-                    $log.info(item);
 
                       var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, item);
 
@@ -245,18 +245,28 @@
 
 
 
-                    $log.info(item);
+                    // $log.info(item);
 
-                      var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, item);
+                    //   var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, item);
 
-                        $log.info("$scope.assays");
-                        $scope.assays.unshift(item);
-                        $log.info($scope.assays);
-                        $log.info("$scope.rawAssays");
-                        $scope.rawAssays.unshift(item);
-                        $log.info($scope.rawAssays);
+                    //     $log.info("$scope.assays");
+                    //     $scope.assays.unshift(item);
+                    //     $log.info($scope.assays);
+                    //     $log.info("$scope.rawAssays");
+                    //     $scope.rawAssays.unshift(item);
+                    //     $log.info($scope.rawAssays);
 
- 
+
+                        // item["calibrationName"] = $routeParams.name;
+                        // item["name"] = $routeParams.name+"-"+item["name"];
+
+
+
+                          var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, item);
+
+                            $scope.assays.unshift(newItem);
+                            $scope.rawAssays.unshift(newItem);
+
                             //$log.info($scope.assays);
                             $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
                             $("#jqxassaysgrid").jqxGrid('gotopage', 0);
