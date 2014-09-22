@@ -111,9 +111,12 @@
                             $log.info(item);
                             $log.info(datarow);
 
-                            if (item["name"].substring(0, (datarow["name"] + "-" + datarow["base"]).length) != datarow["name"] + "-" + datarow["base"]) {
+                            if (item["shortName"].substring(0, (datarow["name"] + "-" + datarow["base"]).length) != datarow["name"] + "-" + datarow["base"]) {
                                 $scope.postJson.push(item);
 
+                            }else{
+                                $log.info("deleting")
+                                $log.info(item)
                             };
                         });
                         var commit = $("#jqxcalibrationsgrid").jqxGrid('deleterow', id);
