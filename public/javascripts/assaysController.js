@@ -703,7 +703,7 @@
 
         var url = "/cgi/assays";
 
-        $http.get(url).then(s, onError);
+        $http.get(url).then(onGetAssaysComplete, onError);
 
     };
 
