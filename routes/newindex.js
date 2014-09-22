@@ -1168,18 +1168,6 @@ var gridBuilder = function() {
                 "element": "Silicon",
                 "percent": 7.17,
                 "error": 0
-            }, {
-                "element": "Iron",
-                "percent": 0.346,
-                "error": 0
-            }, {
-                "element": "Copper",
-                "percent": 0.119,
-                "error": 0
-            }, {
-                "element": "Manganese",
-                "percent": 0.0555,
-                "error": 0
             }
             // , {
             //     "element": "Magnesium",
@@ -1260,42 +1248,6 @@ var gridBuilder = function() {
                 "percent": 7.17,
                 "error": 0
             }, {
-                "element": "Iron",
-                "percent": 0.346,
-                "error": 0
-            }, {
-                "element": "Copper",
-                "percent": 0.119,
-                "error": 0
-            }, {
-                "element": "Manganese",
-                "percent": 0.0555,
-                "error": 0
-            }, {
-                "element": "Magnesium",
-                "percent": 0.351,
-                "error": 0
-            }, {
-                "element": "Chromium",
-                "percent": 0.0007,
-                "error": 0
-            }, {
-                "element": "Nickel",
-                "percent": 0.03,
-                "error": 0
-            }, {
-                "element": "Beryllium",
-                "percent": 0.00001,
-                "error": 0
-            }, {
-                "element": "Bismuth",
-                "percent": 0.0001,
-                "error": 0
-            }, {
-                "element": "Calcium",
-                "percent": 0.0003,
-                "error": 0
-            }, {
                 "element": "Cobalt",
                 "percent": 0.0002,
                 "error": 0
@@ -1310,22 +1262,6 @@ var gridBuilder = function() {
             }, {
                 "element": "Phosphorus",
                 "percent": 0.0005,
-                "error": 0
-            }, {
-                "element": "Lead",
-                "percent": 0.0004,
-                "error": 0
-            }, {
-                "element": "Tin",
-                "percent": 0.0002,
-                "error": 0
-            }, {
-                "element": "Strontium",
-                "percent": 0.0238,
-                "error": 0
-            }, {
-                "element": "Vanadium",
-                "percent": 0.0119,
                 "error": 0
             }, {
                 "element": "Zirconium",
@@ -1338,69 +1274,13 @@ var gridBuilder = function() {
                 "element": "Silicon",
                 "percent": 7.17,
                 "error": 0
-            },  {
-                "element": "Copper",
-                "percent": 0.119,
-                "error": 0
-            }, {
-                "element": "Manganese",
-                "percent": 0.0555,
-                "error": 0
-            }, {
-                "element": "Magnesium",
-                "percent": 0.351,
-                "error": 0
-            }, {
-                "element": "Chromium",
-                "percent": 0.0007,
-                "error": 0
-            }, {
-                "element": "Nickel",
-                "percent": 0.03,
-                "error": 0
-            }, {
-                "element": "Zinc",
-                "percent": 0.1,
-                "error": 0
             }, {
                 "element": "Titanium",
                 "percent": 0.121,
                 "error": 0
-            }, {
-                "element": "Beryllium",
-                "percent": 0.00001,
-                "error": 0
-            }, {
-                "element": "Bismuth",
-                "percent": 0.0001,
-                "error": 0
-            }, {
+            },  {
                 "element": "Calcium",
                 "percent": 0.0003,
-                "error": 0
-            }, {
-                "element": "Cobalt",
-                "percent": 0.0002,
-                "error": 0
-            }, {
-                "element": "Gallium",
-                "percent": 0.0201,
-                "error": 0
-            }, {
-                "element": "Sodium",
-                "percent": 0.00007,
-                "error": 0
-            }, {
-                "element": "Phosphorus",
-                "percent": 0.0005,
-                "error": 0
-            }, {
-                "element": "Lead",
-                "percent": 0.0004,
-                "error": 0
-            }, {
-                "element": "Tin",
-                "percent": 0.0002,
                 "error": 0
             }]
          }

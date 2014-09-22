@@ -99,7 +99,39 @@
                 $log.info("saving new assay "+name);
 
                 $scope.assayvalidationerror ="";
-                
+                                    var baseElems= new HashSet();
+
+                    $($scope.rawAssays).each(function(i,item){
+                        if (item["base"]===$routeParams.base&&item["calibrationName"]==$routeParams.name) {
+                            $log.info(item["name"]); // "object"
+                            $(item.spec).each(function(i,elem){
+
+                                baseElems.add(elem["element"]);
+                            });
+                        };
+
+                    });
+
+                    elemarray =baseElems.values();
+
+                    $log.info( elemarray); 
+                    elemarray.sort();
+                    $log.info( elemarray); 
+
+                    var baseSpec =[];
+                    $(elemarray).each(function(i,elem){
+
+                        baseSpec.push({"element":elem,"percent":0,"error":0});
+                    });
+           
+                    $($scope.assays).each(function(index, assay) {
+
+                        if (assay['shortName'].trim()==name) {
+                            $scope.assayvalidationerror ="Assay already exists!";
+                            $scope.$digest();
+ 
+                         };
+                    });
 
 
                     $($scope.assays).each(function(index, assay) {
@@ -122,7 +154,7 @@
                     item["shortName"] = name;
                     item["name"] = $routeParams.name+"-"+$routeParams.base+"_"+name;
                     item["base"] = $routeParams.base;
-                    item["spec"] = [];
+                    item["spec"] = baseSpec;
 
 
 
@@ -203,8 +235,8 @@
 
                         if ($scope.assayvalidationerror.length==0) {
                         $scope.unsavedChanges = true;
-
-                        var newItem = { "name":$routeParams.name+"-"+item["name"] , "calibrationName": $routeParams.name , "shortName": item["shortName"] ,"base": item["base"], "spec": item["spec"]};
+    
+                         var newItem = { "name":$routeParams.name+"-"+item["name"] , "calibrationName": $routeParams.name , "shortName": item["shortName"] ,"base": item["base"], "spec": item["spec"]};
 
 
                         // item["calibrationName"] = $routeParams.name;
