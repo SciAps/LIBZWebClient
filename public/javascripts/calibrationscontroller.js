@@ -74,6 +74,8 @@
             $scope.showCalibrationsGrid($scope.calibrations);
 
             setUpCalibrationsToolBar();
+
+                    $('#myModal').modal('hide');
         };
         var setUpCalibrationsToolBar = function() {
             $("#addcalibrationsrowbutton").on('click', function() {
@@ -112,7 +114,7 @@
                             $log.info(datarow);
 
                             var tempname = item["name"].substring(0, (datarow["name"] + "-" + datarow["base"]).length);
-                            if (tempname != datarow["name"] + "-" + datarow["base"]) {
+                            if (tempnameq != datarow["name"] + "-" + datarow["base"]) {
                                 $scope.postJson.push(item);
 
                             }else{
@@ -142,7 +144,16 @@
                 $log.info("onSaveCalibrationsComplete");
 
                 $log.info(response.data);
-                $('#myModal').modal('hide');
+
+                 $('#newCalibrationModal').modal({
+                    show: true,
+                    backdrop: 'static'
+                });
+
+                var url = "/cgi/assays";
+
+                $http.get(url).then(onGetCalibrationsComplete, onError);
+               // $('#myModal').modal('hide');
                 //$("#jqxcalibrationsgrid").jqxGrid('updatebounddata', 'cells');
 
                 return true;
@@ -281,6 +292,10 @@
 
         };
 
+        $('#myModal').modal({
+                    show: true,
+                    backdrop: 'static'
+                });
 
         var url = "/cgi/assays";
 
