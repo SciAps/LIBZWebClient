@@ -126,7 +126,6 @@
  
                         $scope.syncData($scope.postJson);
 
-
                     };
                 }
 
@@ -300,6 +299,13 @@
         var url = "/cgi/assays";
 
         $http.get(url).then(onGetCalibrationsComplete, onError);
+        $scope.startTest= function(url){
+           
+           $scope.memem =123;
+            $log.info("startTest");
+
+            $http.get(url).then(onGetCalibrationsComplete, onError);
+        }; 
     };
 
     app.controller("CalibrationsController", CalibrationsController);

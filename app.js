@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var lessMiddleware =require('less-middleware');
-var routes = require('./routes/newindex');
+var routes = require('./routes/index');
  console.log('running!!!');
 var app = express();
 
@@ -25,11 +25,12 @@ app.use(cookieParser());
 var lessMiddleware = require('less-middleware');
 
 app.use(lessMiddleware({ src: __dirname + '/less', dest: __dirname + '/public/stylesheets' ,force:true, prefix: "/stylesheets"}));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public')); 
 //app.use(express.bodyParser());
 
 // var lessMiddleware = require('less-middleware');
 
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 app.use('/', routes);
  

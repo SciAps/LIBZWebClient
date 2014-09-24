@@ -4,8 +4,7 @@ var router = express.Router();
 // /* GET home page. */
 router.get('/index', function(req, res) {
     res.render('index', {
-        title: 'Z Reporter',
-        'age': 32
+        title: 'Z Reporter'
 
     });
 });
@@ -15,10 +14,17 @@ router.get('/', function(req, res) {
 
     });
 }); 
+// /* GET tests page. */
+router.get('/ztests', function(req, res) {
+    res.render('unittests', {
+        title: 'Z Tests'
 
+    });
+});
 router.post('/cgi/saveassays/json', function(req, res) {
-    console.log("save");
-    console.log(req.body);
+     console.log("save");
+    console.log(req);
+    calibrationsSampleData.setCals(req.body);
     res.send("success", 200);
 });
 
@@ -68,31 +74,20 @@ router.get('/cgi/result/:tid', function(req, res) {
     // test["id"] = req.query.tid;
     console.log(gridBuilder.getSampleTest);
     res.send(gridBuilder().getSampleTest(), 200);
-});
-
-// router.get('/cgi/calibrations', function(req, res) {
-//     console.log('calibrations');
-
-//     var builder = new gridBuilder();
-//     var calibrations = builder.getSampleCalibrations(req.query.start);
-
-//     console.log(calibrations);
-
-//     res.send(calibrations, 200);
-
-// });
+}); 
 
 router.get('/cgi/assays', function(req, res) {
     console.log('assays');
 
-    var builder = new gridBuilder();
-    var assays = builder.getSampleAssays(req.query.start);
+    var assays = calibrationsSampleData.getCals(req.query.start);
 
     console.log(assays);
 
     res.send(assays, 200);
 
 });
+
+
 
 var test = {
     "mResult": {
@@ -1169,72 +1164,7 @@ var gridBuilder = function() {
                 "percent": 7.17,
                 "error": 0
             }
-            // , {
-            //     "element": "Magnesium",
-            //     "percent": 0.351,
-            //     "error": 0
-            // }, {
-            //     "element": "Chromium",
-            //     "percent": 0.0007,
-            //     "error": 0
-            // }, {
-            //     "element": "Nickel",
-            //     "percent": 0.03,
-            //     "error": 0
-            // }, {
-            //     "element": "Zinc",
-            //     "percent": 0.1,
-            //     "error": 0
-            // }, {
-            //     "element": "Titanium",
-            //     "percent": 0.121,
-            //     "error": 0
-            // }, {
-            //     "element": "Beryllium",
-            //     "percent": 0.00001,
-            //     "error": 0
-            // }
-            // , {
-            //     "element": "Bismuth",
-            //     "percent": 0.0001,
-            //     "error": 0
-            // }, {
-            //     "element": "Calcium",
-            //     "percent": 0.0003,
-            //     "error": 0
-            // }, {
-            //     "element": "Cobalt",
-            //     "percent": 0.0002,
-            //     "error": 0
-            // }, {
-            //     "element": "Gallium",
-            //     "percent": 0.0201,
-            //     "error": 0
-            // }, {
-            //     "element": "Sodium",
-            //     "percent": 0.00007,
-            //     "error": 0
-            // }, {
-            //     "element": "Phosphorus",
-            //     "percent": 0.0005,
-            //     "error": 0
-            // }, {
-            //     "element": "Lead",
-            //     "percent": 0.0004,
-            //     "error": 0
-            // }, {
-            //     "element": "Tin",
-            //     "percent": 0.0002,
-            //     "error": 0
-            // }, {
-            //     "element": "Strontium",
-            //     "percent": 0.0238,
-            //     "error": 0
-            // }, {
-            //     "element": "Vanadium",
-            //     "percent": 0.0119,
-            //     "error": 0
-            // }
+          
             , 
             {
                 "element": "Zirconium",
@@ -1284,509 +1214,8 @@ var gridBuilder = function() {
                 "error": 0
             }]
          }
-         //, {
-        //     "name": "Al_323456",
-        //     "spec": [{
-        //         "element": "Silicon",
-        //         "percent": 7.17,
-        //         "error": 0
-        //     }, {
-        //         "element": "Iron",
-        //         "percent": 0.346,
-        //         "error": 0
-        //     }, {
-        //         "element": "Copper",
-        //         "percent": 0.119,
-        //         "error": 0
-        //     }, {
-        //         "element": "Manganese",
-        //         "percent": 0.0555,
-        //         "error": 0
-        //     },  {
-        //         "element": "Nickel",
-        //         "percent": 0.03,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zinc",
-        //         "percent": 0.1,
-        //         "error": 0
-        //     }, {
-        //         "element": "Titanium",
-        //         "percent": 0.121,
-        //         "error": 0
-        //     }, {
-        //         "element": "Beryllium",
-        //         "percent": 0.00001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Bismuth",
-        //         "percent": 0.0001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Calcium",
-        //         "percent": 0.0003,
-        //         "error": 0
-        //     }, {
-        //         "element": "Cobalt",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Gallium",
-        //         "percent": 0.0201,
-        //         "error": 0
-        //     }, {
-        //         "element": "Sodium",
-        //         "percent": 0.00007,
-        //         "error": 0
-        //     }, {
-        //         "element": "Phosphorus",
-        //         "percent": 0.0005,
-        //         "error": 0
-        //     }, {
-        //         "element": "Lead",
-        //         "percent": 0.0004,
-        //         "error": 0
-        //     }, {
-        //         "element": "Tin",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Strontium",
-        //         "percent": 0.0238,
-        //         "error": 0
-        //     }, {
-        //         "element": "Vanadium",
-        //         "percent": 0.0119,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zirconium",
-        //         "percent": 0.0007,
-        //         "error": 0
-        //     }]
-        // }, {
-        //     "name": "Al_35678",
-        //     "spec": [{
-        //         "element": "Silicon",
-        //         "percent": 7.17,
-        //         "error": 0
-        //     }, {
-        //         "element": "Iron",
-        //         "percent": 0.346,
-        //         "error": 0
-        //     }, {
-        //         "element": "Copper",
-        //         "percent": 0.119,
-        //         "error": 0
-        //     }, {
-        //         "element": "Manganese",
-        //         "percent": 0.0555,
-        //         "error": 0
-        //     }, {
-        //         "element": "Magnesium",
-        //         "percent": 0.351,
-        //         "error": 0
-        //     }, {
-        //         "element": "Chromium",
-        //         "percent": 0.0007,
-        //         "error": 0
-        //     }, {
-        //         "element": "Nickel",
-        //         "percent": 0.03,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zinc",
-        //         "percent": 0.1,
-        //         "error": 0
-        //     }, {
-        //         "element": "Titanium",
-        //         "percent": 0.121,
-        //         "error": 0
-        //     }, {
-        //         "element": "Beryllium",
-        //         "percent": 0.00001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Bismuth",
-        //         "percent": 0.0001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Calcium",
-        //         "percent": 0.0003,
-        //         "error": 0
-        //     }, {
-        //         "element": "Cobalt",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Gallium",
-        //         "percent": 0.0201,
-        //         "error": 0
-        //     }, {
-        //         "element": "Sodium",
-        //         "percent": 0.00007,
-        //         "error": 0
-        //     }, {
-        //         "element": "Phosphorus",
-        //         "percent": 0.0005,
-        //         "error": 0
-        //     }, {
-        //         "element": "Lead",
-        //         "percent": 0.0004,
-        //         "error": 0
-        //     }, {
-        //         "element": "Tin",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Strontium",
-        //         "percent": 0.0238,
-        //         "error": 0
-        //     }, {
-        //         "element": "Vanadium",
-        //         "percent": 0.0119,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zirconium",
-        //         "percent": 0.0007,
-        //         "error": 0
-        //     }]
-        // }, {
-        //     "name": "Brass_35634453",
-        //     "spec": [{
-        //         "element": "Silicon",
-        //         "percent": 7.17,
-        //         "error": 0
-        //     }, {
-        //         "element": "Iron",
-        //         "percent": 0.346,
-        //         "error": 0
-        //     }, {
-        //         "element": "Copper",
-        //         "percent": 0.119,
-        //         "error": 0
-        //     }, {
-        //         "element": "Manganese",
-        //         "percent": 0.0555,
-        //         "error": 0
-        //     }, {
-        //         "element": "Magnesium",
-        //         "percent": 0.351,
-        //         "error": 0
-        //     }, {
-        //         "element": "Chromium",
-        //         "percent": 0.0007,
-        //         "error": 0
-        //     }, {
-        //         "element": "Nickel",
-        //         "percent": 0.03,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zinc",
-        //         "percent": 0.1,
-        //         "error": 0
-        //     }, {
-        //         "element": "Titanium",
-        //         "percent": 0.121,
-        //         "error": 0
-        //     }, {
-        //         "element": "Beryllium",
-        //         "percent": 0.00001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Bismuth",
-        //         "percent": 0.0001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Calcium",
-        //         "percent": 0.0003,
-        //         "error": 0
-        //     }, {
-        //         "element": "Cobalt",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Gallium",
-        //         "percent": 0.0201,
-        //         "error": 0
-        //     }, {
-        //         "element": "Sodium",
-        //         "percent": 0.00007,
-        //         "error": 0
-        //     }, {
-        //         "element": "Phosphorus",
-        //         "percent": 0.0005,
-        //         "error": 0
-        //     }, {
-        //         "element": "Lead",
-        //         "percent": 0.0004,
-        //         "error": 0
-        //     }, {
-        //         "element": "Tin",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Strontium",
-        //         "percent": 0.0238,
-        //         "error": 0
-        //     }, {
-        //         "element": "Vanadium",
-        //         "percent": 0.0119,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zirconium",
-        //         "percent": 0.0007,
-        //         "error": 0
-        //     }]
-        // }, {
-        //     "name": "Bras_35as6",
-        //     "spec": [{
-        //         "element": "Silicon",
-        //         "percent": 7.17,
-        //         "error": 0
-        //     }, {
-        //         "element": "Iron",
-        //         "percent": 0.346,
-        //         "error": 0
-        //     }, {
-        //         "element": "Copper",
-        //         "percent": 0.119,
-        //         "error": 0
-        //     }, {
-        //         "element": "Manganese",
-        //         "percent": 0.0555,
-        //         "error": 0
-        //     }, {
-        //         "element": "Magnesium",
-        //         "percent": 0.351,
-        //         "error": 0
-        //     }, {
-        //         "element": "Chromium",
-        //         "percent": 0.0007,
-        //         "error": 0
-        //     }, {
-        //         "element": "Nickel",
-        //         "percent": 0.03,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zinc",
-        //         "percent": 0.1,
-        //         "error": 0
-        //     }, {
-        //         "element": "Titanium",
-        //         "percent": 0.121,
-        //         "error": 0
-        //     }, {
-        //         "element": "Beryllium",
-        //         "percent": 0.00001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Bismuth",
-        //         "percent": 0.0001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Calcium",
-        //         "percent": 0.0003,
-        //         "error": 0
-        //     }, {
-        //         "element": "Cobalt",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Gallium",
-        //         "percent": 0.0201,
-        //         "error": 0
-        //     }, {
-        //         "element": "Sodium",
-        //         "percent": 0.00007,
-        //         "error": 0
-        //     }, {
-        //         "element": "Phosphorus",
-        //         "percent": 0.0005,
-        //         "error": 0
-        //     }, {
-        //         "element": "Lead",
-        //         "percent": 0.0004,
-        //         "error": 0
-        //     }, {
-        //         "element": "Tin",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Strontium",
-        //         "percent": 0.0238,
-        //         "error": 0
-        //     }, {
-        //         "element": "Vanadium",
-        //         "percent": 0.0119,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zirconium",
-        //         "percent": 0.0007,
-        //         "error": 0
-        //     }]
-        // }, {
-        //     "name": "Al_3563333",
-        //     "spec": [{
-        //         "element": "Silicon",
-        //         "percent": 7.17,
-        //         "error": 0
-        //     }, {
-        //         "element": "Iron",
-        //         "percent": 0.346,
-        //         "error": 0
-        //     }, {
-        //         "element": "Copper",
-        //         "percent": 0.119,
-        //         "error": 0
-        //     }, {
-        //         "element": "Manganese",
-        //         "percent": 0.0555,
-        //         "error": 0
-        //     }, {
-        //         "element": "Magnesium",
-        //         "percent": 0.351,
-        //         "error": 0
-        //     }, {
-        //         "element": "Chromium",
-        //         "percent": 0.0007,
-        //         "error": 0
-        //     }, {
-        //         "element": "Nickel",
-        //         "percent": 0.03,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zinc",
-        //         "percent": 0.1,
-        //         "error": 0
-        //     }, {
-        //         "element": "Titanium",
-        //         "percent": 0.121,
-        //         "error": 0
-        //     }, {
-        //         "element": "Beryllium",
-        //         "percent": 0.00001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Bismuth",
-        //         "percent": 0.0001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Calcium",
-        //         "percent": 0.0003,
-        //         "error": 0
-        //     }, {
-        //         "element": "Cobalt",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Gallium",
-        //         "percent": 0.0201,
-        //         "error": 0
-        //     }, {
-        //         "element": "Sodium",
-        //         "percent": 0.00007,
-        //         "error": 0
-        //     }, {
-        //         "element": "Phosphorus",
-        //         "percent": 0.0005,
-        //         "error": 0
-        //     }, {
-        //         "element": "Lead",
-        //         "percent": 0.0004,
-        //         "error": 0
-        //     }, {
-        //         "element": "Tin",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Strontium",
-        //         "percent": 0.0238,
-        //         "error": 0
-        //     }, {
-        //         "element": "Vanadium",
-        //         "percent": 0.0119,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zirconium",
-        //         "percent": 0.0007,
-        //         "error": 0
-        //     }]
-        // }, {
-        //     "name": "Al_5052",
-        //     "spec": [{
-        //         "element": "Silicon",
-        //         "percent": 0.149,
-        //         "error": 0
-        //     }, {
-        //         "element": "Iron",
-        //         "percent": 0.198,
-        //         "error": 0
-        //     }, {
-        //         "element": "Copper",
-        //         "percent": 0.0615,
-        //         "error": 0
-        //     }, {
-        //         "element": "Manganese",
-        //         "percent": 0.053,
-        //         "error": 0
-        //     }, {
-        //         "element": "Magnesium",
-        //         "percent": 2.61,
-        //         "error": 0
-        //     }, {
-        //         "element": "Chromium",
-        //         "percent": 0.25,
-        //         "error": 0
-        //     }, {
-        //         "element": "Nickel",
-        //         "percent": 0.0475,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zinc",
-        //         "percent": 0.08,
-        //         "error": 0
-        //     }, {
-        //         "element": "Titanium",
-        //         "percent": 0.0105,
-        //         "error": 0
-        //     }, {
-        //         "element": "Boron",
-        //         "percent": 0.0002,
-        //         "error": 0
-        //     }, {
-        //         "element": "Cobalt",
-        //         "percent": 0.0001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Gallium",
-        //         "percent": 0.0203,
-        //         "error": 0
-        //     }, {
-        //         "element": "Sodium",
-        //         "percent": 0.0003,
-        //         "error": 0
-        //     }, {
-        //         "element": "Phosphorus",
-        //         "percent": 0.0003,
-        //         "error": 0
-        //     }, {
-        //         "element": "Lead",
-        //         "percent": 0.0004,
-        //         "error": 0
-        //     }, {
-        //         "element": "Tin",
-        //         "percent": 0.0001,
-        //         "error": 0
-        //     }, {
-        //         "element": "Vanadium",
-        //         "percent": 0.0107,
-        //         "error": 0
-        //     }, {
-        //         "element": "Zirconium",
-        //         "percent": 0.0008,
-        //         "error": 0
-        //     }]
-        // }
+        
+       
         ];
 
     var getTest = function() {
@@ -1869,5 +1298,29 @@ var gridBuilder = function() {
 
 };
 
+var CalibrationsSampleData = function() {
+
+    var cals = [];
+    var getCals=function(){
+        return cals;
+    };
+    var setCals = function(newCals){
+        // cals = [];
+        // $(newCals).each(function(i,item) {
+        //     cals.push(item);
+        // })
+     
+
+        cals =newCals;
+    };
+
+    return {
+       
+        getCals: getCals,
+        setCals: setCals
+    };
+};
+
+calibrationsSampleData = new CalibrationsSampleData();
 
 module.exports = router;
