@@ -126,15 +126,6 @@
 
 
 
-    var bases = ["NONE", 
-    "Ag", 
-    "Al", 
-    "Au",
-    "Cr", 
-    "Co", "Cu", "Fe", "Hf", "Li", "Mg", "Mn", "Mo", "Ni" , "Pb", "Pd", "Re", "Sb", "Se", "Sn", "Stainless",
-    "Ta", "Ti", "ToolSteel", "V", "W", "Zr", "Nb", "Zn"];
-
- 
 
     var addShortNameAndBase = function(data) {
         $(data).each(function(index, item) {
@@ -182,6 +173,7 @@
                 
             };
         });
+        setExistingBases(assays);
         return retval;
  
     };
@@ -227,8 +219,35 @@
         return retval;
     };
 
+    var bases = [];
+    
+    var getExistingBases= function () {
+        
+          
+        return bases;
+    }
+    var setExistingBases= function (raw_calibrations) {
+        bases.length =0;
+        
+        var basesHash= new HashSet();
+   
+        $(raw_calibrations).each(function(i,item){
+ 
+
+                    basesHash.add(item["base"]);
+   
+
+        });
+
+                    bases =basesHash.values();
+
+                      bases.sort(); 
+                      bases.unshift("NONE");
+    }
+
     return {
-        bases: bases,
+        getExistingBases: getExistingBases,
+        setExistingBases: setExistingBases,
         elements: elements,
         addShortNameAndBase: addShortNameAndBase,
         getCalibrations: getCalibrations,

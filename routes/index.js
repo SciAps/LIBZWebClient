@@ -1157,66 +1157,7 @@ var gridBuilder = function() {
  //    "base":"Cr"
  // }
  // ];
-    var assays =  [{
-            "name": "BB-Al_3562",
-            "spec": [{
-                "element": "Silicon",
-                "percent": 7.17,
-                "error": 0
-            }
-          
-            , 
-            {
-                "element": "Zirconium",
-                "percent": 0.0007,
-                "error": 0
-            }]
-        }, {
-            "name": "BB-Br_3567",
-            "spec": [{
-                "element": "Silicon",
-                "percent": 7.17,
-                "error": 0
-            }, {
-                "element": "Cobalt",
-                "percent": 0.0002,
-                "error": 0
-            }, {
-                "element": "Gallium",
-                "percent": 0.0201,
-                "error": 0
-            }, {
-                "element": "Sodium",
-                "percent": 0.00007,
-                "error": 0
-            }, {
-                "element": "Phosphorus",
-                "percent": 0.0005,
-                "error": 0
-            }, {
-                "element": "Zirconium",
-                "percent": 0.0007,
-                "error": 0
-            }]
-        }, {
-            "name": "Al_3546",
-            "spec": [{
-                "element": "Silicon",
-                "percent": 7.17,
-                "error": 0
-            }, {
-                "element": "Titanium",
-                "percent": 0.121,
-                "error": 0
-            },  {
-                "element": "Calcium",
-                "percent": 0.0003,
-                "error": 0
-            }]
-         }
-        
-       
-        ];
+  
 
     var getTest = function() {
 
@@ -1282,25 +1223,79 @@ var gridBuilder = function() {
 
 
     };
-
-    var getAssays = function() {
-            return assays;
-
-    }; 
+ 
 
     return {
         getSampleTest: getTest,
         getSampleChemResult: getChemResult,
-        getSampleTests: getTests,
-        getSampleAssays: getAssays 
-    };
+        getSampleTests: getTests
+     };
 
 
 };
 
 var CalibrationsSampleData = function() {
-
-    var cals = [];
+  var cals =  [{
+            "name": "Al_3562",
+            "spec": [{
+                "element": "Silicon",
+                "percent": 7.17,
+                "error": 0
+            }
+          
+            , 
+            {
+                "element": "Zirconium",
+                "percent": 0.0007,
+                "error": 0
+            }]
+        }, {
+            "name": "Br_3567",
+            "spec": [{
+                "element": "Silicon",
+                "percent": 7.17,
+                "error": 0
+            }, {
+                "element": "Cobalt",
+                "percent": 0.0002,
+                "error": 0
+            }, {
+                "element": "Gallium",
+                "percent": 0.0201,
+                "error": 0
+            }, {
+                "element": "Sodium",
+                "percent": 0.00007,
+                "error": 0
+            }, {
+                "element": "Phosphorus",
+                "percent": 0.0005,
+                "error": 0
+            }, {
+                "element": "Zirconium",
+                "percent": 0.0007,
+                "error": 0
+            }]
+        }, {
+            "name": "BB-Al_3546",
+            "spec": [{
+                "element": "Silicon",
+                "percent": 7.17,
+                "error": 0
+            }, {
+                "element": "Titanium",
+                "percent": 0.121,
+                "error": 0
+            },  {
+                "element": "Calcium",
+                "percent": 0.0003,
+                "error": 0
+            }]
+         }
+        
+       
+        ];
+  //  var cals = [];
     var getCals=function(){
         return cals;
     };

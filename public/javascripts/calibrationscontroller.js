@@ -283,7 +283,7 @@
                 "Copper"
             ];
             $("#jqxDd").jqxDropDownList({
-                source: bases.bases,
+                source: bases.getExistingBases(),
                 selectedIndex: 0,
                 width: '200',
                 height: '25'

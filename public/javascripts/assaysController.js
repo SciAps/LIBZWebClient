@@ -100,7 +100,7 @@
                 $log.info("saving new assay "+name);
 
                 $scope.assayvalidationerror ="";
-                                    var baseElems= new HashSet();
+                    var baseElems= new HashSet();
 
                     $($scope.rawAssays).each(function(i,item){
                         if (item["base"]===$routeParams.base&&item["calibrationName"]==$routeParams.name) {
