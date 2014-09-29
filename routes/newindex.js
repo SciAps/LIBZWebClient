@@ -30,7 +30,7 @@ router.get('/cgi/results', function(req, res) {
 router.get('/cgi/gradelibraries', function(req, res) {
     console.log("get grade Libraries");
     //console.log(req.query.start);
-    var gradeLibs =[{'name':"MASTER"},{'name':"OTHER"},{'name':"OTHER2"}];
+    gradeLibs =["MASTER","OTHER","OTHER2"];
 
 
     res.send(gradeLibs, 200);

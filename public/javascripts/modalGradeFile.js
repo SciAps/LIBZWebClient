@@ -27,12 +27,12 @@
 	        };
 	        var setUpAddForm = function(response){
 				var ddlFiles=[];
-				ddlFiles.push({name:"\&nbsp;\&nbsp;\&nbsp;---"});
+				ddlFiles.push("\&nbsp;\&nbsp;\&nbsp;---");
 
     			$log.info(response);
 
 					$(response.data).each(function(index,item){
-						ddlFiles.push({name:item['name']});
+						ddlFiles.push(item);
 					});
     			$log.info(ddlFiles); 
 
@@ -53,7 +53,7 @@
 	                  	return;
 	              	};
 
-	        		var item = event.args.item.originalItem['name'];
+	        		var item = event.args.item.originalItem;
 	        		$log.info(event.args.item);
 
 	        		if(event.args.item['index']!=0){
@@ -62,7 +62,7 @@
 	            });
 				ddlFiles.splice(0, 1);
 
-				ddlFiles.unshift({name:"NEW LIBRARY"});
+				ddlFiles.unshift("NEW LIBRARY");
 
 	            $("#jqxlibDd").jqxDropDownList({
 	                source: ddlFiles,
@@ -83,9 +83,8 @@
 	              	};
 
 	        		var item = event.args.item.originalItem;
-	        		isNew = item['name'].substring(0, 3).toLowerCase()=="new";
-	        		//if (item['name'].) {};
-	        		$scope.selectedFile =isNew?"-1":item['name']
+	        		isNew = item.substring(0, 3).toLowerCase()=="new";
+ 	        		$scope.selectedFile =isNew?"-1":item
 		            $log.info($scope.selectedFile);
                     $scope.$digest();
 	            });
@@ -127,10 +126,10 @@
 	        	$log.info("fileName: "+fileName);
 	        	var exists = false;
 	        	$($scope.files).each(function(i,item){
-	        		$log.info("item['name']: "+item['name'].trim().toLowerCase());
+	        		$log.info("item: "+item.trim().toLowerCase());
 	        		$log.info("fileName: "+fileName.trim().toLowerCase());
 
-	        		if (item['name'].trim().toLowerCase()===fileName.trim().toLowerCase() ){
+	        		if (item.trim().toLowerCase()===fileName.trim().toLowerCase() ){
 						exists=true;
 	        		};
 	        	});
