@@ -96,8 +96,11 @@
   </div>
   <div class="page-header">
     <h1>&nbsp; &nbsp; &nbsp; Grade Library EDITOR
-      <small>
+      <small >
         EDITING {{ fname }} 
+      </small>
+      <small ng-hide="allowEdit">
+        Read Only 
       </small>
     </h1>
   </div>

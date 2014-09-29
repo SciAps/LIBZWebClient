@@ -3,6 +3,7 @@
     var GradesController = function($scope, $http, $log, $location, $routeParams) {
 
         var bases = new basesBuilder();
+            $scope.allowEdit  = true;
 
 
 
@@ -26,6 +27,9 @@
             $log.info("onGetSingleLibrary");
             $log.info(response.data);
             $scope.grades =response.data;
+            $scope.allowEdit  = $routeParams.fname.trim().toUpperCase()=="MASTER";
+
+
            showLibraryGrid($scope.grades);
 
 
