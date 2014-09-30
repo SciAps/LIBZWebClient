@@ -274,7 +274,7 @@
 
         };
         var setUpAssayToolBar = function() {
-            $("#selectassayrowbutton").on('click', function() {
+            $("#addassayrowbutton").on('click', function() {
                 $scope.ddVals = bases.getAssaysByBaseForDropDown($scope.rawAssays, $scope.assays, $routeParams.base);
 
                 if ($scope.ddVals.length == 0) {
@@ -295,6 +295,46 @@
                     show: true,
                     backdrop: 'static'
                 });
+            });
+
+            $("#duplicate").on('click', function() {
+
+                var selectedrowindex = $("#jqxassaysgrid").jqxGrid('getselectedrowindex');
+                var rowscount = $("#jqxassaysgrid").jqxGrid('getdatainformation').rowscount;
+                $log.info(selectedrowindex);
+
+  
+
+            if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+                    var id = $("#jqxassaysgrid").jqxGrid('getrowid', selectedrowindex);
+ 
+
+                    var item = $scope.assays[selectedrowindex];
+
+                    if (item != null) {
+
+                        newItem = getNextUniqueItem(item);
+
+                             $scope.unsavedChanges = true;
+
+                            var commit = $("#jqxassaysgrid").jqxGrid('addrow', null, newItem);
+
+                            $scope.assays.unshift(newItem);
+                            $scope.rawAssays.unshift(newItem);
+
+                            //$log.info($scope.assays);
+                            $("#jqxassaysgrid").jqxGrid('updatebounddata', 'cells');
+                            $("#jqxassaysgrid").jqxGrid('gotopage', 0);
+                            $("#jqxassaysgrid").jqxGrid('selectrow', 0);
+                            $('#selectAssayModal').modal('hide');
+         
+                        $("#jqxAssayDd").jqxDropDownList('selectIndex', -1);
+
+                    };
+
+                };
+                $("#jqxassaysgrid").jqxGrid('begincelledit', 0, "shortName");
+
             });
 
 
@@ -408,17 +448,16 @@
                     var me = this;
                     var container = $("<div style='margin: 5px;'></div>");
                     toolbar.append(container);
-                    var selectExisting = '<button id="selectassayrowbutton" class="btn btn-primary btn-sm"><span>Add Standard</span>  </button>';
-                    //var addButton = '<button id="addassayrowbutton" class="btn btn-primary btn-sm" style="margin-left: 10px;"><span>Create New</span>  </button>';
+                    var add = '<button id="addassayrowbutton" class="btn btn-primary btn-sm"><span>Add Standard</span>  </button>';
+                    var duplicate = '<button id="duplicate" class="btn btn-primary btn-sm" style="margin-left: 10px;"><span>Duplicate</span>  </button>';
                     var deleteButton = '<button id="deleteassayrowbutton" class="btn btn-danger btn-sm" style="margin-left: 10px;"><span>Delete Selected Standard</span>  </button>';
-                    container.append(selectExisting);
-                    //container.append(addButton);
+                    container.append(add);
+                    container.append(duplicate);
                     container.append(deleteButton);
                     //$("#addassayrowbutton").jqxButton();
-                    $("#selectassayrowbutton").jqxButton();
+                    $("#addassayrowbutton").jqxButton();
+                    $("#duplicate").jqxButton();
                     $("#deleteassayrowbutton").jqxButton();
-                    // create new row.
-
 
                 },
                 columns: [{
