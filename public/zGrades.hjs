@@ -1,72 +1,135 @@
 <!DOCTYPE html>
- <div class="alert alert-danger fade in" role="alert" ng-show="error">
-     <button type="button" class="close" data-dismiss="alert">
-       <span aria-hidden="true">
-         ×
-       </span>
-       <span class="sr-only">
-         Close
-       </span>
-     </button>
-     <strong>
-       ERROR!
-     </strong>{{error}}
-   </div>
-   <div class="page-header">
-    <h1>
-      &nbsp; &nbsp; &nbsp; Grade Library 
-      <small>
-        Edit Your Z's Grade Library 
-      </small>
-    </h1>
-  </div> 
-   <!--  <div class="wrapper">
-      
-      			<div class = "grades-grid-holder">
-          <div id="jqxgradesgrid">
-          </div>
+  <div class="modal fade" id="newLibraryModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">CREATE A NEW GRADE LIBRARY</h4>
         </div>
-  		
-    </div>  -->
+        <div class="modal-body">
+          <div style="overflow: hidden;">
+            <div class="alert alert-danger fade in" role="alert" ng-show="libraryvalidationerror" style="width:80%">
+              <button type="button" class="close" data-dismiss="alert">
+                  <span aria-hidden="true"> × </span>
+                  <span class="sr-only"> Close </span>
+              </button>
+              <strong> ERROR! </strong>{{libraryvalidationerror}}
+            </div>
+            <div class="alert alert-warning fade in" role="alert" ng-show="libraryvalidationwarning" style="width:80%">
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true"> × </span>
+                <span class="sr-only"> Close </span>
+              </button>
+              <strong> Warning! </strong>{{libraryvalidationwarning}}
+            </div>
+            <table style="width:100%">
+              <tr style="height: 20px;">
+                  <td align="left"></td>
+                  <td align="left"></td>
+              </tr>
+              <tr>
+                  <td align="left">NAME:</td>
+                  <td align="right">
+                      <input id="libraryName" ng-model="newLibraryName" />
+                  </td>
+              </tr>
+              <tr style="height: 20px;">
+                  <td align="left">
+                      <h4> IMPORT FROM (OPTIONAL):<h4>
+                  </td>
+              
+              </tr>
+                    <tr style="height: 34px;">
+                    <td align="left">&nbsp;&nbsp;&nbsp;</td>
+                    <td align="left"></td>
+              </tr>
+              <tr>
+                  <td align="left">FROM EXISTING LIBRARY:</td>
+                  <td align="right">
+                      <div id='jqxlibDd'>
+                      </div>
+                  </td>
+              </tr>
+              <tr style="height: 34px;">
+                  <td align="left">&nbsp;&nbsp;&nbsp;</td>
+                  <td align="left"></td>
+              </tr>
+              <tr>
+                  <td align="left">FROM CSV FILE:</td>
+                  <td align="right">
+                      <button type="button" class="btn btn-primary" ng-click="openFile()">OPEN</button>
+                  </td>
+              </tr>
+            </table>
+          </div>å
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ng-click="addLibrary(newLibraryName)">Save changes</button>
+        </div>
+      </div>  
+              <!-- /.modal-content -->
+    </div>
+          <!-- /.modal-dialog -->
+  </div>
+<!-- /.modal -->
+  <div class="modal fade" id="commentsModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          </button>
+          <h4>{{comments}}</h4>
+        </div>  
+      </div>
+    </div>
+  </div>
+  <!-- /.modal -->
+
+  <div class="alert alert-danger fade in" role="alert" ng-show="error">
+    <button type="button" class="close" data-dismiss="alert">
+      <span aria-hidden="true"> × </span>
+      <span class="sr-only"> Close </span>
+    </button>
+    <strong>ERROR!</strong>{{error}}
+  </div>
+  <div class="page-header">
+    <h1>&nbsp; &nbsp; &nbsp; Grade Library EDITOR
+      <small >
+        EDITING {{ fname }} 
+      </small>
+      <small ng-hide="allowEdit">
+        Read Only 
+      </small>
+              <div class="btn-csv" >
+          <a class="btn btn-primary btn-lg"  ng-click="saveAll()">
+           <!--  disabled="disabled" -->Save Standards
+            <span class="glyphicon glyphicon-save"/> 
+          </a>
+        </div>
+    </h1>
+  </div>
+    <!-- /.alert -->
   <div class="grid-holder">
     <div class="row">
-      <div class="col-md-4">
-      <div style="background-color: #6f5499;">
-                    <div id="jqxgradelibsgrid">
-          </div>
-        </div>
-      </div>
-      <div class="col-md-8">
-        <div style="background-color: #4996f5;">
-           &nbsp;
-        </div>
-      </div>
-    </div>
-
-
-   <!--  <div class="container2 nav-btns-holder">
-    <div class="seven columns alpha">
+      <div class="col-md-5">
         <div style="background-color: #6f5499;">
-          &nbsp;
+            <div id="jqxgradelibsgrid">
+            </div>
         </div>
+      </div>
+      <div class="col-md-7">
+          <div style="background-color: #4996f5;">
+              <div id="jqxelementsgrid">
+              </div>
+          </div>
+      </div>
     </div>
-    <div class="nine columns omega">
-        <div style="background-color: #4996f5;">
-           &nbsp;
-        </div>
+    <div class="btn-back">
+      <a href="#/home" class="btn btn-danger btn-lg">
+        <span class="glyphicon glyphicon-arrow-left">
+        </span>Back
+      </a>
     </div>
-  -->
-     
-
-
-
-  <div class="btn-back" >
- 
-    <a href="#/home"  class="btn btn-danger btn-lg">
-      <span class="glyphicon glyphicon-arrow-left">
-      </span>
-      Back  
-        </a>
   </div>
-
-</div>

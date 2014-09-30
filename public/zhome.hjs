@@ -1,45 +1,158 @@
 <!DOCTYPE html>
-
 <div class="container2 nav-btns-holder">
     <div class="four columns">
         <div class="btn-huge-holder">
             <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("tests")'>
-                <h2>Reporting</h2>
-              <div class = "img_holder">
-                <img alt="" class="img" src="../images/ic_report.png" width="150px" />
-              </div>
+            <h2>
+            Reporting </h2>
+            <div class "img_holder">
+                <img alt="" class="img" src="../images/ic_report.png" width="150px"/>
+            </div>
             </button>
         </div>
     </div>
     <div class="four columns">
         <div class="btn-huge-holder">
             <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("calibrations")'>
-                <h2>Calibrations</h2>
-                            <div class = "img_holder">
-                <img alt="" class="img" src="../images/ic_laser.png" width="150px" />
-                  </div>
+            <h2>
+            Calibrations </h2>
+            <div class "img_holder">
+                <img alt="" class="img" src="../images/ic_laser.png" width="150px"/>
+            </div>
             </button>
         </div>
     </div>
-    
     <div class="four columns">
         <div class="btn-huge-holder">
             <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("manual")'>
-                <h2>Manual</h2>
-                            <div class = "img_holder">
-                <img alt="" class="img" src="../images/ic_manual.png" width="150px" />
-                  </div>
+            <h2>
+            Manual </h2>
+            <div class "img_holder">
+                <img alt="" class="img" src="../images/ic_manual.png" width="150px"/>
+            </div>
             </button>
         </div>
     </div>
-    <div class="four columns" style="visibility:hidden;">
-        <div class="btn-huge-holder">
-            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='goTo("grades")'>
-                <h2>Grades</h2>
-                            <div class = "img_holder">
-                <img alt="" class="img" src="../images/logo_sa.png" width="150px" />
-                  </div>
+    <div class="four columns" >
+        <div class="btn-huge-holder" ng-show="false">
+            <button type="button" class="btn btn-default btn-lg btn-danger btn-main-nav" ng-click='showModal()'>
+            <h2>
+            Grades </h2>
+            <div class "img_holder">
+                <img alt="" class="img" src="../images/logo_sa.png" width="150px"/>
+            </div>
             </button>
         </div>
     </div>
 </div>
+<div class="modal fade" ng-controller="ModalGradeFileController" id="fileSelectModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">
+                &times; </span>
+                <span class="sr-only">
+                Close </span>
+                </button>
+                <h4 class="modal-title">
+                CHOOSE OR CREATE A NEW GRADE LIBRARY </h4>
+            </div>
+            <div class="modal-body">
+                <div style="overflow: hidden;">
+                    <div class="alert alert-danger fade in" role="alert" ng-show="validationError" style="width:80%">
+                        <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">
+                        × </span>
+                        <span class="sr-only">
+                        Close </span>
+                        </button>
+                        <strong>
+                        ERROR! </strong>
+                        {{validationError}}
+                    </div>
+                    <div class="alert alert-warning fade in" role="alert" ng-show="libraryvalidationwarning" style="width:80%">
+                        <button type="button" class="close" data-dismiss="alert">
+                        <span aria-hidden="true">
+                        × </span>
+                        <span class="sr-only">
+                        Close </span>
+                        </button>
+                        <strong>
+                        Warning! </strong>
+                        {{libraryvalidationwarning}}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div align="left">
+                                <h4>
+                                Grade Library: </h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 modalddl" align="right">
+                            <div id='jqxlibDd'>
+                            </div>
+                        </div>
+                    </div>
+                    <div  ng-show="selectedFile==-1" >
+                        <div class="row" >
+                            <div class="col-md-6">
+                                <div align="left">
+                                    <h4>
+                                    NAME: </h4>
+                                </div>
+                            </div>
+                            <div class="col-md-6 modalddl" align="right">
+                                <input id="libraryName" ng-model="newLibraryName"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div align="left">
+                                    <h4>
+                                    &nbsp; &nbsp; &nbsp; CLONE FROM (OPTIONAL): </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div align="left">
+                                    <h4>
+                                    EXISTING LIBRARY: </h4>
+                                </div>
+                            </div>
+                            <div class="col-md-6 modalddl" align="right">
+                                <div id='jqxImportlibDd'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div align="left">
+                                    <h4>
+                                    CSV FILE: </h4>
+                                </div>
+                            </div>
+                            <div class="col-md-6" align="right">
+                                <button type="button" class="btn btn-primary" ng-click="openFile()">
+                                OPEN </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                Close </button>
+                <button type="button" class="btn btn-primary" ng-click='selectFile(selectedFile)' ng-show="selectedFile!=-1">
+                Select </button>
+                <button type="button" class="btn btn-primary" ng-click="addLibrary(newLibraryName)" ng-show="selectedFile==-1">
+                Create </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
