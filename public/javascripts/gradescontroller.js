@@ -1,10 +1,10 @@
 (function() {
+
     var app = angular.module("libz-app");
     var GradesController = function($scope, $http, $log, $location, $routeParams) {
 
         var bases = new basesBuilder();
             $scope.allowEdit  = true;
-
 
 
         $('#selectAssayModal').modal({
@@ -74,6 +74,7 @@
                     alert('Error loading "' + source.url + '" : ' + error);
                 }
             });
+ 
 
 
             $("#jqxgradelibsgrid").jqxGrid({
@@ -86,6 +87,7 @@
                 theme: 'Arctic',
                 selectionmode: 'singlerow',
                 source: dataAdapter,
+                pagesizeoptions: ['5', '10', '20', '50', '100'],
                 rendertoolbar: function(toolbar) {
                     var me = this;
                     var container = $("<div style='margin: 5px;'></div>");
@@ -114,38 +116,42 @@
                     datafield: 'enabled',
                     columntype: 'checkbox',
                      width: 60
-                }, {
-                    text: 'Comments',
-                    columntype: 'button',
-                     width: 80,
-                    cellsrenderer: function() {
-                        return "Show";
-                    },
-                    buttonclick: function(row) {
+                },  
+                {
+                          text: 'Show Comments', align: "center", editable: false, sortable: false, datafield: 'comments', 
+                            width: 150,
+                          cellsrenderer: function (row, column, value) {
+                              var eventName = "onclick";
+                              if ($.jqx.mobile.isTouchDevice()) {
+                                  eventName = "on" + $.jqx.mobile.getTouchEventName('touchstart');
+                              }
+
+                                 
+                              //if (row === that.editrow) {
+                                //  return "<div style='text-align: center; width: 100%; top: 7px; position: relative;'><a " + eventName + "='Update(" + row + ", event)' style='color: inherit;' href='javascript:;'>Update</a><span style=''>/</span>" + "<a " + eventName + "='Cancel(" + row + ", event)' style='color: inherit;' href='javascript:;'>Cancel</a></div>";
+                              //}
+
+                              return "<a  " + eventName + "='showComments(" + row + ", event)' style='color: inherit; margin-left: 25%; top: 7px; position: relative;' href='javascript:;'>Comments</a>";
+                          }
+                      }]
+            });
+                this.showComments  = function(row, event) {
+
                         $log.info("show Comments, row: "+row);
                         var comments = $("#jqxgradelibsgrid").jqxGrid('getrowdata', row).comments;
                         $scope.comments =comments;
                         $scope.$digest();
                         $log.info($scope.comments); 
 
-                        $('#commentsModal').modal({
-                            show: true 
-                        });
 
-                        // var name = $("#jqxcalibrationsgrid").jqxGrid('getrowdata', row).name;
-                        // var base = $("#jqxcalibrationsgrid").jqxGrid('getrowdata', row).base;
+                        if (comments.length>0) {
+                            $('#commentsModal').modal({
+                                show: true 
+                            });
+                        };
+                }
 
-                        // $log.info(name);
-
-                        // $location.path("/assays/" + name + "/" + base);
-
-                        // $scope.showSpinner();
-                        // $scope.$apply();
-
-
-                    }
-                }]
-            });
+            $scope.showComments
             $("#jqxgradelibsgrid").on('rowselect', function(event) {
                 $log.info("Row " + event.args.rowindex + " Selected");
                 showElementsGrid(event.args.rowindex); 
@@ -192,6 +198,7 @@
                     name: 'isTramp',
                     type: 'boolean'
                 }],
+                pagesize: 50,
                 updaterow: function(row, rowdata, commit) {
                      $log.info("updaterow called");
                     // $log.info(rowdata);
@@ -394,7 +401,7 @@
                         });
                     }
                 },{
-                    text: 'Trump',
+                    text: 'Tramp',
                     datafield: 'isTramp',
                     columntype: 'checkbox',
                     width: 60
@@ -437,5 +444,6 @@
 
     };
 
+            
     app.controller("GradesController", GradesController);
 })();
