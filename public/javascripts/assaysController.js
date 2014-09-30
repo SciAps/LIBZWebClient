@@ -244,6 +244,7 @@
         };
         var getNextUniqueItem = function(item) {
 
+            item["name"].subs
             item["shortName"], item["calibrationName"], item["base"]
 
             var exists = false;
@@ -265,7 +266,7 @@
                 };
             }
             return {
-                "name": $routeParams.name + "-" + item["name"] + comp,
+                "name":( (item["name"].substring(0, $routeParams.name.length) != $routeParams.name )?($routeParams.name + "-" ):'')+ item["name"] + comp,
                 "calibrationName": $routeParams.name,
                 "shortName": item["shortName"] + comp,
                 "base": item["base"],
@@ -313,7 +314,7 @@
 
                     if (item != null) {
 
-                        newItem = getNextUniqueItem(item);
+                      var  newItem = getNextUniqueItem(item);
 
                              $scope.unsavedChanges = true;
 
