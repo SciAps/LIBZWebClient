@@ -29,6 +29,14 @@ router.post('/cgi/saveassays/json', function(req, res) {
 });
 
 
+router.post('/cgi/savegradelibrary/:lname', function(req, res) {
+     console.log("save");
+    console.log(req);
+    //calibrationsSampleData.setCals(req.body);
+    res.send("success", 200);
+});
+
+
 
 router.post('/cgi/export/csv', function(req, res) {
     console.log("export");

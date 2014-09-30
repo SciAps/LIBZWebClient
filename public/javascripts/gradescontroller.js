@@ -27,7 +27,7 @@
             $log.info("onGetSingleLibrary");
             $log.info(response.data);
             $scope.grades =response.data;
-            $scope.allowEdit  = $routeParams.fname.trim().toUpperCase()=="MASTER";
+            $scope.allowEdit  = !$routeParams.fname.trim().toUpperCase()=="MASTER";
 
 
            showLibraryGrid($scope.grades);
@@ -36,6 +36,48 @@
 
 
         };
+
+
+            $scope.saveAll= function(){
+              
+                var onSaveAllComplete = function(response) {
+
+                    $log.info("onSavelibComplete"); 
+
+                    $log.info(response.data);
+                    $('#myModal').modal('hide');
+                    $("#jqxgradelibsgrid").jqxGrid('updatebounddata', 'cells');
+                    $scope.unsavedChanges = false;
+
+                     return true;
+
+                };
+                var onError = function(reason) {
+                    $log.error("error");
+                    $scope.error = "Failed to save assays";
+                    $('#myModal').modal('hide');
+
+                    return false;
+                };
+
+
+      
+                $('#myModal').modal({
+                      show: true,
+                      backdrop:'static'
+                });
+
+                   
+
+                var url = "/cgi/savegradelibrary/"+$routeParams.fname;
+                $log.info("savegradelibrary");
+
+                 $log.info( $scope.grades.length); 
+
+                $http.post(url, $scope.grades).then(onSaveAllComplete, onError);
+
+            };
+ 
 
         var showLibraryGrid = function(grades) {
                var source = {
