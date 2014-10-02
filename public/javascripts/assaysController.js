@@ -535,7 +535,7 @@
                 // $log.info(val);
 
                 //update only if elem is valid
-                if (elemVal.length>0) { 
+                if (elemVal==null || elemVal.length>0) { 
 
                     var datarow = generaterow();
                     var commit = $("#jqxassayselementsgrid").jqxGrid('addrow', null, datarow);
