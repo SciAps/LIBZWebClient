@@ -82,8 +82,11 @@
 	                  	return;
 	              	};
 
-	        		var item = event.args.item.originalItem;
-	        		isNew = item.substring(0, 3).toLowerCase()=="new";
+	        		var item = event.args.item.label;
+	        		$log.info(event.args);
+
+	        		var isNew = item.substring(0, 3).toLowerCase()=="new";
+	        		$log.info(isNew);
  	        		$scope.selectedFile =isNew?"-1":item
 		            $log.info($scope.selectedFile);
                     $scope.$digest();
