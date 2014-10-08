@@ -3,7 +3,7 @@
     var TestsController = function($scope, $http, $log, $location) {
         $log.info("TestsController");
 
-
+$scope.testerror="";   
 
 
         function showTests(tsts) {
@@ -173,7 +173,7 @@
 
                 var column = $("#jqxtestsgrid").jqxGrid('getcolumn', event.args.datafield);
                 if (column.visibleindex != 0) {
-                    console.log(event.args.rowindex);
+//                    console.log(event.args.rowindex);
 
                     // var griddata = $('#jqxtestsgrid').jqxGrid('getdatainformation');
                     // var row = $('#jqxtestsgrid').jqxGrid('getrenderedrowdata', i))
@@ -183,12 +183,24 @@
                     var tid = $("#jqxtestsgrid").jqxGrid('getrowdata', event.args.rowindex).id;
                     var tdate = $("#jqxtestsgrid").jqxGrid('getrowdata', event.args.rowindex).time;
                     var ttitle = $("#jqxtestsgrid").jqxGrid('getrowdata', event.args.rowindex).title;
+                    tdate = tdate==undefined||tdate.length==0?" ":tdate;
+                    ttitle =  ttitle==undefined||ttitle.length==0?" ":ttitle;
+           
+
+                    var url = "/single/" + tid + "/" + ttitle + "/" + tdate;
 
                     //$scope.broadcastTestSelected(dataRecord.id);
-                    $log.info("/single/" + tid);
-                    $location.path("/single/" + tid + "/" + ttitle + "/" + tdate);
-                    $scope.showSpinner();
-                    $scope.$apply();
+                    $log.info(url);
+                    $log.info(tid);
+                    if (tid!=undefined&&tid.length>0) {
+                        $location.path(url);
+                        $scope.showSpinner();
+                        $scope.$apply(); 
+                     }else{
+                        $scope.testerror = "No test ID";
+                                         $log.info($scope.testerror);
+                                        $scope.$digest();
+                     };
                 };
 
             });
