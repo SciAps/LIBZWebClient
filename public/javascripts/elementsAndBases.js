@@ -232,17 +232,15 @@
         var basesHash= new HashSet();
    
         $(raw_calibrations).each(function(i,item){
- 
-
-                    basesHash.add(item["base"]);
-   
-
+            basesHash.add(item["base"]);
         });
 
-                    bases =basesHash.values();
+        basesHash.add("GeoChem");
 
-                      bases.sort(); 
-                      bases.unshift("NONE");
+        bases =basesHash.values();
+
+        bases.sort(); 
+        bases.unshift("NONE");
     }
 
     return {
