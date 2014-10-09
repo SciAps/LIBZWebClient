@@ -1,6 +1,6 @@
 (function() {
         var app = angular.module("libz-app");
-        var ModalGradeFileController = function($scope, $http, $log, $location, $routeParams) {
+        var ModalGradeFileController = function($scope,fileDialog, $http, $log, $location, $routeParams) {
     			$log.info('show modal');
 				$scope.selectedFile="";
 				$scope.newLibraryName="";
@@ -124,7 +124,9 @@
 
 
 	        }
-
+	        $scope.openFromFile = function(){
+	        	$log.info("openFromFile");
+	        }
 	        $scope.addLibrary = function(fileName){
 	        	$log.info("fileName: "+fileName);
 	        	var exists = false;
@@ -163,6 +165,6 @@
 
 	    };
 
-    app.controller("ModalGradeFileController", ModalGradeFileController);
+    app.controller("ModalGradeFileController",ModalGradeFileController);
 
 })();

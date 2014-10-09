@@ -134,7 +134,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6" align="right">
-                                <button type="button" class="btn btn-primary" ng-click="openFile()">
+                                <button type="button" class="btn btn-primary" ng-click="openFromFile()">
                                 OPEN </button>
                             </div>
                         </div>
