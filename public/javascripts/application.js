@@ -1,5 +1,5 @@
 (function() {
-	 var app = angular.module("libz-app", ["ngRoute"]);
+	 var app = angular.module("libz-app", ["ngRoute","angularFileUpload"]);
 
 
 	 app.config(function($routeProvider){

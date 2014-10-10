@@ -19,20 +19,22 @@
   <link rel="stylesheet" href="../stylesheets/jqx.base.css" type="text/css" />
 
  
-     <script type="text/javascript" src="/bower_components/ng-file-upload-shim/angular-file-upload-shim.min.js"></script>
 
  
   <script type="text/javascript" src="../javascripts/jquery.min.js">
   </script>
   <script type="text/javascript" src="../javascripts/jquery.csv.min.js">
   </script>
+       <script type="text/javascript" src="/javascripts/fileupload/angular-file-upload-shim.min.js"></script>
+
   <script type="text/javascript" src="../javascripts/angular.min.js">
   </script>
+       <script type="text/javascript" src="/javascripts/fileupload/angular-file-upload.min.js"></script>
+
   <script type="text/javascript" src="../javascripts/angular-route.js">
   </script>
   <script type="text/javascript" src="../javascripts/bootstrap.min.js">
   </script>
-     <script type="text/javascript" src="/bower_components/angular-file-upload/angular-file-upload.min.js"></script>
 
 
   <script type="text/javascript" src="../javascripts/jshashtable-3.0.js">
