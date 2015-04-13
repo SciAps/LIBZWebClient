@@ -1,16 +1,3 @@
-# Mac
-.DS_Store
-
-# Windows
-Thumbs.db
-
-# Android Studio
-build/
-.idea/
 .gradle/
-local.properties
-*.iml
-*.lock
-*.bin
-
+build/
 webservice.zip
